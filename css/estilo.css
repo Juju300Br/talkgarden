@@ -1305,6 +1305,197 @@ label {
     border-radius: 999px;
 }
 
+/* =====================================================================
+   INDICADORES (os cartõezinhos com um número grande) - jardim e estatísticas
+   ===================================================================== */
+
+.indicadores {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.indicador {
+    background: #FFFFFF;
+    border-radius: 20px;
+    padding: 20px 26px;
+    min-width: 160px;
+    box-shadow: 0 6px 18px rgba(91, 75, 166, 0.06);
+}
+
+.indicador strong {
+    display: block;
+    font-size: 30px;
+    font-weight: 800;
+    color: #7B68C8;
+}
+
+.indicador span {
+    color: #6E6A85;
+}
+
+/* Nas estatísticas, os 3 indicadores dividem a largura igualmente */
+.indicadores-grandes {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-bottom: 30px;
+}
+
+.indicadores-grandes .indicador {
+    padding: 28px;
+}
+
+/* =====================================================================
+   JARDIM (jardim.php)
+   ===================================================================== */
+
+/* Painel verde onde fica o jardim */
+.painel-jardim {
+    background: linear-gradient(to bottom, #EAF6E0, #D6EDBF);
+    border-radius: 32px;
+    padding: 40px;
+    box-shadow: 0 10px 30px rgba(91, 75, 166, 0.08);
+}
+
+/* Canteiro: as plantas uma do lado da outra, "plantadas" na mesma linha */
+.canteiro {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    gap: 14px 18px;
+    margin-top: 36px;
+}
+
+.espaco-planta {
+    position: relative;
+    width: 60px;
+    height: 110px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+}
+
+.espaco-planta img {
+    position: relative;  /* fica na frente do montinho de terra */
+    z-index: 1;
+    height: 100px;
+}
+
+/* Montinho de terra embaixo de cada planta (desenhado pelo CSS) */
+.espaco-planta::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    width: 48px;
+    height: 12px;
+    border-radius: 50%;
+    background: #C9A27A;
+}
+
+/* Espaço vazio: só o montinho de terra, mais clarinho */
+.espaco-planta.vazio::after {
+    background: #D9C3A5;
+    opacity: 0.6;
+}
+
+.legenda-jardim {
+    color: #4E7A3E;
+    margin: 28px 0 0;
+}
+
+/* Jardim vazio */
+.jardim-vazio {
+    text-align: center;
+    padding: 30px 10px 10px;
+}
+
+.jardim-vazio-abelha {
+    width: 90px;
+}
+
+.jardim-vazio h2 {
+    font-size: 24px;
+    margin: 14px 0 6px;
+}
+
+.jardim-vazio p {
+    color: #4E4A6A;
+    margin: 0 0 24px;
+}
+
+.jardim-vazio .botao {
+    display: inline-block;
+    width: auto;
+}
+
+/* =====================================================================
+   ESTATÍSTICAS (estatisticas.php)
+   ===================================================================== */
+
+.cartao-grafico {
+    background: #FFFFFF;
+    border-radius: 28px;
+    padding: 30px 34px;
+    box-shadow: 0 10px 30px rgba(91, 75, 166, 0.08);
+}
+
+.cartao-grafico h2 {
+    font-size: 20px;
+    font-weight: 800;
+    margin: 0 0 20px;
+}
+
+.sem-dados {
+    background: #F7F5FD;
+    color: #6E6A85;
+    font-weight: 700;
+    text-align: center;
+    padding: 14px;
+    border-radius: 14px;
+    margin: 0 0 20px;
+}
+
+/* Cada linha: nome do dia | barra | número */
+.linha-grafico {
+    display: grid;
+    grid-template-columns: 50px 1fr 30px;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 16px;
+}
+
+.nome-dia {
+    color: #6E6A85;
+}
+
+/* O "trilho" é a parte clarinha; a barra roxa cresce dentro dele */
+.trilho-barra {
+    height: 18px;
+    background: #EEEBFA;
+    border-radius: 999px;
+    overflow: hidden;
+}
+
+.barra {
+    height: 100%;
+    background: linear-gradient(90deg, #9C8CDC, #7B68C8);
+    border-radius: 999px;
+}
+
+.quantidade-dia {
+    color: #6E6A85;
+    font-weight: 700;
+    text-align: right;
+}
+
+/* O dia de hoje fica destacado */
+.linha-grafico.hoje .nome-dia,
+.linha-grafico.hoje .quantidade-dia {
+    color: #5B4BA6;
+    font-weight: 800;
+}
+
 /* ---------- Telas médias (notebook pequeno e tablet deitado) ---------- */
 
 @media (max-width: 1100px) {
@@ -1506,5 +1697,38 @@ label {
     .palavra-botao {
         font-size: 18px;
         padding: 10px 16px;
+    }
+
+    /* Jardim e estatísticas no celular */
+    .painel-jardim {
+        padding: 22px 16px;
+    }
+
+    .indicador {
+        min-width: 0;
+        flex: 1;
+        padding: 16px;
+    }
+
+    .indicador strong {
+        font-size: 24px;
+    }
+
+    .indicadores-grandes {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .espaco-planta {
+        width: 44px;
+        height: 84px;
+    }
+
+    .espaco-planta img {
+        height: 76px;
+    }
+
+    .cartao-grafico {
+        padding: 22px 16px;
     }
 }

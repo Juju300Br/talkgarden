@@ -118,6 +118,29 @@ function verificarMedalhas($conexao, $responsavel_id)
     return $novas;
 }
 
+// Diz em que estágio está uma flor (regra "cresce jogando").
+// $atividades_depois = quantas atividades foram concluídas DEPOIS que ela foi plantada.
+function estagioDaFlor($atividades_depois)
+{
+    if ($atividades_depois == 0) {
+        return 'semente';
+    } elseif ($atividades_depois == 1) {
+        return 'broto';
+    } elseif ($atividades_depois == 2) {
+        return 'muda';
+    }
+    return 'flor'; // 3 ou mais atividades depois
+}
+
+// Diz a cor de uma flor pela ordem em que foi plantada (1ª rosa, 2ª azul,
+// 3ª amarela, 4ª rosa de novo...). Usa a mesma regra do geral.js.
+function corDaFlor($numero_da_flor)
+{
+    $cores = ['rosa', 'azul', 'amarela'];
+    // % = resto da divisão: flor 1 -> 0 (rosa), flor 2 -> 1 (azul), flor 4 -> 0 (rosa)
+    return $cores[($numero_da_flor - 1) % 3];
+}
+
 // Monta o texto de "o que falta" de uma medalha bloqueada (RF010).
 // Devolve um array com 'atual', 'meta' e 'texto'.
 function progressoMedalha($codigo, $flores, $dias, $frases)
