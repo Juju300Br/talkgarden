@@ -44,7 +44,8 @@ function classeMenu($item, $menu_ativo)
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/estilo.css">
 </head>
-<body>
+<!-- data-som: 1 = som ligado, 0 = desligado (o JavaScript lê isso antes de tocar sons) -->
+<body data-som="<?php echo (int) $responsavel['som_ligado']; ?>">
 <div class="layout">
 
     <!-- ================= MENU LATERAL ================= -->

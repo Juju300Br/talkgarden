@@ -776,6 +776,297 @@ label {
     margin-top: 6px;
 }
 
+/* =====================================================================
+   PÁGINAS INTERNAS (jogos, jardim, estatísticas...)
+   ===================================================================== */
+
+/* Garante que tudo com o atributo "hidden" fique escondido,
+   mesmo que outra regra diga display: flex */
+[hidden] {
+    display: none !important;
+}
+
+/* Espaço em volta do conteúdo das páginas internas */
+.pagina {
+    padding: 44px 50px 50px;
+}
+
+/* Botão voltar + título + subtítulo */
+.cabecalho-pagina {
+    display: flex;
+    align-items: flex-start;
+    gap: 18px;
+    margin-bottom: 30px;
+}
+
+.cabecalho-pagina h1 {
+    font-size: 30px;
+    font-weight: 800;
+    margin: 0;
+}
+
+.cabecalho-pagina p {
+    color: #6E6A85;
+    margin: 4px 0 0;
+}
+
+.botao-voltar {
+    width: 48px;
+    height: 48px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background: #FFFFFF;
+    color: #7B68C8;
+    font-size: 30px;
+    line-height: 44px;
+    text-align: center;
+    text-decoration: none;
+    box-shadow: 0 6px 16px rgba(91, 75, 166, 0.12);
+    margin-top: 4px;
+}
+
+/* Botão com cara de link (ex.: "Jogar de novo", "Tentar de novo") */
+.link-botao {
+    background: none;
+    border: none;
+    padding: 4px;
+    font-family: inherit;
+    font-size: 16px;
+    font-weight: 800;
+    color: #7B68C8;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.espaco-pequeno {
+    margin-top: 14px;
+}
+
+/* =====================================================================
+   JOGOS (jogo_vocabulario.php e jogo_frases.php)
+   ===================================================================== */
+
+/* Cartão branco onde o jogo acontece */
+.cartao-jogo {
+    background: #FFFFFF;
+    border-radius: 28px;
+    padding: 30px 38px 34px;
+    max-width: 1025px;
+    box-shadow: 0 10px 30px rgba(91, 75, 166, 0.08);
+    text-align: center;
+}
+
+/* "Palavra 1 de 5" e as bolinhas de progresso */
+.progresso-jogo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #6E6A85;
+    font-weight: 700;
+    margin-bottom: 18px;
+}
+
+.progresso-bolinhas {
+    display: flex;
+    gap: 8px;
+}
+
+.bolinha-progresso {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: #E2DDF5;
+}
+
+.bolinha-progresso.atual { background: #7B68C8; }
+.bolinha-progresso.feita { background: #6BBF6B; }
+
+/* A palavra da vez, numa pílula verde */
+.palavra-da-vez {
+    display: inline-block;
+    background: #E8F5E1;
+    color: #4E9F4E;
+    font-size: 30px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    padding: 10px 34px;
+    border-radius: 999px;
+    margin-bottom: 30px;
+}
+
+/* As 3 opções de imagem, lado a lado */
+.opcoes-imagem {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+}
+
+.opcao-imagem {
+    background: #EEEBFA;
+    border: 3px solid transparent;
+    border-radius: 24px;
+    padding: 26px;
+    cursor: pointer;
+    transition: transform 0.15s, background 0.15s;
+}
+
+.opcao-imagem img {
+    width: 100%;
+    max-width: 130px;
+    height: 120px;
+}
+
+.opcao-imagem:hover {
+    transform: translateY(-4px);
+    background: #E5E0F8;
+}
+
+/* Resposta certa: verde e "pulinho" */
+.opcao-imagem.certo {
+    background: #EAF6E6;
+    border-color: #6BBF6B;
+    animation: pulinho 0.5s;
+}
+
+/* Resposta errada: rosa e "balançando" */
+.opcao-imagem.errado {
+    background: #FCE9EF;
+    border-color: #E9557A;
+    animation: balancar 0.4s;
+    cursor: default;
+    opacity: 0.7;
+}
+
+/* Mensagem embaixo das opções */
+.mensagem-jogo {
+    min-height: 26px;   /* reserva o espaço para a tela não "pular" */
+    margin: 26px 0 0;
+    font-size: 18px;
+    font-weight: 700;
+    color: #6E6A85;
+}
+
+.msg-certo       { color: #3F8F3F; }
+.msg-erro-gentil { color: #6E6A85; }
+
+/* ----- Animações (@keyframes = os "quadros" da animação) ----- */
+
+/* Aumenta um pouquinho e volta */
+@keyframes pulinho {
+    0%   { transform: scale(1); }
+    50%  { transform: scale(1.08); }
+    100% { transform: scale(1); }
+}
+
+/* Mexe para os lados, como quem diz "não é esse" */
+@keyframes balancar {
+    0%   { transform: translateX(0); }
+    25%  { transform: translateX(-8px); }
+    50%  { transform: translateX(8px); }
+    75%  { transform: translateX(-4px); }
+    100% { transform: translateX(0); }
+}
+
+/* Faz o modal "surgir" crescendo */
+@keyframes aparecer {
+    from { transform: scale(0.8); opacity: 0; }
+    to   { transform: scale(1);   opacity: 1; }
+}
+
+/* =====================================================================
+   MODAL (janela por cima da página) - recompensa e conquista
+   ===================================================================== */
+
+/* Fundo escuro que cobre a tela toda */
+.fundo-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(46, 42, 74, 0.45);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    z-index: 100;   /* fica na frente de tudo, até do menu */
+}
+
+/* Janela branca no meio */
+.modal {
+    background: #FFFFFF;
+    border-radius: 32px;
+    padding: 40px;
+    width: 100%;
+    max-width: 480px;
+    text-align: center;
+    box-shadow: 0 20px 60px rgba(46, 42, 74, 0.25);
+    animation: aparecer 0.35s;
+}
+
+.modal h2 {
+    font-size: 28px;
+    font-weight: 800;
+    margin: 18px 0 8px;
+}
+
+.modal p {
+    color: #6E6A85;
+    line-height: 1.5;
+    margin: 0;
+}
+
+/* Moeda grande + flor */
+.recompensa-figuras {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 18px;
+}
+
+.moeda-grande {
+    width: 92px;
+    height: 92px;
+    border-radius: 50%;
+    background: radial-gradient(circle, #FFD970 55%, #F5B82E 56%);
+    border: 4px solid #E8A817;
+    color: #8A6400;
+    font-size: 26px;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 14px;
+}
+
+.recompensa-flor {
+    height: 140px;
+}
+
+.recompensa-acertos {
+    font-weight: 700;
+    margin-top: 8px !important;
+}
+
+/* Pílulas "+18 moedas" e "+1 flor no jardim" */
+.pilulas {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin: 20px 0 26px;
+}
+
+.pilula {
+    padding: 8px 18px;
+    border-radius: 999px;
+    font-weight: 800;
+    font-size: 15px;
+}
+
+.pilula-moedas { background: #FFF3CC; color: #8A6400; }
+.pilula-flor   { background: #E8F5E1; color: #3F8F3F; }
+
 /* ---------- Telas médias (notebook pequeno e tablet deitado) ---------- */
 
 @media (max-width: 1100px) {
@@ -937,5 +1228,40 @@ label {
     .previa img {
         width: 44px;
         height: 44px;
+    }
+
+    /* Jogos no celular: tudo um pouco menor */
+    .pagina {
+        padding: 24px 16px 30px;
+    }
+
+    .cabecalho-pagina h1 {
+        font-size: 24px;
+    }
+
+    .cartao-jogo {
+        padding: 20px 16px 24px;
+    }
+
+    .palavra-da-vez {
+        font-size: 24px;
+        padding: 8px 24px;
+    }
+
+    .opcoes-imagem {
+        gap: 10px;
+    }
+
+    .opcao-imagem {
+        padding: 12px 6px;
+        border-radius: 18px;
+    }
+
+    .opcao-imagem img {
+        height: 72px;
+    }
+
+    .modal {
+        padding: 30px 22px;
     }
 }
