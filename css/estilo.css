@@ -345,6 +345,450 @@ label {
     width: auto;
 }
 
+.botao-rosa {
+    background: #E9557A;
+    box-shadow: 0 10px 24px rgba(233, 85, 122, 0.3);
+}
+
+/* Bolinha com a setinha dentro do botão "Jogar ›" */
+.seta-botao {
+    display: inline-block;
+    width: 28px;
+    height: 28px;
+    line-height: 26px;
+    margin-left: 10px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    font-size: 20px;
+}
+
+/* =====================================================================
+   LAYOUT DAS PÁGINAS INTERNAS (topo.php)
+   ===================================================================== */
+
+/* Menu lateral do lado esquerdo e o resto da página do lado direito */
+.layout {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* ---------- Menu lateral roxo ---------- */
+
+.menu-lateral {
+    width: 110px;
+    flex-shrink: 0;          /* não deixa o menu ficar mais estreito */
+    background: linear-gradient(to bottom, #7B68C8, #5B4BA6);
+    display: flex;
+    flex-direction: column;  /* itens um embaixo do outro */
+    align-items: center;
+    gap: 18px;
+    padding: 24px 0;
+    position: sticky;        /* o menu fica parado quando a página rola */
+    top: 0;
+    height: 100vh;
+}
+
+/* Círculo com a abelhinha no alto do menu */
+.menu-mascote {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.menu-mascote img {
+    width: 34px;
+}
+
+.menu-item {
+    width: 64px;
+    height: 64px;
+    border-radius: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #FFFFFF;
+    transition: background 0.15s;
+}
+
+.menu-item svg {
+    width: 26px;
+    height: 26px;
+}
+
+.menu-item:hover {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+/* Item da página atual: quadrado branco com o ícone roxo */
+.menu-item.ativo {
+    background: #FFFFFF;
+    color: #7B68C8;
+    box-shadow: 0 8px 20px rgba(46, 42, 74, 0.2);
+}
+
+/* "Sair" vai lá para baixo (margin-top: auto ocupa todo o espaço livre) */
+.menu-sair {
+    margin-top: auto;
+}
+
+/* ---------- Parte da direita (barra do topo + conteúdo) ---------- */
+
+.area-principal {
+    flex: 1;          /* ocupa todo o resto da largura */
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.barra-topo {
+    background: #FCFBF5;
+    min-height: 98px;
+    padding: 0 40px 0 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #F0EDE4;
+}
+
+.logo-topo {
+    text-decoration: none;
+}
+
+.topo-direita {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+/* Pílula amarela com as moedas */
+.saldo-moedas {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #FFF3CC;
+    color: #8A6400;
+    font-weight: 800;
+    font-size: 17px;
+    padding: 10px 20px;
+    border-radius: 999px;
+}
+
+.saldo-moedas img {
+    width: 22px;
+}
+
+/* Pílula com o avatar e o nome da criança */
+.topo-crianca {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: #EEEBFA;
+    color: #5B4BA6;
+    font-weight: 800;
+    text-decoration: none;
+    padding: 6px 18px 6px 6px;
+    border-radius: 999px;
+}
+
+.topo-crianca img {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+}
+
+.botao-engrenagem {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: #EEEBFA;
+    color: #7B68C8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.botao-engrenagem svg {
+    width: 22px;
+    height: 22px;
+}
+
+/* Área onde entra o conteúdo de cada página */
+.conteudo {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+/* =====================================================================
+   TELA INICIAL (inicio.php)
+   ===================================================================== */
+
+/* Parte de cima: céu azul */
+.inicio-ceu {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(to bottom, #C2E3F6, #DDEFFA);
+    padding: 48px 50px 30px;
+    min-height: 320px;
+}
+
+.inicio-nuvem {
+    position: absolute;
+    top: 70px;
+    left: 52%;
+    width: 320px;
+}
+
+.inicio-arvore {
+    position: absolute;
+    right: 40px;
+    bottom: 0;
+    width: 200px;
+}
+
+.inicio-titulo {
+    position: relative;   /* fica na frente da nuvem */
+    font-size: 34px;
+    font-weight: 800;
+    margin: 0 0 8px;
+}
+
+.inicio-texto {
+    position: relative;
+    color: #4E4A6A;
+    font-size: 18px;
+    margin: 0;
+}
+
+.inicio-mascote-linha {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    margin-top: 20px;
+}
+
+.inicio-mascote {
+    width: 90px;
+}
+
+/* Balão de fala da abelhinha */
+.balao-fala {
+    position: relative;
+    background: #FFF6DA;
+    padding: 16px 22px;
+    border-radius: 20px;
+    font-size: 17px;
+    box-shadow: 0 8px 20px rgba(46, 42, 74, 0.08);
+}
+
+/* Pontinha do balão (um quadradinho girado 45 graus) */
+.balao-fala::before {
+    content: '';
+    position: absolute;
+    left: -8px;
+    top: 50%;
+    width: 16px;
+    height: 16px;
+    margin-top: -8px;
+    background: #FFF6DA;
+    transform: rotate(45deg);
+}
+
+/* Parte de baixo: grama verde-clara com os cards */
+.inicio-grama {
+    flex: 1;
+    background: linear-gradient(to bottom, #E9F5DC, #DCEDC2);
+    padding: 12px 50px 50px;
+}
+
+.cards-inicio {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr 1.2fr;
+    gap: 28px;
+}
+
+/* ---------- Cards ---------- */
+
+.card {
+    background: #FFFFFF;
+    border-radius: 28px;
+    padding: 28px;
+    box-shadow: 0 10px 30px rgba(91, 75, 166, 0.08);
+}
+
+.card h2 {
+    font-size: 22px;
+    font-weight: 800;
+    margin: 0 0 6px;
+}
+
+.card p {
+    color: #6E6A85;
+    margin: 0 0 22px;
+    line-height: 1.5;
+}
+
+.card-titulo-jardim {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.card-vocabulario          { background: #F4F6E4; }
+.card-vocabulario h2       { color: #4E9F4E; }
+.card-frases               { background: #FDEEF2; }
+.card-frases h2            { color: #E9557A; }
+
+/* Caixinha branca de "prévia" do jogo, dentro do card */
+.previa {
+    background: #FFFFFF;
+    border-radius: 20px;
+    padding: 18px;
+    margin-bottom: 22px;
+    min-height: 104px;
+    display: flex;
+    flex-wrap: wrap;      /* se não couber, os itens descem para a linha de baixo */
+    align-items: center;
+    gap: 14px;
+}
+
+.previa img {
+    width: 52px;
+    height: 52px;
+}
+
+.pilula-palavra {
+    background: #E8F5E1;
+    color: #4E9F4E;
+    font-weight: 800;
+    padding: 8px 16px;
+    border-radius: 999px;
+}
+
+.previa .previa-frase-imagem {
+    width: 92px;
+    height: 69px;
+    border-radius: 12px;
+}
+
+.chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.chip-palavra {
+    background: #FFFFFF;
+    border: 2px solid #F7B6C8;
+    color: #E9557A;
+    font-weight: 800;
+    padding: 5px 12px;
+    border-radius: 12px;
+}
+
+/* ---------- Trilha de crescimento (card "Seu jardim") ---------- */
+
+/* 4 colunas iguais: semente, broto, muda e flor */
+.trilha {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.trilha-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Espaço de altura fixa para as plantas ficarem alinhadas embaixo */
+.trilha-planta {
+    height: 72px;
+    display: flex;
+    align-items: flex-end;
+}
+
+.trilha-planta img {
+    height: 68px;
+}
+
+/* Estágios que ainda não chegaram ficam clarinhos */
+.proximo .trilha-planta img,
+.futuro .trilha-planta img {
+    opacity: 0.3;
+}
+
+.trilha-marca {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 8px;
+}
+
+/* Linha que liga uma bolinha à anterior (desenhada pelo CSS) */
+.trilha-marca::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: 50%;
+    width: 100%;
+    height: 4px;
+    margin-top: -2px;
+    background: #E2DDF5;
+}
+
+/* A primeira bolinha não tem linha antes dela */
+.trilha-item:first-child .trilha-marca::before {
+    display: none;
+}
+
+.feito .trilha-marca::before {
+    background: #6BBF6B;
+}
+
+.bolinha {
+    position: relative;   /* fica na frente da linha */
+    z-index: 1;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #FFFFFF;
+    font-weight: 800;
+    font-size: 15px;
+}
+
+.feito .bolinha   { background: #6BBF6B; }  /* verde com ✓ */
+.proximo .bolinha { background: #7B68C8; }  /* roxo: é o próximo */
+.futuro .bolinha  { background: #E2DDF5; }  /* cinza-claro: ainda falta */
+
+.trilha-nome {
+    font-size: 13px;
+    color: #6E6A85;
+    margin-top: 6px;
+}
+
+/* ---------- Telas médias (notebook pequeno e tablet deitado) ---------- */
+
+@media (max-width: 1100px) {
+    .cards-inicio {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    /* O card do jardim ocupa a linha inteira */
+    .cards-inicio .card:first-child {
+        grid-column: 1 / -1;
+    }
+}
+
 /* ---------- Telas pequenas (celular e tablet em pé) ---------- */
 
 @media (max-width: 900px) {
@@ -352,6 +796,44 @@ label {
     .arvore,
     .flor-enfeite {
         display: none;
+    }
+
+    /* Menu lateral mais estreito */
+    .menu-lateral {
+        width: 80px;
+    }
+
+    .menu-item {
+        width: 54px;
+        height: 54px;
+    }
+
+    .barra-topo {
+        padding: 0 20px;
+    }
+
+    .logo-topo {
+        font-size: 26px;
+    }
+
+    .inicio-ceu,
+    .inicio-grama {
+        padding-left: 24px;
+        padding-right: 24px;
+    }
+
+    .inicio-nuvem {
+        display: none;
+    }
+
+    .inicio-arvore {
+        width: 140px;
+        right: 16px;
+    }
+
+    /* minmax(0, 1fr): a coluna nunca fica mais larga que a tela */
+    .cards-inicio {
+        grid-template-columns: minmax(0, 1fr);
     }
 }
 
@@ -370,5 +852,90 @@ label {
 
     .botoes-lado-a-lado .botao {
         width: 100%;
+    }
+
+    /* No celular, o menu lateral vira uma barra fixa embaixo da tela */
+    .menu-lateral {
+        position: fixed;
+        top: auto;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 72px;
+        flex-direction: row;
+        justify-content: space-around;
+        padding: 0 8px;
+        gap: 0;
+        z-index: 10;
+    }
+
+    .menu-mascote {
+        display: none;
+    }
+
+    .menu-sair {
+        margin-top: 0;
+    }
+
+    /* Espaço embaixo para o conteúdo não ficar escondido atrás do menu */
+    .area-principal {
+        padding-bottom: 72px;
+    }
+
+    .barra-topo {
+        min-height: 70px;
+        padding: 0 14px;
+    }
+
+    .logo-topo {
+        font-size: 20px;
+        gap: 6px;
+    }
+
+    .logo-topo img {
+        height: 20px;
+    }
+
+    .topo-direita {
+        gap: 8px;
+    }
+
+    .saldo-moedas {
+        padding: 8px 12px;
+    }
+
+    /* Esconde o nome da criança, deixa só o avatar */
+    .topo-crianca {
+        padding: 4px;
+    }
+
+    .topo-crianca span {
+        display: none;
+    }
+
+    .botao-engrenagem {
+        width: 42px;
+        height: 42px;
+    }
+
+    .inicio-arvore {
+        display: none;
+    }
+
+    .inicio-titulo {
+        font-size: 28px;
+    }
+
+    .inicio-mascote {
+        width: 64px;
+    }
+
+    .card {
+        padding: 20px;
+    }
+
+    .previa img {
+        width: 44px;
+        height: 44px;
     }
 }

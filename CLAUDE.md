@@ -104,6 +104,7 @@ O jogo **Formando Frases** não tem protótipo. Siga o mesmo estilo do Jogo de V
 
 - **Moedas:** 10 moedas por rodada concluída + 2 moedas por acerto **de primeira**.
 - **Flores:** cada rodada concluída = 1 flor. Para o jardim completo são necessárias **20 flores**, então `% completo = flores / 20 * 100` (máximo 100%).
+- **Crescimento das flores ("cresce jogando"):** cada flor nasce como semente e sobe 1 estágio a cada atividade concluída **depois** dela: 0 atividades depois = semente, 1 = broto, 2 = muda, 3 ou mais = flor. A cor da flor (rosa, azul, amarela) se alterna pela ordem de plantio. O card "Seu jardim" da tela inicial mostra a trilha de crescimento da primeira flor.
 - **Dias seguidos:** quantidade de dias consecutivos, até hoje, em que existe pelo menos uma atividade.
 - **% de acertos no vocabulário:** acertos de primeira ÷ total de palavras respondidas.
 - Se a criança sair do jogo pelo botão "<" no meio da rodada, **nada é salvo**.
