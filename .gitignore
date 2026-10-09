@@ -1,0 +1,5 @@
+# Arquivos que o Windows e os editores criam sozinhos (não precisam ir para o GitHub)
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
