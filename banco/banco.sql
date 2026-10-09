@@ -4,6 +4,10 @@
 -- (aba "SQL" ou "Importar") e execute tudo de uma vez.
 -- =====================================================================
 
+-- Avisa o MySQL que este arquivo está escrito em UTF-8.
+-- Sem isso, os acentos podem ser gravados errados (ex.: "SequÃªncia").
+SET NAMES utf8mb4;
+
 -- Cria o banco de dados, se ele ainda não existir.
 -- utf8mb4 permite gravar acentos (ã, ç, é) e até emojis sem problema.
 CREATE DATABASE IF NOT EXISTS talkgarden
