@@ -270,6 +270,50 @@ label {
     margin-top: 28px;
 }
 
+/* ---------- Recuperar senha ---------- */
+
+/* Círculo verde-claro com o envelope (protótipo 05) */
+.icone-envelope {
+    width: 92px;
+    height: 92px;
+    margin: 0 auto 6px;
+    border-radius: 50%;
+    background: #EEF5E6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Caixa amarela tracejada do "modo demonstração" */
+.caixa-demonstracao {
+    margin-top: 22px;
+    padding: 16px;
+    border: 2px dashed #F5B82E;
+    border-radius: 16px;
+    background: #FFF9E6;
+    text-align: center;
+}
+
+.caixa-demonstracao strong {
+    color: #8A6400;
+    text-transform: uppercase;
+    font-size: 13px;
+    letter-spacing: 1px;
+}
+
+.caixa-demonstracao p {
+    color: #6E6A85;
+    font-size: 14px;
+    margin: 6px 0 10px;
+}
+
+/* O link é bem comprido: quebra a linha em qualquer lugar para não vazar */
+.link-demonstracao {
+    color: #5B4BA6;
+    font-size: 13px;
+    word-break: break-all;
+}
+
 /* ---------- Botões ---------- */
 
 .botao {

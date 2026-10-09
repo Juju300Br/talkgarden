@@ -66,6 +66,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 // Mensagem de sucesso quando a pessoa acabou de se cadastrar
 $cadastro_ok = isset($_GET['cadastro']) && $_GET['cadastro'] == 'ok';
+
+// Mensagem de sucesso quando a pessoa acabou de criar uma senha nova
+$senha_ok = isset($_GET['senha']) && $_GET['senha'] == 'ok';
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -93,6 +96,10 @@ $cadastro_ok = isset($_GET['cadastro']) && $_GET['cadastro'] == 'ok';
 
         <?php if ($cadastro_ok) { ?>
             <div class="aviso aviso-sucesso">Conta criada com sucesso! Agora é só entrar.</div>
+        <?php } ?>
+
+        <?php if ($senha_ok) { ?>
+            <div class="aviso aviso-sucesso">Senha alterada! Agora entre com a senha nova.</div>
         <?php } ?>
 
         <?php if ($erro != '') { ?>
