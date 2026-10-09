@@ -3,8 +3,10 @@
 // api/salvar_atividade.php  (RF006 - Conceder recompensas)
 // Recebe do JavaScript (fetch) o resultado de uma rodada, em JSON:
 //     { "tipo": "vocabulario", "total_itens": 5, "acertos_primeira": 4 }
-// Salva a atividade (= 1 flor), soma as moedas e responde em JSON:
-//     { "ok": true, "moedas_ganhas": 18, "saldo": 138, "total_flores": 7, "medalhas_novas": [] }
+// Salva a atividade (= 1 flor), soma as moedas, verifica as medalhas
+// e responde em JSON:
+//     { "ok": true, "moedas_ganhas": 18, "saldo": 138, "total_flores": 7,
+//       "medalhas_novas": [ { "nome": "Jardim florido", "descricao": "...", "icone": "..." } ] }
 // =====================================================================
 
 // Este arquivo está dentro da pasta api/, por isso o "../" nos caminhos
@@ -81,7 +83,11 @@ try {
     $somar = $conexao->prepare('UPDATE responsaveis SET moedas = moedas + ? WHERE id = ?');
     $somar->execute([$moedas_ganhas, $responsavel_id]);
 
-    $conexao->commit(); // confirma as duas operações
+    // Depois da recompensa, confere as metas e desbloqueia medalhas (RF007).
+    // Fica dentro da transação: se algo falhar, nada é salvo pela metade.
+    $medalhas_novas = verificarMedalhas($conexao, $responsavel_id);
+
+    $conexao->commit(); // confirma tudo
 } catch (PDOException $erro) {
     $conexao->rollBack(); // desfaz tudo
     responderErro(500, 'Não consegui salvar a rodada.');
@@ -90,10 +96,6 @@ try {
 // ----- 6. Busca o saldo e o total de flores atualizados -----
 $responsavel  = buscarResponsavel($conexao, $responsavel_id);
 $total_flores = contarFlores($conexao, $responsavel_id);
-
-// As medalhas (RF007) serão verificadas na Etapa 6.
-// Por enquanto a lista de medalhas novas vai sempre vazia.
-$medalhas_novas = [];
 
 // ----- 7. Responde para o JavaScript -----
 echo json_encode([

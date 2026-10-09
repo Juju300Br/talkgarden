@@ -175,7 +175,42 @@ function mostrarRecompensa(resultado, totalItens, acertosPrimeira) {
     document.getElementById('recompensa-acertos').textContent =
         'Acertos de primeira: ' + acertosPrimeira + ' de ' + totalItens;
 
+    // Guarda as medalhas novas para mostrar depois do "Continuar"
+    medalhasParaMostrar = resultado.medalhas_novas;
+
     // Tira o "hidden" para o modal aparecer
     document.getElementById('modal-recompensa').hidden = false;
+    tocarSom('vitoria');
+}
+
+
+// ---------------------------------------------------------------------
+// CONQUISTAS (RF007 - protótipo 11)
+// Depois da recompensa, mostra uma janela para cada medalha nova.
+// ---------------------------------------------------------------------
+let medalhasParaMostrar = []; // lista que veio da API (pode estar vazia)
+
+// Botão "Continuar" da recompensa
+function continuarDepoisDaRecompensa() {
+    document.getElementById('modal-recompensa').hidden = true;
+    mostrarProximaConquista();
+}
+
+// Mostra a próxima medalha da lista. Se não tiver mais, volta para o início.
+function mostrarProximaConquista() {
+    if (medalhasParaMostrar.length == 0) {
+        window.location.href = 'inicio.php';
+        return;
+    }
+
+    // shift() tira o primeiro item da lista e devolve ele
+    let medalha = medalhasParaMostrar.shift();
+
+    document.getElementById('conquista-icone').src = 'img/medalhas/' + medalha.icone;
+    document.getElementById('conquista-nome').textContent = medalha.nome;
+    document.getElementById('conquista-texto').textContent =
+        'Incrível! ' + medalha.descricao + ' Você ganhou uma nova medalha.';
+
+    document.getElementById('modal-conquista').hidden = false;
     tocarSom('vitoria');
 }

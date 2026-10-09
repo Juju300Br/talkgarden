@@ -1,11 +1,14 @@
 <?php
 // =====================================================================
-// modal_recompensa.php  (RF006 - protótipo 09)
-// Janela de "Parabéns!" que aparece no fim da rodada dos dois jogos.
-// Começa escondida (hidden). A função mostrarRecompensa() do geral.js
-// preenche os números e faz ela aparecer.
+// modal_recompensa.php
+// As duas janelas que aparecem no fim da rodada dos jogos:
+//   1) "Parabéns!" com as moedas e a flor nova (RF006 - protótipo 09)
+//   2) "Nova conquista" quando ganha medalha (RF007 - protótipo 11)
+// As duas começam escondidas (hidden). O geral.js preenche e mostra.
 // =====================================================================
 ?>
+
+<!-- ===== 1) Recompensa ===== -->
 <div class="fundo-modal" id="modal-recompensa" hidden>
     <div class="modal">
         <div class="recompensa-figuras">
@@ -22,8 +25,26 @@
             <span class="pilula pilula-flor">+1 flor no jardim</span>
         </div>
 
-        <a href="inicio.php" class="botao botao-verde">Continuar</a>
+        <!-- Se ganhou medalha, mostra a conquista. Se não, volta para o início. -->
+        <button type="button" class="botao botao-verde" onclick="continuarDepoisDaRecompensa()">Continuar</button>
         <!-- location.reload() recarrega a página = começa uma rodada nova -->
         <button type="button" class="link-botao espaco-pequeno" onclick="location.reload()">Jogar de novo</button>
+    </div>
+</div>
+
+<!-- ===== 2) Conquista desbloqueada ===== -->
+<div class="fundo-modal" id="modal-conquista" hidden>
+    <div class="modal">
+        <div class="medalha-destaque">
+            <img src="img/medalhas/primeiro_passo.svg" alt="" id="conquista-icone">
+        </div>
+
+        <span class="etiqueta-conquista">NOVA CONQUISTA</span>
+        <h2 id="conquista-nome">Medalha</h2>
+        <p id="conquista-texto"></p>
+
+        <a href="conquistas.php" class="botao botao-roxo espaco-cima">Ver minhas conquistas</a>
+        <!-- Mostra a próxima medalha (se ganhou mais de uma) ou volta para o início -->
+        <button type="button" class="link-botao espaco-pequeno" onclick="mostrarProximaConquista()">Continuar</button>
     </div>
 </div>

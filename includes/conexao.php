@@ -7,6 +7,10 @@
 // e depois usam a variável $conexao.
 // =====================================================================
 
+// Fuso horário do PHP. O XAMPP vem configurado com o horário da Alemanha,
+// o que faria as datas ficarem erradas (6 horas adiantadas).
+date_default_timezone_set('America/Manaus');
+
 // Dados de acesso ao banco.
 // No XAMPP, o usuário padrão é "root" e a senha fica vazia.
 $servidor = 'localhost';

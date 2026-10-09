@@ -1166,6 +1166,145 @@ label {
 .pilula-moedas { background: #FFF3CC; color: #8A6400; }
 .pilula-flor   { background: #E8F5E1; color: #3F8F3F; }
 
+/* Modal de conquista: medalha grande dentro de um círculo amarelo-claro */
+.medalha-destaque {
+    width: 170px;
+    height: 170px;
+    margin: 0 auto;
+    border-radius: 50%;
+    background: #FFF3D6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: pulinho 0.8s;
+}
+
+.medalha-destaque img {
+    width: 130px;
+}
+
+.etiqueta-conquista {
+    display: inline-block;
+    margin-top: 14px;
+    background: #EEEBFA;
+    color: #5B4BA6;
+    font-weight: 800;
+    font-size: 13px;
+    letter-spacing: 1px;
+    padding: 6px 14px;
+    border-radius: 999px;
+}
+
+/* O modal tem um <h2> com margem própria; perto da etiqueta, diminui */
+.etiqueta-conquista + h2 {
+    margin-top: 10px;
+}
+
+/* =====================================================================
+   CONQUISTAS (conquistas.php)
+   ===================================================================== */
+
+.grade-medalhas {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    gap: 22px;
+}
+
+.cartao-medalha {
+    background: #FFFFFF;
+    border-radius: 24px;
+    padding: 26px 20px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(91, 75, 166, 0.08);
+}
+
+.icone-medalha {
+    width: 84px;
+    height: 84px;
+}
+
+.cartao-medalha h2 {
+    font-size: 18px;
+    font-weight: 800;
+    margin: 10px 0 4px;
+}
+
+.cartao-medalha p {
+    color: #6E6A85;
+    font-size: 14px;
+    margin: 0;
+}
+
+.data-conquista {
+    display: inline-block;
+    margin-top: 10px;
+    font-size: 12px;
+    color: #3F8F3F;
+    background: #E8F5E1;
+    padding: 4px 10px;
+    border-radius: 999px;
+}
+
+/* Medalha bloqueada: mais apagada */
+.cartao-medalha.bloqueada {
+    background: #F7F5FD;
+    cursor: pointer;
+}
+
+.cartao-medalha.bloqueada h2 {
+    color: #8A85A8;
+}
+
+/* Tira a setinha padrão do <summary> */
+.cartao-medalha summary {
+    list-style: none;
+}
+
+.cartao-medalha summary::-webkit-details-marker {
+    display: none;
+}
+
+.dica-toque {
+    display: inline-block;
+    margin-top: 10px;
+    font-size: 12px;
+    font-weight: 700;
+    color: #7B68C8;
+}
+
+/* Quando está aberto, esconde a dica "Toque para ver" */
+.cartao-medalha[open] .dica-toque {
+    display: none;
+}
+
+/* Caixa com o que falta para desbloquear */
+.o-que-falta {
+    margin-top: 14px;
+    background: #FFFFFF;
+    border-radius: 16px;
+    padding: 14px;
+    font-size: 14px;
+    color: #2E2A4A;
+}
+
+.o-que-falta p {
+    margin-top: 6px;
+}
+
+.barra-progresso {
+    height: 12px;
+    background: #E2DDF5;
+    border-radius: 999px;
+    margin: 10px 0 6px;
+    overflow: hidden;
+}
+
+.barra-preenchida {
+    height: 100%;
+    background: #7B68C8;
+    border-radius: 999px;
+}
+
 /* ---------- Telas médias (notebook pequeno e tablet deitado) ---------- */
 
 @media (max-width: 1100px) {
