@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Avatar: sapo -->
+  <!-- Fundo redondo -->
+  <circle cx="50" cy="50" r="50" fill="#E3F4D9"/>
+  <!-- Bolinhas verdes onde ficam os olhos -->
+  <circle cx="34" cy="42" r="11" fill="#6BBF6B"/>
+  <circle cx="66" cy="42" r="11" fill="#6BBF6B"/>
+  <!-- Cabeça -->
+  <ellipse cx="50" cy="62" rx="30" ry="20" fill="#6BBF6B"/>
+  <!-- Olhos (branco + pupila) -->
+  <circle cx="34" cy="44" r="6" fill="#FFFFFF"/>
+  <circle cx="66" cy="44" r="6" fill="#FFFFFF"/>
+  <circle cx="35" cy="45" r="3" fill="#2D2D2D"/>
+  <circle cx="67" cy="45" r="3" fill="#2D2D2D"/>
+  <!-- Bochechas -->
+  <ellipse cx="30" cy="66" rx="4" ry="3" fill="#F7A1B5"/>
+  <ellipse cx="70" cy="66" rx="4" ry="3" fill="#F7A1B5"/>
+  <!-- Sorrisão -->
+  <path d="M36 66 Q50 76 64 66" stroke="#2D2D2D" stroke-width="3" fill="none" stroke-linecap="round"/>
+</svg>

@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
+  <!-- Moeda dourada com uma estrela no meio (saldo e recompensas) -->
+  <circle cx="24" cy="24" r="22" fill="#F5B82E"/>
+  <circle cx="24" cy="24" r="16" fill="#FFD970"/>
+  <!-- Estrela de 5 pontas -->
+  <polygon points="24,14 26.5,20.6 33.5,20.9 28,25.3 29.9,32.1 24,28.2 18.1,32.1 20,25.3 14.5,20.9 21.5,20.6" fill="#E0A010"/>
+</svg>

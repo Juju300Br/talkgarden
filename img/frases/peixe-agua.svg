@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 120">
+  <!-- Frase: "O peixe nada na água" -->
+
+  <!-- Fundo: água azul e areia -->
+  <rect x="0" y="0" width="160" height="120" fill="#A9D8F2"/>
+  <rect x="0" y="104" width="160" height="16" fill="#F5E6B8"/>
+
+  <!-- Algas verdes -->
+  <path d="M24 108 Q16 94 24 82 Q32 70 24 58" stroke="#5AA845" stroke-width="5" fill="none" stroke-linecap="round"/>
+  <path d="M136 108 Q144 96 136 86 Q128 76 136 66" stroke="#5AA845" stroke-width="5" fill="none" stroke-linecap="round"/>
+
+  <!-- Rabo -->
+  <polygon points="98,58 118,44 118,72" fill="#F39A4B"/>
+  <!-- Corpo do peixe -->
+  <ellipse cx="76" cy="58" rx="26" ry="16" fill="#F39A4B"/>
+  <!-- Olho -->
+  <circle cx="62" cy="54" r="4.5" fill="#FFFFFF"/>
+  <circle cx="61" cy="54" r="2.2" fill="#2D2D2D"/>
+
+  <!-- Bolhinhas -->
+  <circle cx="46" cy="44" r="4" fill="#FFFFFF" opacity="0.7"/>
+  <circle cx="40" cy="32" r="3" fill="#FFFFFF" opacity="0.7"/>
+  <circle cx="46" cy="21" r="2" fill="#FFFFFF" opacity="0.7"/>
+</svg>

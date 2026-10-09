@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 32">
+  <!-- Ícone do logo: um botãozinho de flor rosa (fica ao lado do nome "TalkGarden") -->
+  <!-- Caule -->
+  <rect x="11" y="2" width="2" height="8" rx="1" fill="#E9557A"/>
+  <!-- Botão da flor (formato de gota) -->
+  <path d="M12 6 Q20 16 20 22 A8 8 0 0 1 4 22 Q4 16 12 6 Z" fill="#E9557A"/>
+</svg>

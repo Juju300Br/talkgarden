@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 100">
+  <!-- Estágio 4: flor azul aberta -->
+  <!-- Caule -->
+  <rect x="28" y="40" width="4" height="60" rx="2" fill="#5AA845"/>
+  <!-- Folhas -->
+  <ellipse cx="20" cy="76" rx="9" ry="4.5" fill="#6BBF6B" transform="rotate(-25 20 76)"/>
+  <ellipse cx="40" cy="66" rx="9" ry="4.5" fill="#6BBF6B" transform="rotate(25 40 66)"/>
+  <!-- Quatro pétalas (troque a cor aqui) -->
+  <circle cx="20" cy="24" r="11" fill="#7DB7EA"/>
+  <circle cx="40" cy="24" r="11" fill="#7DB7EA"/>
+  <circle cx="20" cy="44" r="11" fill="#7DB7EA"/>
+  <circle cx="40" cy="44" r="11" fill="#7DB7EA"/>
+  <!-- Miolo da flor -->
+  <circle cx="30" cy="34" r="7" fill="#F5B82E"/>
+</svg>

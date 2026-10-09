@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- GATO -->
+  <!-- Orelhas (laranja por fora, rosa por dentro) -->
+  <polygon points="20,40 24,10 46,28" fill="#F39A4B"/>
+  <polygon points="80,40 76,10 54,28" fill="#F39A4B"/>
+  <polygon points="25,34 27,18 39,28" fill="#F7B6C2"/>
+  <polygon points="75,34 73,18 61,28" fill="#F7B6C2"/>
+  <!-- Cabeça -->
+  <circle cx="50" cy="56" r="32" fill="#F39A4B"/>
+  <!-- Olhos -->
+  <ellipse cx="38" cy="52" rx="4" ry="6" fill="#2D2D2D"/>
+  <ellipse cx="62" cy="52" rx="4" ry="6" fill="#2D2D2D"/>
+  <!-- Nariz -->
+  <polygon points="45,62 55,62 50,68" fill="#E9557A"/>
+  <!-- Bigodes -->
+  <line x1="14" y1="62" x2="36" y2="66" stroke="#2D2D2D" stroke-width="2" stroke-linecap="round"/>
+  <line x1="14" y1="72" x2="36" y2="70" stroke="#2D2D2D" stroke-width="2" stroke-linecap="round"/>
+  <line x1="86" y1="62" x2="64" y2="66" stroke="#2D2D2D" stroke-width="2" stroke-linecap="round"/>
+  <line x1="86" y1="72" x2="64" y2="70" stroke="#2D2D2D" stroke-width="2" stroke-linecap="round"/>
+</svg>

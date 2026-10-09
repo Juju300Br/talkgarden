@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- UVA -->
+  <!-- Cabinho e folha -->
+  <path d="M50 30 Q51 20 56 12" stroke="#8B5A3C" stroke-width="4" fill="none" stroke-linecap="round"/>
+  <ellipse cx="66" cy="20" rx="11" ry="6" fill="#6BBF6B" transform="rotate(-20 66 20)"/>
+  <!-- Bolinhas da uva (cacho em forma de triângulo) -->
+  <circle cx="36" cy="38" r="10" fill="#7B68C8"/>
+  <circle cx="50" cy="38" r="10" fill="#8E7CD6"/>
+  <circle cx="64" cy="38" r="10" fill="#7B68C8"/>
+  <circle cx="43" cy="54" r="10" fill="#8E7CD6"/>
+  <circle cx="57" cy="54" r="10" fill="#7B68C8"/>
+  <circle cx="50" cy="70" r="10" fill="#8E7CD6"/>
+</svg>

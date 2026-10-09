@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 120">
+  <!-- Frase: "A abelha pousa na flor" -->
+
+  <!-- Fundo: céu e chão -->
+  <rect x="0" y="0" width="160" height="120" fill="#EAF6FF"/>
+  <rect x="0" y="96" width="160" height="24" fill="#DFF0C8"/>
+
+  <!-- Flor grande -->
+  <rect x="75" y="50" width="6" height="50" rx="3" fill="#5AA845"/>
+  <ellipse cx="66" cy="84" rx="11" ry="5" fill="#6BBF6B" transform="rotate(-25 66 84)"/>
+  <ellipse cx="90" cy="76" rx="11" ry="5" fill="#6BBF6B" transform="rotate(25 90 76)"/>
+  <circle cx="66" cy="34" r="14" fill="#E9557A"/>
+  <circle cx="90" cy="34" r="14" fill="#E9557A"/>
+  <circle cx="66" cy="58" r="14" fill="#E9557A"/>
+  <circle cx="90" cy="58" r="14" fill="#E9557A"/>
+  <circle cx="78" cy="46" r="9" fill="#F5B82E"/>
+
+  <!-- Abelhinha pousada em cima da flor -->
+  <!-- Asas -->
+  <ellipse cx="96" cy="16" rx="6" ry="9" fill="#BFE3F7" transform="rotate(-20 96 16)"/>
+  <ellipse cx="104" cy="16" rx="6" ry="9" fill="#BFE3F7" transform="rotate(20 104 16)"/>
+  <!-- Corpo com listras -->
+  <ellipse cx="100" cy="28" rx="11" ry="8" fill="#F5B82E"/>
+  <rect x="96" y="21" width="3" height="14" rx="1.5" fill="#2D2D2D"/>
+  <rect x="102" y="21" width="3" height="14" rx="1.5" fill="#2D2D2D"/>
+  <!-- Cabeça e olho -->
+  <circle cx="113" cy="26" r="6" fill="#F5B82E"/>
+  <circle cx="115" cy="25" r="1.5" fill="#2D2D2D"/>
+</svg>

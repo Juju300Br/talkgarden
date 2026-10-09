@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 40">
+  <!-- Faixa de grama. Também pode se repetir na horizontal no CSS. -->
+
+  <!-- Chão verde-claro -->
+  <rect x="0" y="14" width="200" height="26" fill="#DCEFC4"/>
+
+  <!-- Tufinhos de grama (triângulos) -->
+  <polygon points="10,16 14,4 18,16"    fill="#A8D47F"/>
+  <polygon points="16,16 21,7 26,16"    fill="#96C76A"/>
+  <polygon points="60,16 64,6 68,16"    fill="#A8D47F"/>
+  <polygon points="108,16 112,3 116,16" fill="#96C76A"/>
+  <polygon points="114,16 119,8 124,16" fill="#A8D47F"/>
+  <polygon points="160,16 164,5 168,16" fill="#A8D47F"/>
+</svg>

@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 60">
+  <!-- Pedaço de cerca. No CSS ele pode se repetir na horizontal
+       (background-repeat: repeat-x) para formar uma cerca comprida. -->
+
+  <!-- Duas tábuas deitadas -->
+  <rect x="0" y="18" width="200" height="6" fill="#EDE3D2"/>
+  <rect x="0" y="40" width="200" height="6" fill="#EDE3D2"/>
+
+  <!-- Tábuas em pé (uma a cada 20 pixels) -->
+  <rect x="5"   y="4" width="10" height="56" rx="3" fill="#F5EEE2"/>
+  <rect x="25"  y="4" width="10" height="56" rx="3" fill="#F5EEE2"/>
+  <rect x="45"  y="4" width="10" height="56" rx="3" fill="#F5EEE2"/>
+  <rect x="65"  y="4" width="10" height="56" rx="3" fill="#F5EEE2"/>
+  <rect x="85"  y="4" width="10" height="56" rx="3" fill="#F5EEE2"/>
+  <rect x="105" y="4" width="10" height="56" rx="3" fill="#F5EEE2"/>
+  <rect x="125" y="4" width="10" height="56" rx="3" fill="#F5EEE2"/>
+  <rect x="145" y="4" width="10" height="56" rx="3" fill="#F5EEE2"/>
+  <rect x="165" y="4" width="10" height="56" rx="3" fill="#F5EEE2"/>
+  <rect x="185" y="4" width="10" height="56" rx="3" fill="#F5EEE2"/>
+</svg>

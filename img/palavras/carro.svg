@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- CARRO -->
+  <!-- Parte de cima (cabine) -->
+  <rect x="26" y="30" width="46" height="26" rx="8" fill="#E9557A"/>
+  <!-- Parte de baixo -->
+  <rect x="10" y="48" width="80" height="24" rx="8" fill="#E9557A"/>
+  <!-- Janelas -->
+  <rect x="31" y="35" width="16" height="13" rx="3" fill="#BFE3F7"/>
+  <rect x="51" y="35" width="16" height="13" rx="3" fill="#BFE3F7"/>
+  <!-- Rodas -->
+  <circle cx="30" cy="74" r="10" fill="#3D3D3D"/>
+  <circle cx="70" cy="74" r="10" fill="#3D3D3D"/>
+  <circle cx="30" cy="74" r="4" fill="#CCCCCC"/>
+  <circle cx="70" cy="74" r="4" fill="#CCCCCC"/>
+</svg>

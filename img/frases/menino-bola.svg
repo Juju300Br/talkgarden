@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 120">
+  <!-- Frase: "O menino chuta a bola" -->
+
+  <!-- Fundo: céu e chão -->
+  <rect x="0" y="0" width="160" height="120" fill="#EAF6FF"/>
+  <rect x="0" y="92" width="160" height="28" fill="#DFF0C8"/>
+
+  <!-- Pernas (calça azul): uma parada e outra chutando -->
+  <line x1="62" y1="78" x2="60" y2="106" stroke="#4A6FB5" stroke-width="9" stroke-linecap="round"/>
+  <line x1="68" y1="78" x2="88" y2="96" stroke="#4A6FB5" stroke-width="9" stroke-linecap="round"/>
+  <!-- Sapatos -->
+  <ellipse cx="62" cy="110" rx="8" ry="4" fill="#3D3D3D"/>
+  <ellipse cx="92" cy="99" rx="7" ry="4" fill="#3D3D3D"/>
+
+  <!-- Braços -->
+  <line x1="52" y1="56" x2="40" y2="72" stroke="#F2C29B" stroke-width="7" stroke-linecap="round"/>
+  <line x1="76" y1="56" x2="90" y2="64" stroke="#F2C29B" stroke-width="7" stroke-linecap="round"/>
+  <!-- Camiseta verde -->
+  <rect x="50" y="48" width="28" height="34" rx="10" fill="#6BBF6B"/>
+
+  <!-- Cabeça -->
+  <circle cx="64" cy="34" r="14" fill="#F2C29B"/>
+  <!-- Cabelo (meio círculo marrom em cima da cabeça) -->
+  <path d="M50 32 A14 14 0 0 1 78 32 Z" fill="#5A3A22"/>
+  <!-- Olhos e sorriso -->
+  <circle cx="59" cy="37" r="2" fill="#2D2D2D"/>
+  <circle cx="69" cy="37" r="2" fill="#2D2D2D"/>
+  <path d="M59 42 Q64 46 69 42" stroke="#2D2D2D" stroke-width="2" fill="none" stroke-linecap="round"/>
+
+  <!-- Bola -->
+  <circle cx="112" cy="94" r="12" fill="#F39A4B"/>
+  <line x1="112" y1="82" x2="112" y2="106" stroke="#C86A23" stroke-width="2"/>
+  <line x1="100" y1="94" x2="124" y2="94" stroke="#C86A23" stroke-width="2"/>
+  <!-- Risquinhos de movimento -->
+  <line x1="130" y1="86" x2="142" y2="84" stroke="#B9B3D9" stroke-width="3" stroke-linecap="round"/>
+  <line x1="132" y1="96" x2="146" y2="96" stroke="#B9B3D9" stroke-width="3" stroke-linecap="round"/>
+</svg>
