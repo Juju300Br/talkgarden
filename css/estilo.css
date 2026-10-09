@@ -949,6 +949,105 @@ label {
 .msg-certo       { color: #3F8F3F; }
 .msg-erro-gentil { color: #6E6A85; }
 
+/* ----- Formando Frases (cor rosa) ----- */
+
+.titulo-frases {
+    color: #2E2A4A;
+}
+
+/* Imagem de apoio da frase */
+.imagem-frase {
+    width: 100%;
+    max-width: 320px;
+    height: auto;
+    border-radius: 20px;
+    margin-bottom: 22px;
+}
+
+/* Caixa tracejada onde a frase vai sendo montada */
+.area-resposta {
+    min-height: 82px;
+    border: 3px dashed #F7B6C8;
+    border-radius: 22px;
+    background: #FFF7F9;
+    padding: 14px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    transition: background 0.2s;
+}
+
+.dica-resposta {
+    color: #B9B3D9;
+    font-weight: 700;
+}
+
+/* Frase certa: verde com pulinho */
+.area-resposta.certo {
+    border-style: solid;
+    border-color: #6BBF6B;
+    background: #EAF6E6;
+    animation: pulinho 0.5s;
+}
+
+/* Frase errada: rosa balançando */
+.area-resposta.errado {
+    border-style: solid;
+    border-color: #E9557A;
+    background: #FCE9EF;
+    animation: balancar 0.4s;
+}
+
+/* Palavras embaralhadas, embaixo da área de resposta */
+.banco-palavras {
+    min-height: 70px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    margin: 24px 0;
+}
+
+/* Cada palavra é um botão grande, fácil de tocar */
+.palavra-botao {
+    background: #FFFFFF;
+    border: 3px solid #F7B6C8;
+    border-radius: 16px;
+    padding: 12px 22px;
+    font-family: inherit;
+    font-size: 22px;
+    font-weight: 800;
+    color: #E9557A;
+    cursor: pointer;
+    transition: transform 0.1s;
+}
+
+.palavra-botao:hover {
+    transform: translateY(-3px);
+}
+
+/* Palavras que já estão na resposta ficam rosa cheio */
+.area-resposta .palavra-botao {
+    background: #E9557A;
+    border-color: #E9557A;
+    color: #FFFFFF;
+}
+
+.botao-confirmar {
+    max-width: 360px;
+    margin: 0 auto;
+}
+
+/* Botão desligado (antes de usar todas as palavras) */
+.botao:disabled {
+    background: #E2DDF5;
+    box-shadow: none;
+    cursor: default;
+    transform: none;
+}
+
 /* ----- Animações (@keyframes = os "quadros" da animação) ----- */
 
 /* Aumenta um pouquinho e volta */
@@ -1263,5 +1362,10 @@ label {
 
     .modal {
         padding: 30px 22px;
+    }
+
+    .palavra-botao {
+        font-size: 18px;
+        padding: 10px 16px;
     }
 }
