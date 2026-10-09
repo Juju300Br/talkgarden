@@ -1,0 +1,374 @@
+/* =====================================================================
+   estilo.css - TalkGarden
+   Cores principais:
+     roxo   #7B68C8 / #5B4BA6  (botões principais e menu)
+     verde  #6BBF6B            (vocabulário / sucesso)
+     rosa   #E9557A            (frases / erros gentis)
+     texto  #2E2A4A (escuro)   e #6E6A85 (cinza)
+   ===================================================================== */
+
+/* ---------- Regras gerais ---------- */
+
+/* box-sizing: o padding fica "dentro" da largura (fica mais fácil calcular) */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: 'Nunito', Arial, sans-serif;
+    color: #2E2A4A;
+    background: #EEEBFA;
+}
+
+a {
+    color: inherit;
+}
+
+/* ---------- Fundo com cenário (login, cadastro, senha, sair) ---------- */
+
+.pagina-cenario {
+    min-height: 100vh;
+    /* Céu azul em cima (até 54% da altura) e grama verde-clara embaixo */
+    background: linear-gradient(to bottom, #C2E3F6 0%, #DDEFFA 54%, #E9F5DC 54%, #DCEDC2 100%);
+    display: flex;
+    align-items: center;      /* centraliza o cartão na vertical */
+    justify-content: center;  /* centraliza o cartão na horizontal */
+    padding: 70px 16px 40px;
+    overflow-x: hidden;
+}
+
+/* Camada dos enfeites: fica parada atrás do cartão e não pode ser clicada */
+.cenario {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.cenario img {
+    position: absolute;
+}
+
+.nuvem-1 { top: 9%;  left: 10%;  width: 320px; }
+.nuvem-2 { top: 17%; right: 13%; width: 200px; }
+
+/* A cerca é a imagem cerca.svg repetida na horizontal */
+.cerca {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    top: calc(54% - 56px);
+    height: 56px;
+    background-image: url('../img/cenario/cerca.svg');
+    background-repeat: repeat-x;
+    background-size: auto 56px;
+}
+
+/* As árvores ficam "em pé" na linha onde começa a grama */
+.arvore          { bottom: 46%; width: 200px; }
+.arvore-esquerda { left: 4%; }
+.arvore-direita  { right: 5%; width: 160px; }
+
+.flor-enfeite   { width: 40px; bottom: 28%; }
+.flor-enfeite-1 { left: 6%; }
+.flor-enfeite-2 { left: 27%; }
+.flor-enfeite-3 { right: 27%; }
+.flor-enfeite-4 { right: 6%; }
+
+/* ---------- Cartão branco do login / cadastro ---------- */
+
+.cartao-acesso {
+    position: relative;   /* fica na frente do cenário */
+    z-index: 2;
+    width: 100%;
+    max-width: 550px;
+    background: #FFFFFF;
+    border-radius: 32px;
+    padding: 56px 48px 36px;
+    box-shadow: 0 20px 60px rgba(91, 75, 166, 0.15);
+}
+
+/* Cartão do cadastro é um pouco mais largo (tem duas colunas) */
+.cartao-largo {
+    max-width: 650px;
+}
+
+/* Abelhinha "sentada" em cima do cartão */
+.mascote-topo {
+    position: absolute;
+    top: -52px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 70px;
+}
+
+.cartao-acesso h1 {
+    text-align: center;
+    font-size: 28px;
+    font-weight: 800;
+    margin: 12px 0 6px;
+}
+
+.subtitulo {
+    text-align: center;
+    color: #6E6A85;
+    margin: 0 0 8px;
+    line-height: 1.5;
+}
+
+/* ---------- Logo "TalkGarden" ---------- */
+
+.logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-size: 32px;
+    font-weight: 800;
+}
+
+.logo img {
+    height: 28px;
+}
+
+.logo-talk   { color: #7B68C8; }
+.logo-garden { color: #4E9F4E; }
+
+/* ---------- Formulários ---------- */
+
+label {
+    display: block;
+    font-weight: 700;
+    font-size: 15px;
+    margin: 18px 0 8px;
+}
+
+.campo {
+    width: 100%;
+    padding: 16px 18px;
+    border: 2px solid transparent;
+    border-radius: 14px;
+    background: #EEEBFA;
+    font-family: inherit;
+    font-size: 17px;
+    color: #2E2A4A;
+}
+
+/* Quando a pessoa clica no campo */
+.campo:focus {
+    outline: none;
+    border-color: #7B68C8;
+    background: #FFFFFF;
+}
+
+/* Campo com erro: borda e fundo rosados */
+.campo-erro {
+    border-color: #E9557A;
+    background: #FCE9EF;
+}
+
+/* Mensagem de erro embaixo do campo */
+.msg-erro {
+    color: #E9557A;
+    font-size: 14px;
+    margin: 6px 0 0;
+}
+
+/* Caixinha de aviso no topo do formulário */
+.aviso {
+    padding: 14px 16px;
+    border-radius: 14px;
+    margin-top: 20px;
+    line-height: 1.4;
+}
+
+.aviso-erro {
+    background: #FCE9EF;
+    color: #D23C64;
+}
+
+.aviso-sucesso {
+    background: #E6F5E6;
+    color: #3F8F3F;
+}
+
+/* Campo de senha com o botão do olhinho dentro */
+.campo-senha {
+    position: relative;
+}
+
+.campo-senha .campo {
+    padding-right: 54px; /* espaço para o olhinho não ficar em cima do texto */
+}
+
+.botao-olho {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: #6E6A85;
+    cursor: pointer;
+    padding: 6px;
+}
+
+/* Linha com "Lembrar de mim" e "Esqueceu a senha?" */
+.linha-opcoes {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 18px 0 24px;
+}
+
+.lembrar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0;
+    font-weight: 400;
+    color: #6E6A85;
+    cursor: pointer;
+}
+
+.lembrar input {
+    width: 18px;
+    height: 18px;
+    accent-color: #7B68C8;
+}
+
+/* Duas colunas lado a lado (vira uma coluna no celular) */
+.grade-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 16px;
+}
+
+.link {
+    color: #7B68C8;
+    font-weight: 800;
+    text-decoration: none;
+}
+
+.link:hover {
+    text-decoration: underline;
+}
+
+.rodape-cartao {
+    text-align: center;
+    color: #6E6A85;
+    margin: 22px 0 0;
+}
+
+.espaco-cima {
+    margin-top: 28px;
+}
+
+/* ---------- Botões ---------- */
+
+.botao {
+    display: block;
+    width: 100%;
+    padding: 17px 28px;
+    /* borda transparente: assim todos os botões ficam da mesma altura,
+       inclusive o .botao-contorno, que tem borda colorida */
+    border: 2px solid transparent;
+    border-radius: 999px;   /* bem arredondado (formato de pílula) */
+    font-family: inherit;
+    font-size: 18px;
+    font-weight: 800;
+    text-align: center;
+    text-decoration: none;
+    color: #FFFFFF;
+    cursor: pointer;
+    transition: transform 0.1s;
+}
+
+/* Botão "sobe" um pouquinho quando o mouse passa por cima */
+.botao:hover {
+    transform: translateY(-2px);
+}
+
+.botao-roxo {
+    background: linear-gradient(90deg, #7B68C8, #5B4BA6);
+    box-shadow: 0 10px 24px rgba(91, 75, 166, 0.3);
+}
+
+.botao-verde {
+    background: #6BBF6B;
+    box-shadow: 0 10px 24px rgba(107, 191, 107, 0.35);
+}
+
+.botao-contorno {
+    background: #FFFFFF;
+    color: #7B68C8;
+    border: 2px solid #E2DDF5;
+}
+
+/* ---------- Confirmação de saída (protótipo 15) ---------- */
+
+/* Camada roxa escura e transparente por cima do cenário */
+.fundo-escuro {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(46, 42, 74, 0.45);
+    z-index: 1;
+}
+
+.cartao-sair {
+    max-width: 480px;
+    text-align: center;
+    padding-top: 36px;
+}
+
+.mascote-meio {
+    width: 80px;
+}
+
+.botoes-lado-a-lado {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 28px;
+}
+
+.botoes-lado-a-lado .botao {
+    width: auto;
+}
+
+/* ---------- Telas pequenas (celular e tablet em pé) ---------- */
+
+@media (max-width: 900px) {
+    /* Esconde árvores e flores para não ficarem atrás do cartão */
+    .arvore,
+    .flor-enfeite {
+        display: none;
+    }
+}
+
+@media (max-width: 600px) {
+    .cartao-acesso {
+        padding: 50px 22px 28px;
+    }
+
+    .grade-2 {
+        grid-template-columns: 1fr;
+    }
+
+    .botoes-lado-a-lado {
+        flex-direction: column-reverse;
+    }
+
+    .botoes-lado-a-lado .botao {
+        width: 100%;
+    }
+}
