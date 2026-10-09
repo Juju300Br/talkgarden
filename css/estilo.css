@@ -1496,6 +1496,174 @@ label {
     font-weight: 800;
 }
 
+/* =====================================================================
+   PERFIL (perfil.php)
+   ===================================================================== */
+
+/* Aviso de sucesso/erro no topo das páginas internas */
+.aviso-pagina {
+    max-width: 1300px;
+    margin: 0 0 20px;
+}
+
+/* Duas colunas: dados (mais larga) e configurações */
+.grade-perfil {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 28px;
+    align-items: start;
+    max-width: 1300px;
+}
+
+.texto-ajuda {
+    color: #6E6A85;
+    margin: 0 0 18px !important;
+    font-size: 15px;
+}
+
+.espaco-titulo {
+    margin-top: 30px !important;
+}
+
+/* ---------- Escolha do avatar ---------- */
+
+.escolha-avatar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+}
+
+/* Esconde a bolinha do radio (a imagem é que fica clicável) */
+.opcao-avatar input {
+    position: absolute;
+    opacity: 0;
+}
+
+.opcao-avatar {
+    margin: 0;
+    cursor: pointer;
+}
+
+.opcao-avatar img {
+    display: block;
+    width: 76px;
+    height: 76px;
+    border-radius: 50%;
+    border: 4px solid transparent;
+    transition: transform 0.15s;
+}
+
+.opcao-avatar:hover img {
+    transform: scale(1.06);
+}
+
+/* Avatar escolhido: borda roxa em volta (":checked + img" = a imagem logo depois do radio marcado) */
+.opcao-avatar input:checked + img {
+    border-color: #7B68C8;
+    box-shadow: 0 0 0 4px #E2DDF5;
+}
+
+/* Contorno quando navega pelo teclado (Tab) */
+.opcao-avatar input:focus-visible + img {
+    outline: 3px dashed #7B68C8;
+    outline-offset: 4px;
+}
+
+.botoes-perfil {
+    display: flex;
+    gap: 14px;
+    margin-top: 28px;
+}
+
+.botoes-perfil .botao {
+    width: auto;
+}
+
+/* ---------- Linhas de configuração ---------- */
+
+.linha-config {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    padding: 18px 0;
+    border-bottom: 1px solid #EEEBFA;
+}
+
+.linha-config:last-child {
+    border-bottom: none;
+}
+
+.linha-config strong {
+    display: block;
+    font-size: 17px;
+}
+
+.linha-config span {
+    color: #6E6A85;
+    font-size: 15px;
+}
+
+/* ---------- Interruptor liga/desliga (checkbox disfarçado) ---------- */
+
+.interruptor {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+    margin: 0;
+    flex-shrink: 0;
+    cursor: pointer;
+}
+
+/* Esconde o quadradinho do checkbox */
+.interruptor input {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+/* O "trilho" do interruptor (cinza = desligado) */
+.trilho-interruptor {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #E2DDF5;
+    border-radius: 999px;
+    transition: background 0.2s;
+}
+
+/* A bolinha branca */
+.trilho-interruptor::before {
+    content: '';
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: #FFFFFF;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    transition: transform 0.2s;
+}
+
+/* Ligado: trilho verde e a bolinha vai para a direita */
+.interruptor input:checked + .trilho-interruptor {
+    background: #6BBF6B;
+}
+
+.interruptor input:checked + .trilho-interruptor::before {
+    transform: translateX(26px);
+}
+
+.interruptor input:focus-visible + .trilho-interruptor {
+    outline: 3px dashed #7B68C8;
+    outline-offset: 3px;
+}
+
 /* ---------- Telas médias (notebook pequeno e tablet deitado) ---------- */
 
 @media (max-width: 1100px) {
@@ -1506,6 +1674,11 @@ label {
     /* O card do jardim ocupa a linha inteira */
     .cards-inicio .card:first-child {
         grid-column: 1 / -1;
+    }
+
+    /* Perfil: as duas colunas ficam uma embaixo da outra */
+    .grade-perfil {
+        grid-template-columns: minmax(0, 1fr);
     }
 }
 
