@@ -19,7 +19,7 @@ Conta de demonstração: `demo@talkgarden.com` / senha `123456`.
 - `js/data.js` e `js/games-data.js`: palavras, frases, histórias, medalhas e outros dados dos jogos
 - `js/app.js`: funcionamento do sistema
 - `img/`: logo e fundos
-- `docs/`: TCC, projeto integrador, manuais, diagramas e prints das telas
+- `docs/`: PCCT (Projeto de Conclusão de Curso Técnico), projeto integrador, manuais, diagramas e prints das telas
 - `video/`: vídeo de demonstração e roteiro de dublagem
 
 Os dados ficam salvos no próprio navegador (localStorage), simulando o banco de dados MySQL modelado em `docs/`.
