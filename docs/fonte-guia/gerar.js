@@ -59,7 +59,7 @@ ${h1('Resumo do projeto')}
 <tr><td>Conte a História</td><td>Ouve uma história, ordena as cenas e responde sobre ela</td><td>Narrativa</td></tr>
 </table>
 <p>Cada jogo concluído dá moedas e planta uma flor no jardim virtual da criança, e algumas metas desbloqueiam medalhas. O responsável (pai, mãe ou professor) cria a conta, responde a um questionário inicial que orienta a família sem fazer diagnóstico e acompanha o desempenho na tela de estatísticas.</p>
-<p>A interface foi feita com HTML, CSS e JavaScript. Os dados ficam em um banco MySQL, e a ligação entre a interface e o banco é feita por arquivos em PHP. Tudo roda no XAMPP, que reúne o servidor Apache, o PHP e o MySQL.</p>
+<p>A interface foi feita com HTML, CSS e JavaScript. Nesta versão, os dados ficam salvos no próprio navegador, com o recurso <code>localStorage</code>, simulando o banco de dados que foi modelado para o MySQL e que será implementado na próxima etapa.</p>
 
 ${h1('Como o projeto está organizado')}
 <table class="simples">
@@ -69,36 +69,22 @@ ${h1('Como o projeto está organizado')}
 <tr><td>js/data.js</td><td>Dados fixos: palavras e imagens do vocabulário, frases, flores, avatares e medalhas</td></tr>
 <tr><td>js/games-data.js</td><td>Dados do Siga a Abelha e do Conte a História, os sinais do questionário e os limites de idade</td></tr>
 <tr><td>js/app.js</td><td>O funcionamento: navegação entre telas, login, jogos, recompensas, estatísticas e perfil</td></tr>
-<tr><td>api/</td><td>Arquivos PHP que recebem os dados do JavaScript e gravam ou leem no MySQL</td></tr>
-<tr><td>banco/talkgarden.sql</td><td>Script que cria o banco, as oito tabelas e a conta de demonstração</td></tr>
 <tr><td>img/</td><td>Logo e imagens de fundo</td></tr>
 </table>
 <p>Os três arquivos JavaScript são carregados no fim do <code>index.html</code>, nesta ordem, porque o <code>app.js</code> usa os dados que os outros dois criam:</p>
 ${trecho('index.html', /<script src="js\/data.js">/, 3)}
 
 ${h2('Como rodar')}
-<ol>
-<li>Abra o XAMPP Control Panel e clique em Start no Apache e no MySQL.</li>
-<li>Coloque a pasta do projeto em <code>C:\\xampp\\htdocs\\talkgarden</code>.</li>
-<li>Em <code>http://localhost/phpmyadmin</code>, importe o arquivo <code>banco/talkgarden.sql</code>.</li>
-<li>Abra <code>http://localhost/talkgarden</code>. A conta de demonstração é demo@talkgarden.com, com a senha 123456.</li>
-</ol>
+<p>Basta abrir o arquivo <code>index.html</code> no navegador; não é preciso instalar nada. A conta de demonstração é demo@talkgarden.com, com a senha 123456.</p>
 
-${h1('O caminho de um clique até o banco')}
-<p>O sistema tem três partes que conversam entre si. O navegador mostra as telas e reage aos cliques (HTML, CSS e JavaScript). Quando é preciso guardar ou buscar alguma informação, o JavaScript manda uma mensagem para um arquivo PHP no servidor. O PHP fala com o MySQL e devolve a resposta.</p>
-<svg class="fluxo" viewBox="0 0 640 120" xmlns="http://www.w3.org/2000/svg">
-<defs><marker id="s" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10z" fill="#5B4FA8"/></marker></defs>
-<g font-family="Segoe UI" font-size="13" fill="#2E2A3F">
-<rect x="6" y="30" width="170" height="60" rx="8" fill="#EFECFB" stroke="#7C6FCB"/><text x="91" y="56" text-anchor="middle" font-weight="700">Navegador</text><text x="91" y="76" text-anchor="middle">HTML, CSS e JavaScript</text>
-<rect x="235" y="30" width="170" height="60" rx="8" fill="#EFECFB" stroke="#7C6FCB"/><text x="320" y="56" text-anchor="middle" font-weight="700">Servidor Apache</text><text x="320" y="76" text-anchor="middle">arquivos PHP (api/)</text>
-<rect x="464" y="30" width="170" height="60" rx="8" fill="#F1F7E4" stroke="#4C9A50"/><text x="549" y="56" text-anchor="middle" font-weight="700">Banco MySQL</text><text x="549" y="76" text-anchor="middle">8 tabelas</text>
-<path d="M178 50 H232" stroke="#5B4FA8" stroke-width="1.6" marker-end="url(#s)"/><path d="M233 72 H180" stroke="#5B4FA8" stroke-width="1.6" marker-end="url(#s)"/>
-<path d="M407 50 H461" stroke="#5B4FA8" stroke-width="1.6" marker-end="url(#s)"/><path d="M462 72 H409" stroke="#5B4FA8" stroke-width="1.6" marker-end="url(#s)"/>
-<text x="205" y="22" text-anchor="middle" font-size="11" fill="#7A7590">dados em JSON</text><text x="434" y="22" text-anchor="middle" font-size="11" fill="#7A7590">SQL</text>
-</g></svg>
-<p>Toda essa conversa passa por uma única função do <code>app.js</code>, a <code>api()</code>. Ela recebe o nome do arquivo PHP e os dados, envia tudo com <code>fetch</code> e devolve a resposta. Se o servidor estiver desligado, ela devolve <code>{ ok: false, erro: 'servidor' }</code>, e a tela avisa que o XAMPP precisa estar ligado.</p>
-${trecho(app, /^async function api\(/)}
-<p>Exemplo: quando o responsável clica em Entrar, a função <code>handleLogin</code> (linha ${L(/^async function handleLogin/)}) chama <code>api('entrar', { email, senha, lembrar })</code>. O arquivo <code>api/entrar.php</code> procura o e-mail na tabela <code>responsavel</code>, confere a senha e, se estiver certa, guarda o id na sessão e devolve todos os dados da conta. Com esses dados, o JavaScript abre o sistema pela função <code>enterApp</code>.</p>
+${h1('Onde os dados ficam guardados')}
+<p>O sistema ainda não usa um servidor. Tudo o que precisa ser lembrado (as contas, o progresso das crianças, as flores, as medalhas e as configurações) fica guardado no <code>localStorage</code>, um espaço que todo navegador oferece para o site salvar dados no próprio computador. Esses dados ficam num único objeto, <code>db</code>, salvo com o nome <code>talkgarden_db</code>. A função <code>loadDB</code> lê esse objeto quando a página abre, e <code>saveDB</code> grava de volta a cada mudança:</p>
+${trecho(app, /^function loadDB/, /^function saveUser/)}
+<p>Cada conta é criada pela função <code>newUser</code>, que já define tudo o que o sistema guarda de uma família. Esses campos são os mesmos que aparecem nas tabelas do banco modelado:</p>
+${trecho(app, /^function newUser/)}
+<p>A senha nunca é guardada como foi digitada. A função <code>hashPass</code> transforma a senha num código SHA-256 (hash), e é esse código que fica salvo. No login, o sistema gera o hash da senha digitada e compara com o guardado:</p>
+${trecho(app, /^async function hashPass/)}
+<p>A função <code>handleLogin</code> (linha ${L(/^async function handleLogin/)}) faz essa comparação. Se estiver certo, guarda quem entrou com <code>setSession</code> (no <code>localStorage</code> se "Lembrar de mim" estiver marcado, ou só até fechar o navegador) e abre o sistema com <code>enterApp</code>:</p>
 ${trecho(app, /^async function handleLogin/)}
 
 ${h1('As telas: index.html')}
@@ -142,38 +128,16 @@ ${h2('Os outros jogos')}
 <tr><td>Conte a História</td><td><code>startStory</code> (linha ${L(/^function startStory/)}), <code>checkStory</code>, <code>showStoryQuestion</code>, <code>onStoryOption</code></td></tr>
 </table>
 <p>No Siga a Abelha, a função <code>genCommand</code> monta comandos de quatro tipos: cor ("toque no carro azul"), tamanho, posição ("o gato que está embaixo da mesa") e duas etapas ("toque primeiro na flor e depois na bola").</p>
-${h2('Recompensa e gravação no banco')}
-<p>Todos os jogos terminam na mesma função, <code>grantReward</code>. Ela soma as moedas, planta a próxima flor, confere se alguma medalha foi desbloqueada e manda tudo para o banco com <code>api('atividade', ...)</code>. Depois abre a janela de parabéns.</p>
+${h2('Recompensa e gravação dos dados')}
+<p>Todos os jogos terminam na mesma função, <code>grantReward</code>. Ela soma as moedas, planta a próxima flor, registra a atividade do dia, confere se alguma medalha foi desbloqueada e salva tudo com <code>saveUser()</code>. Depois abre a janela de parabéns.</p>
 ${trecho(app, /^function grantReward\(/, /sfx\.win\(\);/)}
 ${h2('Questionário e aviso de acompanhamento')}
 <p>No primeiro acesso, o responsável responde ao questionário "Conhecendo a criança". A função <code>orientacao</code> (linha ${L(/^function orientacao/)}) escolhe a mensagem conforme as respostas, sem nunca dizer que a criança tem TDL. Na tela de estatísticas, <code>renderAlert</code> (linha ${L(/^function renderAlert/)}) só mostra um aviso depois de pelo menos ${'12'} respostas com menos de 60% de acertos de primeira.</p>
 ${h2('Jardim, estatísticas e perfil')}
-<p><code>renderGarden</code> desenha uma flor para cada atividade concluída e calcula quanto falta para completar o jardim. <code>renderStats</code> mostra os percentuais de acerto e o gráfico da semana. Na tela de perfil, <code>saveProfile</code> envia os dados para <code>api/perfil.php</code>, e cada chave de configuração salva na hora por <code>api/configuracoes.php</code>.</p>
+<p><code>renderGarden</code> desenha uma flor para cada atividade concluída e calcula quanto falta para completar o jardim. <code>renderStats</code> mostra os percentuais de acerto e o gráfico da semana. Na tela de perfil, <code>saveProfile</code> atualiza os dados da conta, e cada chave de configuração é salva na hora.</p>
 
-${h1('A ligação com o banco: pasta api')}
-<p>Cada arquivo PHP cuida de uma ação só. Todos começam incluindo o <code>conexao.php</code>, que abre a sessão, conecta no MySQL com PDO e traz três funções de apoio: <code>entrada()</code> lê o JSON enviado pelo JavaScript, <code>responder()</code> devolve a resposta em JSON e <code>exigirLogin()</code> barra quem não entrou no sistema.</p>
-${trecho('api/conexao.php', /^session_start/, /^function idCrianca/)}
-<table class="simples">
-<tr><th>Arquivo</th><th>O que faz</th></tr>
-<tr><td>cadastrar.php</td><td>Cria o responsável, a configuração e a criança, numa transação</td></tr>
-<tr><td>entrar.php</td><td>Confere e-mail e senha e abre a sessão</td></tr>
-<tr><td>sessao.php</td><td>Diz se já existe alguém logado (usado quando a página abre)</td></tr>
-<tr><td>sair.php</td><td>Encerra a sessão</td></tr>
-<tr><td>esqueci.php e redefinir.php</td><td>Recuperação de senha (o envio do e-mail é simulado)</td></tr>
-<tr><td>perfil.php e configuracoes.php</td><td>Salvam os dados do perfil e as preferências</td></tr>
-<tr><td>questionario.php</td><td>Salva as respostas do questionário inicial</td></tr>
-<tr><td>atividade.php</td><td>Registra um jogo concluído, a flor, as moedas e as medalhas</td></tr>
-</table>
-<p>O login mostra os três cuidados de segurança do sistema: a consulta usa parâmetros (<code>?</code>), o que impede injeção de SQL; a senha é conferida com <code>password_verify</code>, porque no banco só existe o hash dela; e o id do responsável fica guardado na sessão do PHP, no servidor.</p>
-${trecho('api/entrar.php', /^\$dados = entrada/, /^responder\(\['ok' => true/)}
-<p>Quando a criança termina um jogo, o <code>atividade.php</code> grava a atividade, a flor e as medalhas numa transação: ou tudo é salvo, ou nada é.</p>
-${trecho('api/atividade.php', /^\$pdo->beginTransaction/, /^\$pdo->commit/)}
-<p>A função <code>montarUsuario</code>, no <code>conexao.php</code>, faz o caminho inverso: busca os dados nas tabelas e monta o objeto que o JavaScript usa. As estatísticas não ficam guardadas prontas; elas são calculadas na hora, somando os registros da tabela <code>atividade</code> com <code>SUM</code>, <code>COUNT</code> e <code>GROUP BY</code> (linha ${L(/SELECT tipo, COUNT/, 'api/conexao.php')} do <code>conexao.php</code>).</p>
-
-${h1('O banco de dados')}
-<p>O banco <code>talkgarden</code> tem oito tabelas, criadas pelo arquivo <code>banco/talkgarden.sql</code>. Este é o comando que cria a tabela das atividades; as outras seguem o mesmo formato:</p>
-${trecho('banco/talkgarden.sql', /^CREATE TABLE atividade/, /^\) ENGINE/)}
-<p>O diagrama abaixo foi gerado no MySQL Workbench a partir desse script e está salvo em <code>banco/talkgarden.mwb</code>. As linhas com pé de galinha marcam o lado "muitos" de cada relacionamento.</p>
+${h1('O banco de dados planejado')}
+<p>O banco de dados foi modelado no MySQL Workbench e será implementado na próxima etapa do projeto. O modelo tem oito tabelas e segue as mesmas informações que hoje ficam no <code>localStorage</code>. As linhas com pé de galinha marcam o lado "muitos" de cada relacionamento.</p>
 <img class="diagrama" src="../diagrama-banco-workbench.png" alt="">
 <table class="simples">
 <tr><th>Tabela</th><th>O que guarda</th></tr>
@@ -190,16 +154,15 @@ ${trecho('banco/talkgarden.sql', /^CREATE TABLE atividade/, /^\) ENGINE/)}
 
 ${h1('Perguntas que a banca pode fazer')}
 <dl>
-<dt>Por que usar PHP e MySQL?</dt><dd>O navegador não consegue gravar dados num banco sozinho. O PHP roda no servidor, recebe os dados do JavaScript e conversa com o MySQL. Os dois são gratuitos, vêm juntos no XAMPP e são muito usados em sistemas web.</dd>
-<dt>Onde fica a senha?</dt><dd>No banco só existe o hash da senha, gerado por <code>password_hash</code>. Nem quem abre o banco consegue ver a senha original. No login, <code>password_verify</code> compara a senha digitada com o hash.</dd>
-<dt>Como vocês evitam injeção de SQL?</dt><dd>Todas as consultas usam o PDO com parâmetros (<code>?</code>). O valor digitado nunca entra direto no texto do SQL.</dd>
-<dt>Como as estatísticas são calculadas?</dt><dd>Cada jogo concluído vira uma linha na tabela <code>atividade</code>. As estatísticas somam essas linhas com <code>SUM</code>, <code>COUNT</code> e <code>GROUP BY</code> no momento em que a tela é aberta.</dd>
+<dt>Por que os dados ficam no navegador?</dt><dd>Nesta etapa, o foco foi construir e testar as telas e os jogos. O <code>localStorage</code> permite guardar os dados sem precisar de servidor, e o sistema abre só com o <code>index.html</code>. A estrutura dos dados já segue o banco modelado, para facilitar a troca pelo MySQL depois.</dd>
+<dt>Qual a limitação disso?</dt><dd>Os dados ficam só naquele navegador e naquele computador. Se a família entrar de outro aparelho, a conta não aparece. Por isso a implementação do MySQL é a próxima etapa.</dd>
+<dt>Onde fica a senha?</dt><dd>Só o hash SHA-256 da senha é guardado, gerado pela função <code>hashPass</code>. No login, o sistema gera o hash da senha digitada e compara com o guardado.</dd>
+<dt>Como as estatísticas são calculadas?</dt><dd>A cada jogo, o sistema soma os acertos de primeira e o total de perguntas daquele jogo, e conta quantas atividades foram feitas em cada dia. A tela de estatísticas calcula os percentuais a partir desses números.</dd>
 <dt>Para que serve a tabela crianca_conquista?</dt><dd>É uma tabela associativa: resolve a relação de muitos para muitos entre crianças e medalhas, porque uma criança ganha várias medalhas e cada medalha pode ser ganha por várias crianças. A chave primária dela é formada pelas duas chaves estrangeiras juntas.</dd>
-<dt>Como vocês usaram o MySQL Workbench?</dt><dd>O script <code>banco/talkgarden.sql</code> foi importado no Workbench, que gerou o diagrama EER do banco. O modelo fica salvo em <code>banco/talkgarden.mwb</code> e pode ser aberto no Workbench (File > Open Model).</dd>
+<dt>Como vocês usaram o MySQL Workbench?</dt><dd>Para modelar o banco de dados: o Workbench gerou o diagrama EER com as oito tabelas e seus relacionamentos, que será a base da implementação no MySQL.</dd>
 <dt>Onde ficam as palavras e as frases dos jogos?</dt><dd>No <code>data.js</code> e no <code>games-data.js</code>. São conteúdo fixo, que não muda por usuário, então não precisam estar no banco.</dd>
 <dt>O sistema diagnostica TDL?</dt><dd>Não. O questionário só orienta a família, e o aviso das estatísticas só sugere conversar com a escola ou com um fonoaudiólogo. Somente um fonoaudiólogo pode diagnosticar.</dd>
-<dt>O que acontece se o MySQL estiver desligado?</dt><dd>A função <code>api()</code> não recebe resposta e devolve <code>erro: 'servidor'</code>. A tela mostra o aviso para ligar o XAMPP, e o sistema não trava.</dd>
-<dt>Como o sistema lembra quem está logado?</dt><dd>Pela sessão do PHP. Ao abrir a página, a função <code>init</code> chama <code>api('sessao')</code>; se já houver alguém logado, o sistema abre direto na tela inicial.</dd>
+<dt>Como o sistema lembra quem está logado?</dt><dd>Pela função <code>setSession</code>, que guarda o e-mail de quem entrou. Ao abrir a página, a função <code>init</code> confere se há alguém salvo e, se houver, abre direto na tela inicial.</dd>
 </dl>
 `;
 
