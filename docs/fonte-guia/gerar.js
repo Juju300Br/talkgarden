@@ -173,8 +173,8 @@ ${trecho('api/atividade.php', /^\$pdo->beginTransaction/, /^\$pdo->commit/)}
 ${h1('O banco de dados')}
 <p>O banco <code>talkgarden</code> tem oito tabelas, criadas pelo arquivo <code>banco/talkgarden.sql</code>. Este é o comando que cria a tabela das atividades; as outras seguem o mesmo formato:</p>
 ${trecho('banco/talkgarden.sql', /^CREATE TABLE atividade/, /^\) ENGINE/)}
-<p>O diagrama abaixo mostra as oito tabelas e como elas se ligam:</p>
-<img class="diagrama" src="../diagrama-banco-de-dados-PI.svg" alt="">
+<p>O diagrama abaixo foi gerado no MySQL Workbench a partir desse script e está salvo em <code>banco/talkgarden.mwb</code>. As linhas com pé de galinha marcam o lado "muitos" de cada relacionamento.</p>
+<img class="diagrama" src="../diagrama-banco-workbench.png" alt="">
 <table class="simples">
 <tr><th>Tabela</th><th>O que guarda</th></tr>
 <tr><td>responsavel</td><td>Nome, e-mail e hash da senha de quem cria a conta</td></tr>
@@ -195,6 +195,7 @@ ${h1('Perguntas que a banca pode fazer')}
 <dt>Como vocês evitam injeção de SQL?</dt><dd>Todas as consultas usam o PDO com parâmetros (<code>?</code>). O valor digitado nunca entra direto no texto do SQL.</dd>
 <dt>Como as estatísticas são calculadas?</dt><dd>Cada jogo concluído vira uma linha na tabela <code>atividade</code>. As estatísticas somam essas linhas com <code>SUM</code>, <code>COUNT</code> e <code>GROUP BY</code> no momento em que a tela é aberta.</dd>
 <dt>Para que serve a tabela crianca_conquista?</dt><dd>É uma tabela associativa: resolve a relação de muitos para muitos entre crianças e medalhas, porque uma criança ganha várias medalhas e cada medalha pode ser ganha por várias crianças. A chave primária dela é formada pelas duas chaves estrangeiras juntas.</dd>
+<dt>Como vocês usaram o MySQL Workbench?</dt><dd>O script <code>banco/talkgarden.sql</code> foi importado no Workbench, que gerou o diagrama EER do banco. O modelo fica salvo em <code>banco/talkgarden.mwb</code> e pode ser aberto no Workbench (File > Open Model).</dd>
 <dt>Onde ficam as palavras e as frases dos jogos?</dt><dd>No <code>data.js</code> e no <code>games-data.js</code>. São conteúdo fixo, que não muda por usuário, então não precisam estar no banco.</dd>
 <dt>O sistema diagnostica TDL?</dt><dd>Não. O questionário só orienta a família, e o aviso das estatísticas só sugere conversar com a escola ou com um fonoaudiólogo. Somente um fonoaudiólogo pode diagnosticar.</dd>
 <dt>O que acontece se o MySQL estiver desligado?</dt><dd>A função <code>api()</code> não recebe resposta e devolve <code>erro: 'servidor'</code>. A tela mostra o aviso para ligar o XAMPP, e o sistema não trava.</dd>
@@ -232,7 +233,7 @@ table.simples{width:100%;border-collapse:collapse;margin:8px 0 16px;font-size:9.
 table.simples th{text-align:left;border-bottom:1.5px solid #5B4FA8;padding:5px 8px;color:#5B4FA8}
 table.simples td{border-bottom:1px solid #E4E1F0;padding:3px 8px;vertical-align:top}
 svg.fluxo{width:100%;margin:6px 0 14px}
-img.diagrama{width:66%;display:block;margin:6px auto 10px}
+img.diagrama{width:56%;display:block;margin:6px auto 10px}
 ol{margin:0 0 10px;padding-left:20px}
 dl dt{font-weight:600;margin-top:12px;break-after:avoid}
 dl dd{margin:3px 0 0;text-align:justify}

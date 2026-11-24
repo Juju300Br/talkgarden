@@ -32,4 +32,4 @@ Não abra o `index.html` com dois cliques: sem o Apache e o MySQL ligados, o sis
 
 ## Banco de dados
 
-O banco `talkgarden` tem oito tabelas: `responsavel`, `configuracao`, `crianca`, `perfil_linguagem`, `atividade`, `flor`, `conquista` e `crianca_conquista`. A senha é guardada com `password_hash` do PHP. Para ver o diagrama no MySQL Workbench, abra o Workbench, vá em **Database > Reverse Engineer**, conecte em `localhost` com o usuário `root` (sem senha) e escolha o banco `talkgarden`.
+O banco `talkgarden` tem oito tabelas: `responsavel`, `configuracao`, `crianca`, `perfil_linguagem`, `atividade`, `flor`, `conquista` e `crianca_conquista`. A senha é guardada com `password_hash` do PHP. O modelo do banco no MySQL Workbench está em `banco/talkgarden.mwb` (abra no Workbench 8.0 em File > Open Model). Ele foi gerado a partir do `talkgarden.sql`, e a imagem do diagrama está em `docs/diagrama-banco-workbench.png`. Use o MySQL Workbench 8.0: a versão nova (26.x) não conecta no MariaDB do XAMPP.
