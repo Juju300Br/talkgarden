@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>TalkGarden – Projeto Integrador</title>
+<style>
+:root{--roxo:#7C6FCB;--roxo-esc:#5B4FA8;--lilas:#EFECFB;--verde:#6FBF73;--verde-esc:#4C9A50;--rosa:#F0577E;--ouro:#F5B92E;--creme:#FDFBF6;--tinta:#2E2A3F;--suave:#6B6789}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;background:#2E2A3F;overflow:hidden;font-family:'Segoe UI',system-ui,sans-serif;color:var(--tinta)}
+#janela{position:fixed;inset:0;display:grid;place-items:center}
+#palco{width:1920px;height:1080px;position:relative;transform-origin:center;overflow:hidden;background:var(--lilas)}
+.slide{position:absolute;inset:0;padding:150px 140px 100px;display:flex;flex-direction:column;opacity:0;visibility:hidden;transition:opacity .4s ease,visibility 0s linear .4s;background:var(--lilas)}
+.slide.ativo{opacity:1;visibility:visible;transition:opacity .4s ease}
+.jardim{background:url({{fundo.svg}}) center bottom/cover}
+.marca{position:absolute;left:140px;top:56px;display:flex;align-items:center;gap:14px;font-size:30px;font-weight:700}
+.marca img{width:52px;height:52px}
+.t{color:var(--roxo)}.g{color:var(--verde-esc)}
+.num{position:absolute;right:70px;bottom:44px;font-size:22px;color:#9C96B8}
+h2{font-size:76px;font-weight:700;color:var(--roxo-esc);line-height:1.1;letter-spacing:-1px}
+.sub{font-size:34px;color:var(--suave);margin-top:14px}
+p,li{font-size:36px;line-height:1.45}
+.abelha{position:absolute;width:96px}
+.flores{position:absolute;left:0;right:0;bottom:0;height:150px;display:flex;justify-content:space-between;align-items:flex-end;padding:0 40px;pointer-events:none}
+.flores svg{height:130px;width:auto}
+
+/* capa e encerramento */
+.capa{align-items:center;justify-content:center;text-align:center;padding-top:60px}
+.capa .logo{width:190px;height:190px}
+.capa h1{font-size:150px;font-weight:800;letter-spacing:-3px;line-height:1;margin-top:8px}
+.capa .desc{font-size:42px;color:var(--tinta);margin-top:22px;max-width:1250px;line-height:1.3}
+.capa .quem{margin-top:auto;background:rgba(255,255,255,.88);border-radius:28px;padding:26px 46px;font-size:29px;line-height:1.6;color:var(--tinta)}
+.capa .quem span{color:var(--suave)}
+
+/* objetivos */
+.dois{display:grid;grid-template-columns:1fr 1fr;gap:110px;margin-top:70px;align-items:start}
+.rot{font-size:30px;font-weight:700;color:var(--verde-esc);margin-bottom:18px}
+.geral{font-size:50px;line-height:1.3;font-weight:600}
+.lista{list-style:none;display:flex;flex-direction:column;gap:30px}
+.lista li{display:flex;gap:24px;align-items:center;font-size:36px;line-height:1.3}
+.bola{flex:none;width:62px;height:62px;border-radius:50%;display:grid;place-items:center;color:#fff;font-weight:800;font-size:30px}
+
+/* metodologia */
+.passos{display:grid;grid-template-columns:repeat(3,1fr);gap:70px;margin-top:110px;position:relative}
+.passos::before{content:"";position:absolute;left:12%;right:12%;top:62px;border-top:4px dashed #C9C3E6}
+.passo{text-align:center;position:relative}
+.passo .bola{width:124px;height:124px;font-size:56px;margin:0 auto 34px}
+.passo h3{font-size:44px;font-weight:700}
+.passo p{font-size:32px;color:var(--suave);margin-top:10px;line-height:1.35}
+.nota{margin-top:auto;font-size:30px;color:var(--suave);text-align:center}
+
+/* tecnologias */
+.logos{display:grid;grid-template-columns:repeat(5,1fr);gap:60px 40px;margin-top:90px;justify-items:center}
+.logo-item{display:flex;flex-direction:column;align-items:center;gap:18px}
+.logo-item .caixa{width:230px;height:170px;background:#fff;border-radius:30px;display:grid;place-items:center;padding:26px}
+.logo-item img{max-width:100%;max-height:100%;object-fit:contain}
+.logo-item span{font-size:28px;font-weight:600}
+
+/* diagramas */
+.diagrama{flex:1;margin-top:40px;background:#fff;border-radius:32px;padding:30px;min-height:0;height:100%}
+.diagrama img{width:100%;height:100%;object-fit:contain;display:block}
+.legenda{font-size:30px;color:var(--suave);margin-top:24px}
+.legenda b{color:var(--tinta)}
+.lado{display:grid;grid-template-columns:1fr 470px;gap:60px;flex:1;margin-top:40px;min-height:0}
+.lado .diagrama{margin-top:0}
+.fatos{display:flex;flex-direction:column;justify-content:center;gap:40px}
+.fato .n{font-size:84px;font-weight:800;color:var(--roxo);line-height:1}
+.fato p{font-size:30px;color:var(--tinta);line-height:1.35;margin-top:6px}
+
+/* conclusão */
+.icone{flex:none;width:52px;height:52px;border-radius:50%;display:grid;place-items:center}
+.icone svg{width:30px;height:30px}
+
+/* referências */
+.refs{columns:2;column-gap:70px;margin-top:50px}
+.refs p{font-size:21px;line-height:1.45;margin-bottom:18px;break-inside:avoid;color:var(--tinta)}
+
+/* site */
+.tablet{width:1020px;border-radius:46px;background:#3A3550;padding:30px;margin-left:auto}
+.tablet img{width:100%;display:block;border-radius:14px}
+.site{display:grid;grid-template-columns:1fr 1020px;gap:80px;align-items:center;flex:1}
+.site h2{font-size:80px}
+.painel{background:rgba(255,255,255,.9);border-radius:36px;padding:50px 56px}
+
+@media print{
+  html,body{overflow:visible;background:#fff}
+  #janela{position:static;display:block}
+  #palco{transform:none!important;width:auto;height:auto;overflow:visible;background:none}
+  .slide{position:relative;width:1920px;height:1080px;opacity:1;visibility:visible;page-break-after:always;break-after:page}
+  @page{size:1920px 1080px;margin:0}
+}
+</style></head><body>
+<div id="janela"><div id="palco">
+
+<section class="slide jardim capa">
+  <img class="logo" src="{{logo.svg}}" alt="">
+  <h1><span class="t">Talk</span><span class="g">Garden</span></h1>
+  <div class="desc">Plataforma web de apoio ao desenvolvimento da linguagem em crianças com TDL</div>
+  <div class="quem">Deborah Gabriely Moraes Martins · Julliana Emelin de Sousa Andrade · Nicoli Silva de Lima<br>
+    <span>Orientadora: Profa. Jorlene · Projeto Integrador · IFAM Campus Manaus Centro · 2026</span></div>
+</section>
+
+<section class="slide">
+  <h2>Objetivos</h2>
+  <div class="dois">
+    <div><div class="rot">Objetivo geral</div>
+      <div class="geral">Desenvolver um site educativo que apoie a alfabetização e a linguagem de crianças com TDL, com atividades lúdicas.</div></div>
+    <div><div class="rot">Objetivos específicos</div>
+      <ul class="lista">
+        <li><span class="bola" style="background:var(--roxo)">1</span>Levantar os requisitos e modelar com a UML</li>
+        <li><span class="bola" style="background:var(--verde)">2</span>Criar telas pensadas para crianças</li>
+        <li><span class="bola" style="background:var(--rosa)">3</span>Programar com HTML, CSS e JavaScript</li>
+        <li><span class="bola" style="background:var(--ouro)">4</span>Modelar o banco de dados</li>
+      </ul></div>
+  </div>
+  {{flores}}
+</section>
+
+<section class="slide">
+  <h2>Metodologia</h2>
+  <div class="passos">
+    <div class="passo"><div class="bola" style="background:var(--roxo)">1</div><h3>Levantamento</h3><p>Pesquisa sobre TDL, alfabetização e jogos educativos</p></div>
+    <div class="passo"><div class="bola" style="background:var(--verde)">2</div><h3>Planejamento</h3><p>Diagramas da UML e protótipos das telas</p></div>
+    <div class="passo"><div class="bola" style="background:var(--rosa)">3</div><h3>Desenvolvimento</h3><p>Programação do site e modelo do banco de dados</p></div>
+  </div>
+  <div class="nota">Pesquisa aplicada, de abordagem qualitativa</div>
+</section>
+
+<section class="slide">
+  <h2>Tecnologias utilizadas</h2>
+  <div class="logos">
+    <div class="logo-item"><div class="caixa"><img src="{{logos/html.png}}" alt=""></div></div>
+    <div class="logo-item"><div class="caixa"><img src="{{logos/css.png}}" alt=""></div></div>
+    <div class="logo-item"><div class="caixa"><img src="{{logos/js.png}}" alt=""></div></div>
+    <div class="logo-item"><div class="caixa"><img src="{{logos/vscode.png}}" alt=""></div></div>
+    <div class="logo-item"><div class="caixa"><img src="{{logos/workbench.png}}" alt=""></div></div>
+    <div class="logo-item"><div class="caixa"><img src="{{logos/staruml.png}}" alt=""></div></div>
+    <div class="logo-item"><div class="caixa"><img src="{{logos/canva.png}}" alt=""></div></div>
+    <div class="logo-item"><div class="caixa"><img src="{{logos/github.png}}" alt=""></div></div>
+    <div class="logo-item"><div class="caixa"><img src="{{logos/trello.png}}" alt=""></div></div>
+    <div class="logo-item"><div class="caixa"><img src="{{logos/googledocs.png}}" alt=""></div></div>
+  </div>
+</section>
+
+<section class="slide">
+  <h2>Diagrama de classes</h2>
+  <div class="lado">
+    <div class="diagrama"><img src="{{classes.png}}" alt=""></div>
+    <div class="fatos">
+      <div class="fato"><div class="n">13</div><p>classes</p></div>
+      <div class="fato"><div class="n" style="color:var(--verde-esc)">Crianca</div><p>é o centro: joga, cultiva o jardim e ganha conquistas</p></div>
+      <div class="fato"><div class="n" style="color:var(--rosa);font-size:64px">Atividade</div><p>é abstrata; os dois jogos herdam dela</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="slide">
+  <h2>Diagrama de casos de uso</h2>
+  <div class="lado">
+    <div class="diagrama"><img src="{{casos-de-uso.png}}" alt=""></div>
+    <div class="fatos">
+      <div class="fato"><div class="n">3</div><p>atores: Visitante, Responsável e Criança</p></div>
+      <div class="fato"><div class="n" style="color:var(--verde-esc)">10</div><p>casos de uso</p></div>
+      <div class="fato"><div class="n" style="color:var(--rosa);font-size:64px">include</div><p>todo jogo concluído gera uma recompensa</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="slide">
+  <h2>Modelo entidade-relacionamento</h2>
+  <div class="lado">
+    <div class="diagrama"><img src="{{mer.png}}" alt=""></div>
+    <div class="fatos">
+      <div class="fato"><div class="n">8</div><p>tabelas, modeladas no MySQL Workbench</p></div>
+      <div class="fato"><div class="n" style="color:var(--verde-esc);font-size:58px">crianca_conquista</div><p>resolve a relação de muitos para muitos</p></div>
+      <div class="fato"><div class="n" style="color:var(--rosa);font-size:64px">atividade</div><p>guarda cada jogo e gera as estatísticas</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="slide">
+  <h2>Conclusão</h2>
+  <div class="dois">
+    <div><div class="rot">O que entregamos</div>
+      <ul class="lista">
+        <li><span class="icone" style="background:#E3F4E4"><svg viewBox="0 0 24 24" fill="none" stroke="#4C9A50" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></span>Site funcionando, com dois jogos</li>
+        <li><span class="icone" style="background:#E3F4E4"><svg viewBox="0 0 24 24" fill="none" stroke="#4C9A50" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></span>Moedas, medalhas e jardim virtual</li>
+        <li><span class="icone" style="background:#E3F4E4"><svg viewBox="0 0 24 24" fill="none" stroke="#4C9A50" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></span>Estatísticas para a família</li>
+        <li><span class="icone" style="background:#E3F4E4"><svg viewBox="0 0 24 24" fill="none" stroke="#4C9A50" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></span>Sistema modelado com a UML</li>
+      </ul></div>
+    <div><div class="rot" style="color:var(--roxo-esc)">Próximos passos</div>
+      <ul class="lista">
+        <li><span class="icone" style="background:#EFECFB;border:2px solid #DCD6F5"><svg viewBox="0 0 24 24" fill="none" stroke="#5B4FA8" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>Ligar o site ao MySQL</li>
+        <li><span class="icone" style="background:#EFECFB;border:2px solid #DCD6F5"><svg viewBox="0 0 24 24" fill="none" stroke="#5B4FA8" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>Criar novos jogos</li>
+        <li><span class="icone" style="background:#EFECFB;border:2px solid #DCD6F5"><svg viewBox="0 0 24 24" fill="none" stroke="#5B4FA8" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>Testar com crianças e fonoaudiólogos</li>
+      </ul></div>
+  </div>
+  <div class="nota">O TalkGarden não faz diagnóstico: é um apoio ao trabalho do fonoaudiólogo.</div>
+</section>
+
+<section class="slide">
+  <h2>Referências</h2>
+  <div class="refs">
+    <p>AMERICAN SPEECH-LANGUAGE-HEARING ASSOCIATION (ASHA). <b>Spoken language disorders</b>. Rockville, MD: ASHA, 2023. Disponível em: https://www.asha.org/practice-portal/clinical-topics/spoken-language-disorders/. Acesso em: 17 jun. 2026.</p>
+    <p>BRASIL. Ministério da Saúde. <b>Política Nacional de Atenção Integral à Saúde da Criança</b>. Brasília: Ministério da Saúde, 2021.</p>
+    <p>INSTITUTO BRASILEIRO DE GEOGRAFIA E ESTATÍSTICA (IBGE). <b>Síntese de indicadores sociais</b>: uma análise das condições de vida da população brasileira. Rio de Janeiro: IBGE, 2022.</p>
+    <p>MENEZES, Maria Luiza Nogueira; MORSCH, Denise Salles; MAYRINK, Maria Carolina dos Santos. Transtornos da linguagem na pré-escola e o início da alfabetização. <b>Revista Psicopedagogia</b>, São Paulo, v. 40, n. 122, p. 181-190, 2023.</p>
+    <p>NATIONAL INSTITUTE ON DEAFNESS AND OTHER COMMUNICATION DISORDERS (NIDCD). <b>Quick statistics about voice, speech, language</b>. Bethesda: NIDCD, 2023. Disponível em: https://www.nidcd.nih.gov/health/statistics/quick-statistics-voice-speech-language. Acesso em: 17 jun. 2026.</p>
+    <p>PIRES, Douglas <i>et al</i>. O Livro do Conhecimento: um <i>serious game</i> educacional para aprendizagem de ortografia da Língua Portuguesa. <b>Revista Brasileira de Informática na Educação</b>, v. 28, p. 434-458, 2020.</p>
+    <p>RAISING AWARENESS OF DEVELOPMENTAL LANGUAGE DISORDER (RADLD). <b>What is DLD?</b> [<i>S. l.</i>]: RADLD, 2022. Disponível em: https://radld.org. Acesso em: 17 jun. 2026.</p>
+    <p>SILVA, Priscila Cristiane Escobar; CARVALHO, Rosana Passos Quitério de. Transtorno do Desenvolvimento de Linguagem: desafios e possibilidades no processo de ensino-aprendizagem na educação infantil. <b>Revista Caleidoscópio</b>, v. 16, n. 1, p. 65-73, [20--].</p>
+  </div>
+</section>
+
+<section class="slide jardim">
+  <div class="site">
+    <div class="painel"><h2>Vamos ver o TalkGarden funcionando</h2></div>
+    <div class="tablet"><img src="{{tela-inicio-pi.png}}" alt=""></div>
+  </div>
+</section>
+
+<section class="slide jardim capa">
+  <img class="logo" src="{{logo.svg}}" alt="">
+  <h1 style="font-size:130px;color:var(--roxo-esc)">Obrigada!</h1>
+  <div class="quem" style="margin-top:40px">Deborah Gabriely · Julliana Emelin · Nicoli Silva</div>
+</section>
+
+</div></div>
+<script>
+const slides = [...document.querySelectorAll('.slide')];
+const palco = document.getElementById('palco');
+slides.forEach((s, i) => {
+  if (!s.classList.contains('capa') && !s.classList.contains('jardim')) {
+    s.insertAdjacentHTML('afterbegin', '<div class="marca"><img src="' + document.querySelector('.capa .logo').src + '" alt=""><span><span class="t">Talk</span><span class="g">Garden</span></span></div>');
+    s.querySelector('h2').style.marginTop = '0';
+  }
+  if (i > 0 && i < slides.length - 1) s.insertAdjacentHTML('beforeend', '<div class="num">' + (i + 1) + ' / ' + slides.length + '</div>');
+});
+let atual = Math.max(0, Math.min(slides.length - 1, parseInt(location.hash.slice(1) || '1') - 1));
+function mostra(n) { atual = Math.max(0, Math.min(slides.length - 1, n)); slides.forEach((s, i) => s.classList.toggle('ativo', i === atual)); history.replaceState(null, '', '#' + (atual + 1)); }
+function ajusta() { const k = Math.min(innerWidth / 1920, innerHeight / 1080); palco.style.transform = 'scale(' + k + ')'; }
+addEventListener('resize', ajusta); ajusta(); mostra(atual);
+addEventListener('keydown', e => {
+  if (['ArrowRight', 'PageDown', ' ', 'Enter'].includes(e.key)) mostra(atual + 1);
+  if (['ArrowLeft', 'PageUp', 'Backspace'].includes(e.key)) mostra(atual - 1);
+  if (e.key === 'Home') mostra(0); if (e.key === 'End') mostra(slides.length - 1);
+  if (e.key === 'f' || e.key === 'F') document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen();
+});
+addEventListener('click', e => mostra(atual + (e.clientX > innerWidth / 3 ? 1 : -1)));
+</script>
+</body></html>
