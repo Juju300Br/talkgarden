@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:1920px;height:1080px;overflow:hidden;background:#000;font-family:'Segoe UI',sans-serif}
+#base{position:absolute;inset:0;width:1920px;height:1080px;object-fit:cover;transform-origin:50% 50%}
+#cartao{position:absolute;inset:0;background:#FDFBF6;display:flex;flex-direction:column;align-items:center;justify-content:center;opacity:0}
+#cartao img{width:230px;height:230px}
+#cartao h1{font-size:150px;font-weight:800;letter-spacing:-3px;line-height:1;margin-top:10px}
+#cartao .t{color:#7C6FCB}#cartao .g{color:#4C9A50}
+#cartao .rodape{position:absolute;bottom:70px;font-size:28px;color:#8A85A3;text-align:center;line-height:1.5;opacity:0}
+#leg{position:absolute;left:0;right:0;bottom:118px;text-align:center;font-family:'Segoe UI Black','Segoe UI',sans-serif;font-weight:900;
+  font-size:74px;line-height:1.1;text-transform:uppercase;letter-spacing:1px;color:#fff;-webkit-text-stroke:12px #111;paint-order:stroke fill;
+  text-shadow:0 6px 0 rgba(0,0,0,.35);transform-origin:50% 100%;padding:0 120px}
+#leg .am{color:#FFD43B}
+#veu{position:absolute;inset:0;background:#000;opacity:0}
+</style></head><body>
+<img id="base" alt="">
+<div id="cartao"><img src="../../img/logo.svg" alt=""><h1><span class="t">Talk</span><span class="g">Garden</span></h1>
+  <div class="rodape">Projeto Integrador · Curso Técnico em Informática · IFAM Campus Manaus Centro · 2026<br>Deborah Gabriely Moraes Martins, Julliana Emelin de Sousa Andrade e Nicoli Silva de Lima</div></div>
+<div id="leg"></div>
+<div id="veu"></div>
+<script>
+// a linha do tempo (segmentos, legendas, quadros e zooms) é injetada pelo renderizador em window.LT
+const $ = s => document.querySelector(s);
+const cl = (v, a = 0, b = 1) => Math.max(a, Math.min(b, v));
+const suave = x => x < .5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2;
+let ultimaSrc = '';
+function zoomEm(ts) {
+  const Z = LT.zooms; let atual = { s: 1, x: 960, y: 540 }, ant = { s: 1, x: 960, y: 540 }, t0 = -99;
+  for (const z of Z) { if (z.t > ts) break; ant = atual; atual = { s: z.s, x: z.x ?? atual.x, y: z.y ?? atual.y }; t0 = z.t; }
+  const k = suave(cl((ts - t0) / 0.7));
+  const s = ant.s + (atual.s - ant.s) * k;
+  const ox = (atual.s > 1 ? atual.x : ant.x), oy = (atual.s > 1 ? atual.y : ant.y);
+  return { s, ox, oy };
+}
+function legenda(t) {
+  for (const L of LT.legendas) {
+    if (t < L.ini || t >= L.fim) continue;
+    for (const c of L.pedacos) if (t >= c.ini && t < c.fim) return { html: c.html, k: (t - c.ini) };
+  }
+  return null;
+}
+window.quadro = async t => {
+  const seg = LT.segmentos.find(s => t >= s.ini && t < s.fim) || LT.segmentos[LT.segmentos.length - 1];
+  const lt = t - seg.ini;
+  let src = '', tf = 'none';
+  if (seg.tipo === 'clipe') {
+    const n = Math.min(seg.n, Math.floor(lt * 30) + 1);
+    src = seg.dir + '/' + String(n).padStart(4, '0') + '.jpg';
+    tf = `scale(${1 + 0.06 * (lt / (seg.fim - seg.ini))})`;
+  } else if (seg.tipo === 'sistema') {
+    const Q = LT.quadros; let lo = 0, hi = Q.length - 1;
+    while (lo < hi) { const m = (lo + hi + 1) >> 1; if (Q[m].t <= lt) lo = m; else hi = m - 1; }
+    src = 'quadros/' + Q[lo].f;
+    const z = zoomEm(lt);
+    $('#base').style.transformOrigin = `${z.ox}px ${z.oy}px`;
+    tf = `scale(${z.s})`;
+  }
+  if (seg.tipo !== 'sistema') $('#base').style.transformOrigin = '50% 50%';
+  $('#base').style.transform = tf;
+  const cartao = seg.tipo === 'logo';
+  $('#cartao').style.opacity = cartao ? cl(lt / 0.4) : 0;
+  $('#cartao img').style.transform = cartao ? `scale(${0.85 + 0.15 * suave(cl(lt / 0.6))})` : '';
+  $('#cartao .rodape').style.opacity = cartao && seg.rodape ? cl((lt - 0.8) / 0.5) : 0;
+  const L = legenda(t);
+  $('#leg').style.bottom = cartao ? '250px' : '118px';
+  const leg = $('#leg');
+  if (L) { if (leg.dataset.h !== L.html) { leg.innerHTML = L.html; leg.dataset.h = L.html; } leg.style.opacity = 1; leg.style.transform = `scale(${0.88 + 0.12 * suave(cl(L.k / 0.14))})`; }
+  else leg.style.opacity = 0;
+  $('#veu').style.opacity = Math.max(cl(1 - t / 0.6), cl((t - (LT.total - 1)) / 1));
+  if (src && src !== ultimaSrc) {
+    const img = $('#base'); img.src = src; ultimaSrc = src;
+    await img.decode().catch(() => {});
+  }
+  $('#base').style.visibility = src ? 'visible' : 'hidden';
+};
+</script>
+</body></html>
