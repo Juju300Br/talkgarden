@@ -174,7 +174,7 @@ const rosto = [
   ...blank(3),
   new Paragraph({ alignment: AlignmentType.JUSTIFIED, indent: { left: cm(8) }, spacing: { ...L1, after: 240 }, children: runs([
     'Projeto Integrador apresentado ao Curso Técnico de Nível Médio em Informática do Instituto Federal de Educação, Ciência e Tecnologia do Amazonas – Campus Manaus Centro, como requisito parcial para aprovação no componente Projeto Integrador.'], { size: 22 }) }),
-  new Paragraph({ alignment: AlignmentType.JUSTIFIED, indent: { left: cm(8) }, spacing: L1, children: runs([{ t: 'Orientadora: ', b: true }, 'Profa. Dra. Josiane Rodrigues Sandes.'], { size: 22 }) }),
+  new Paragraph({ alignment: AlignmentType.JUSTIFIED, indent: { left: cm(8) }, spacing: L1, children: runs([{ t: 'Orientadora: ', b: true }, 'Profa. Jorlene.'], { size: 22 }) }),
   ...blank(10),
   C([{ t: 'MANAUS – AM', b: true }], { single: true }),
   C([{ t: '2026', b: true }], { single: true }),
@@ -346,7 +346,7 @@ const anexo = [
   [{ t: 'CURSO: ', b: true }, 'Técnico de Nível Médio em Informática'],
   [{ t: 'TÍTULO DO PROJETO: ', b: true }, 'TalkGarden: plataforma web de apoio ao desenvolvimento da linguagem em crianças com TDL'],
   [{ t: 'MODALIDADE: ', b: true }, '(   ) Solo     (   ) Dupla     ( X ) Trio'],
-  [{ t: 'PROFESSORA RESPONSÁVEL: ', b: true }, 'Profa. Dra. Josiane Rodrigues Sandes'],
+  [{ t: 'PROFESSORA RESPONSÁVEL: ', b: true }, 'Profa. Jorlene'],
   [{ t: 'DISCENTES: ', b: true }, 'Deborah Gabriely Moraes Martins, Julliana Emelin de Sousa Andrade e Nicoli Silva de Lima'],
   [{ t: 'MATRÍCULAS: ', b: true }, '________________, ________________ e ________________'],
   [{ t: 'INÍCIO: ', b: true }, '_____ de ____________________ de 2026'],
@@ -368,7 +368,7 @@ const sig = (...nomes) => new Table({
 });
 add(sig('Deborah Gabriely Moraes Martins', 'Julliana Emelin de Sousa Andrade', 'Nicoli Silva de Lima'));
 add(...blank(2));
-add(C('_______________________________', { single: true }), C('Profa. Dra. Josiane Rodrigues Sandes', { single: true, size: 22 }), C('Orientadora', { single: true, size: 22 }));
+add(C('_______________________________', { single: true }), C('Profa. Jorlene', { single: true, size: 22 }), C('Orientadora', { single: true, size: 22 }));
 
 // ---------- LISTAS E SUMÁRIO (páginas vindas da renderização anterior) ----------
 const pg = k => (PAGES[k] != null ? String(PAGES[k]) : '00');

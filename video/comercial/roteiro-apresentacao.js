@@ -6,7 +6,7 @@ const { Document, Packer, Paragraph, TextRun, Table, TableRow, TableCell, WidthT
 
 const SLIDES = [
   ['1', 'Título e equipe', 'Deborah', '0:00 – 0:30',
-    'Bom dia a todos. Nós somos a Deborah Gabriely, a Julliana Emelin e a Nicoli Silva, do Grupo 6, e vamos apresentar o TalkGarden, uma plataforma web de apoio ao desenvolvimento da linguagem em crianças com TDL, o Transtorno do Desenvolvimento da Linguagem. Nossa orientadora é a professora doutora Josiane Rodrigues Sandes.'],
+    'Bom dia a todos. Nós somos a Deborah Gabriely, a Julliana Emelin e a Nicoli Silva, do Grupo 6, e vamos apresentar o TalkGarden, uma plataforma web de apoio ao desenvolvimento da linguagem em crianças com TDL, o Transtorno do Desenvolvimento da Linguagem. Nossa orientadora é a professora Jorlene.'],
   ['2', 'Objetivos', 'Deborah', '0:30 – 1:20',
     'O TDL atinge cerca de sete por cento das crianças: elas têm dificuldade para entender e usar a linguagem, mesmo sem nenhum problema auditivo ou intelectual. E muitas famílias não conseguem acompanhamento com um fonoaudiólogo. Por isso, o nosso objetivo geral foi desenvolver um sistema web educativo que apoie a alfabetização e a linguagem dessas crianças, com atividades lúdicas focadas em vocabulário e construção de frases. Os objetivos específicos foram: levantar os requisitos e modelar o sistema com a UML, criar protótipos pensados para crianças, construir a plataforma com HTML, CSS e JavaScript e modelar o banco de dados.'],
   ['3', 'Metodologia', 'Deborah', '1:20 – 2:10',
@@ -51,5 +51,5 @@ const doc = new Document({ sections: [{
     par([run('Cada fala foi escrita para caber no tempo indicado, lendo em ritmo calmo (cerca de 130 palavras por minuto). Não precisa decorar palavra por palavra: o importante é passar pelas ideias de cada slide.')], 240),
     ...blocos,
   ] }] });
-Packer.toBuffer(doc).then(b => { const out = path.join(__dirname, '..', '..', 'docs', 'Roteiro da apresentacao - PI.docx'); fs.writeFileSync(out, b); console.log('ok', out);
+Packer.toBuffer(doc).then(b => { const out = path.join(__dirname, '..', '..', 'docs', process.env.SAIDA || 'Roteiro da apresentacao - PI.docx'); fs.writeFileSync(out, b); console.log('ok', out);
   for (const s of SLIDES) console.log(s[0], s[2], s[4].split(/\s+/).length, 'palavras'); });
