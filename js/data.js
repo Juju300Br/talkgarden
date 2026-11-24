@@ -1,8 +1,3 @@
-/* =========================================================
-   TalkGarden — dados fixos e desenhos (SVG)
-   ========================================================= */
-
-/* ---------- Ícones de interface ---------- */
 const ICONS = {
   home:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8"/><path d="M5 10v10a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1V10"/></svg>',
   sprout:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22v-9"/><path d="M12 13c-4 0-7-3-7-7 4 0 7 3 7 7z"/><path d="M12 13c4 0 7-3 7-7-4 0-7 3-7 7z"/></svg>',
@@ -24,7 +19,6 @@ const ICONS = {
   speaker:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M19 5a10 10 0 0 1 0 14"/></svg>',
 };
 
-/* ---------- Abelha (mascote) ---------- */
 let _beeId = 0;
 function beeSVG(cls = 'bee'){
   const id = 'beeclip' + (++_beeId);
@@ -46,8 +40,6 @@ function beeSVG(cls = 'bee'){
   </svg>`;
 }
 
-
-/* ---------- Flores do jardim ---------- */
 const FLOWERS = {
   broto:  (h=90)=>`<svg viewBox="0 0 40 90" height="${h}"><path d="M20 90V62" stroke="#5D9E3B" stroke-width="4" stroke-linecap="round"/><circle cx="20" cy="56" r="7" fill="#79B84A"/></svg>`,
   muda:   (h=90)=>`<svg viewBox="0 0 44 90" height="${h}"><path d="M22 90V54" stroke="#5D9E3B" stroke-width="4" stroke-linecap="round"/><ellipse cx="12" cy="54" rx="10" ry="6" fill="#79B84A"/><ellipse cx="32" cy="54" rx="10" ry="6" fill="#79B84A"/></svg>`,
@@ -60,11 +52,10 @@ const FLOWERS = {
 function petalFlower(petal, center, h){
   return `<svg viewBox="0 0 48 90" height="${h}"><path d="M24 90V30" stroke="#5D9E3B" stroke-width="4" stroke-linecap="round"/><ellipse cx="15" cy="62" rx="8" ry="4" fill="#79B84A" transform="rotate(-20 15 62)"/><ellipse cx="33" cy="72" rx="8" ry="4" fill="#79B84A" transform="rotate(20 33 72)"/><g fill="${petal}"><circle cx="24" cy="12" r="8"/><circle cx="13" cy="20" r="8"/><circle cx="35" cy="20" r="8"/><circle cx="17" cy="31" r="8"/><circle cx="31" cy="31" r="8"/></g><circle cx="24" cy="22" r="6.5" fill="${center}"/></svg>`;
 }
-/* ordem em que as flores nascem no jardim */
-const FLOWER_CYCLE = ['broto','muda','tulipa','rosa','azul','broto','amarela','muda','lilas','rosa','tulipa','azul','amarela','lilas'];
-const GARDEN_GOAL = 20; // flores para o jardim ficar 100% completo
 
-/* ---------- Desenhos das palavras (Jogo de Vocabulário) ---------- */
+const FLOWER_CYCLE = ['broto','muda','tulipa','rosa','azul','broto','amarela','muda','lilas','rosa','tulipa','azul','amarela','lilas'];
+const GARDEN_GOAL = 20;
+
 const PICS = {
   maca:'<svg viewBox="0 0 64 64"><path d="M32 18c-6-5-20-4-22 10-2 13 7 28 15 28 3 0 4-2 7-2s4 2 7 2c8 0 17-15 15-28-2-14-16-15-22-10z" fill="#E85454"/><path d="M32 18c0-5 1-9 5-12" stroke="#7A4A1E" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M34 13c4-6 11-6 14-4-3 5-9 6-14 4z" fill="#6FBF73"/><ellipse cx="20" cy="30" rx="3" ry="6" fill="#fff" opacity=".45"/></svg>',
   casa:'<svg viewBox="0 0 64 64"><path d="M8 30L32 10l24 20" fill="#E85454"/><path d="M6 31L32 9l26 22" stroke="#C23B3B" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/><rect x="13" y="29" width="38" height="27" fill="#FFD08A"/><rect x="27" y="39" width="10" height="17" fill="#8A5A34"/><rect x="16" y="34" width="8" height="8" fill="#BFE3F7"/><rect x="40" y="34" width="8" height="8" fill="#BFE3F7"/></svg>',
@@ -99,7 +90,6 @@ const WORDS = [
 ];
 const WORDS_PER_ROUND = 3;
 
-/* ---------- Imagens de apoio (Formando Frases) ---------- */
 const SCENES = {
   gatoSofa:'<svg viewBox="0 0 110 72"><rect x="14" y="34" width="82" height="22" rx="8" fill="#9C90E0"/><rect x="8" y="26" width="16" height="32" rx="7" fill="#7C6FCB"/><rect x="86" y="26" width="16" height="32" rx="7" fill="#7C6FCB"/><rect x="18" y="56" width="5" height="10" fill="#5B4FA8"/><rect x="87" y="56" width="5" height="10" fill="#5B4FA8"/><ellipse cx="54" cy="31" rx="22" ry="9" fill="#F2A65A"/><circle cx="34" cy="27" r="9" fill="#F2A65A"/><path d="M27 21l2-8 5 6zM36 19l4-7 2 8z" fill="#F2A65A"/><path d="M30 27q2 2 4 0M36 27q2 2 4 0" stroke="#7A4A1E" stroke-width="1.4" fill="none"/><path d="M76 30q10-2 8-12" stroke="#F2A65A" stroke-width="5" fill="none" stroke-linecap="round"/><text x="44" y="12" font-size="9" fill="#7A7590" font-family="sans-serif" font-weight="700">z z</text></svg>',
   solCeu:'<svg viewBox="0 0 110 72"><rect width="110" height="72" rx="12" fill="#DFF1FB"/><g stroke="#F5A623" stroke-width="3" stroke-linecap="round"><path d="M55 8v6M55 58v6M27 36h6M77 36h6M35 16l4 4M71 52l4 4M35 56l4-4M71 20l4-4"/></g><circle cx="55" cy="36" r="15" fill="#FFC93C"/><circle cx="50" cy="34" r="2" fill="#7A4A1E"/><circle cx="60" cy="34" r="2" fill="#7A4A1E"/><path d="M50 40q5 4 10 0" stroke="#7A4A1E" stroke-width="2" fill="none" stroke-linecap="round"/><ellipse cx="90" cy="20" rx="12" ry="6" fill="#fff"/><ellipse cx="18" cy="54" rx="12" ry="6" fill="#fff"/></svg>',
@@ -117,7 +107,6 @@ const PHRASES = [
   {words:['A','menina','lê','o','livro'], scene:'meninaLivro'},
 ];
 
-/* ---------- Avatares ---------- */
 const AVATARS = {
   pessoa:'<svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="24" fill="url(#avg)"/><defs><linearGradient id="avg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFD3B0"/><stop offset="1" stop-color="#FFB27A"/></linearGradient></defs><circle cx="24" cy="19" r="6.5" fill="none" stroke="#7A4A1E" stroke-width="2.6"/><path d="M12.5 36c1.5-6 6-8.5 11.5-8.5s10 2.5 11.5 8.5" fill="none" stroke="#7A4A1E" stroke-width="2.6" stroke-linecap="round"/></svg>',
   abelha:'<svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="24" fill="#FFF1C9"/><ellipse cx="15" cy="24" rx="6" ry="8" fill="#CFEBF5"/><ellipse cx="33" cy="24" rx="6" ry="8" fill="#CFEBF5"/><ellipse cx="24" cy="30" rx="8" ry="10" fill="#F5B92E"/><path d="M19 23v16M24 21v19M29 23v16" stroke="#2E2A20" stroke-width="2.4"/><circle cx="24" cy="16" r="7" fill="#F5B92E"/><circle cx="21.5" cy="15" r="1.5" fill="#2E2A20"/><circle cx="26.5" cy="15" r="1.5" fill="#2E2A20"/><path d="M20 8l2 3M28 8l-2 3" stroke="#2E2A20" stroke-width="1.5" stroke-linecap="round"/></svg>',
@@ -125,7 +114,6 @@ const AVATARS = {
   estrela:'<svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="24" fill="#E3F0FB"/><path d="M24 11l3.9 8.3 9.1 1.1-6.7 6.3 1.7 9.1L24 31.4l-8 4.4 1.7-9.1-6.7-6.3 9.1-1.1z" fill="#F5B92E"/></svg>',
 };
 
-/* ---------- Medalhas / conquistas ---------- */
 const BADGES = [
   {id:'primeiro', name:'Primeiro passo', desc:'Concluiu a 1ª atividade', req:'Conclua sua primeira atividade', icon:'medal',
    test:u=>u.activities>=1, msg:'Você concluiu sua primeira atividade'},

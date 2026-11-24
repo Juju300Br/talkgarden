@@ -1,16 +1,10 @@
-/* =========================================================
-   TalkGarden — dados dos jogos "Siga a Abelha" e "Conte a História"
-   e do questionário "Conhecendo a criança"
-   ========================================================= */
-
-/* ---------- JOGO "SIGA A ABELHA": compreensão de comandos ---------- */
 const CORES = {
   vermelho: { hex: '#E85454', m: 'vermelho', f: 'vermelha' },
   azul:     { hex: '#5B8DEF', m: 'azul', f: 'azul' },
   amarelo:  { hex: '#F5B92E', m: 'amarelo', f: 'amarela' },
   verde:    { hex: '#4FAF55', m: 'verde', f: 'verde' },
 };
-// g = gênero da palavra (f/m), usado para "na/no" e para concordar a cor e o tamanho
+
 const OBJETOS = {
   bola:    { g: 'f', nome: 'bola',    svg: c => `<circle cx="32" cy="34" r="22" fill="${c}"/><path d="M10 34h44" stroke="#fff" stroke-width="4"/><circle cx="24" cy="24" r="4" fill="#fff" opacity=".5"/>` },
   estrela: { g: 'f', nome: 'estrela', svg: c => `<path d="M32 8l7.6 16.4L58 26.6 44.6 39.2 48 58 32 49 16 58l3.4-18.8L6 26.6l18.4-2.2z" fill="${c}" stroke="#00000022" stroke-width="2" stroke-linejoin="round"/>` },
@@ -23,13 +17,12 @@ const art = o => (OBJETOS[o].g === 'f' ? 'na' : 'no');
 const corNome = (o, cor) => CORES[cor][OBJETOS[o].g];
 const pequeno = o => (OBJETOS[o].g === 'f' ? 'pequena' : 'pequeno');
 
-// desenha um objeto: tam = 'grande' | 'pequeno'
 function objetoSVG(o, cor = 'vermelho', tam = 'grande') {
   const s = tam === 'grande' ? 1 : 0.55;
   const t = tam === 'grande' ? '' : ` transform="translate(${32 - 32 * s} ${64 - 64 * s}) scale(${s})"`;
   return `<svg viewBox="0 0 64 64"><g${t}>${OBJETOS[o].svg(CORES[cor].hex)}</g></svg>`;
 }
-// objeto em relação à mesa: pos = 'cima' | 'baixo' | 'lado'
+
 function cenaMesaSVG(o, cor, pos) {
   const mesa = '<rect x="6" y="40" width="60" height="7" rx="2" fill="#B07A4A"/><rect x="9" y="47" width="5" height="29" fill="#8A5A34"/><rect x="58" y="47" width="5" height="29" fill="#8A5A34"/><path d="M0 76h100" stroke="#C9C3DE" stroke-width="2"/>';
   const at = { cima: 'translate(17 4) scale(.58)', baixo: 'translate(18 47) scale(.46)', lado: 'translate(68 47) scale(.46)' }[pos];
@@ -38,7 +31,6 @@ function cenaMesaSVG(o, cor, pos) {
 const POSICOES = { cima: 'em cima da mesa', baixo: 'embaixo da mesa', lado: 'ao lado da mesa' };
 const COMANDOS_POR_RODADA = 4;
 
-/* ---------- JOGO "CONTE A HISTÓRIA": sequência e compreensão de narrativas ---------- */
 const CEU = (cor = '#DFF1FB') => `<rect width="120" height="90" rx="10" fill="${cor}"/>`;
 const CHAO = '<path d="M0 70 Q60 60 120 70 V90 H0z" fill="#B8DE8F"/>';
 const HISTORIAS = [
@@ -77,9 +69,6 @@ const HISTORIAS = [
 ];
 const cenaSVG = c => `<svg viewBox="0 0 120 90">${c}</svg>`;
 
-/* ---------- QUESTIONÁRIO "CONHECENDO A CRIANÇA" ----------
-   Sinais adaptados da ficha do NIDCD (2022) sobre o TDL.
-   NÃO é um instrumento de diagnóstico: serve apenas para orientar o responsável. */
 const SINAIS = [
   'Tem dificuldade para seguir instruções, não por desobediência, mas porque não entende bem o que foi dito.',
   'Tem dificuldade para aprender palavras novas ou para encontrar a palavra certa ao falar.',
@@ -90,10 +79,9 @@ const SINAIS = [
 ];
 const DIAGNOSTICO = { sim: 'Sim, tem diagnóstico de TDL', avaliacao: 'Está em avaliação', nao: 'Não tem diagnóstico' };
 const IDADE_MIN = 6, IDADE_MAX = 9;
-// parâmetros iniciais do aviso de acompanhamento (a serem validados com fonoaudiólogos)
+
 const ALERTA_MIN_RESPOSTAS = 12, ALERTA_ACERTO = 0.6;
 
-/* ---------- ícones e medalhas novos ---------- */
 ICONS.ear = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9a6 6 0 1 1 12 0c0 3-2 4-3 6s-1 4-3.5 4A2.5 2.5 0 0 1 9 16.5"/><path d="M10 9a2 2 0 1 1 4 0c0 1.5-2 2-2 3.5"/></svg>';
 ICONS.story = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="7" height="7" rx="1.5"/><rect x="14" y="4" width="7" height="7" rx="1.5"/><rect x="8.5" y="14" width="7" height="7" rx="1.5"/><path d="M10 7.5h4M12 11v3"/></svg>';
 ICONS.alert = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v6M12 16.5v.5"/></svg>';

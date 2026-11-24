@@ -1,12 +1,6 @@
-/* =========================================================
-   TalkGarden — lógica da aplicação
-   Os dados ficam salvos no navegador (localStorage), simulando
-   o banco de dados. Cada função indica o caso de uso (UC) que atende.
-   ========================================================= */
-
 const DB_KEY = 'talkgarden_db';
 const SESSION_KEY = 'talkgarden_session';
-const DAILY_GOAL = 4;           // atividades por dia (meta exibida na tela inicial)
+const DAILY_GOAL = 4;
 const DEMO_EMAIL = 'demo@talkgarden.com';
 const DEMO_PASS = '123456';
 
@@ -14,12 +8,9 @@ const $ = (sel, root = document) => root.querySelector(sel);
 const $$ = (sel, root = document) => [...root.querySelectorAll(sel)];
 
 let db = { users: {} };
-let user = null;          // usuário logado
-let resetEmail = null;    // e-mail em processo de redefinição de senha
+let user = null;
+let resetEmail = null;
 
-/* =========================================================
-   BANCO DE DADOS (localStorage)
-   ========================================================= */
 function loadDB(){
   try { db = JSON.parse(localStorage.getItem(DB_KEY)) || { users: {} }; }
   catch { db = { users: {} }; }
@@ -59,24 +50,23 @@ function newUser({name, email, childName, passHash}){
     childAge: '', avatar: 'pessoa',
     coins: 0, flowers: [], activities: 0, phrases: 0,
     vocab: { hits: 0, total: 0 },
-    comandos: { hits: 0, total: 0 },   // jogo Siga a Abelha
-    historias: 0,                      // jogo Conte a História
-    perfil: null,                      // questionário "Conhecendo a criança"
-    log: {},                 // { 'AAAA-MM-DD': quantidade de atividades }
+    comandos: { hits: 0, total: 0 },
+    historias: 0,
+    perfil: null,
+    log: {},
     badges: [], lastBadge: null,
     settings: { sound: true, music: false, voice: true, bigText: false },
     createdAt: Date.now(),
   };
 }
 
-/* Conta de demonstração, com progresso já preenchido (útil para apresentar) */
 function demoExtras(u){
   u.childAge = 7;
   u.comandos = { hits: 14, total: 20 };
   u.historias = 6;
   u.perfil = { diagnostico: 'avaliacao', sinais: [0, 1, 3], idade: 7, data: Date.now() };
 }
-/* Completa campos que contas antigas ainda não têm */
+
 function migrate(u){
   if(!u.comandos) u.comandos = { hits: 0, total: 0 };
   if(u.historias == null) u.historias = 0;
@@ -88,7 +78,7 @@ async function seedDemo(){
   if(db.users[DEMO_EMAIL]){ migrate(db.users[DEMO_EMAIL]); saveDB(); return; }
   const u = newUser({ name:'Ana Souza', email:DEMO_EMAIL, childName:'Ju', passHash: await hashPass(DEMO_PASS) });
   demoExtras(u);
-  const plan = { 12:1, 10:2, 9:1, 3:2, 2:2, 1:1, 0:3 };   // dias atrás : atividades
+  const plan = { 12:1, 10:2, 9:1, 3:2, 2:2, 1:1, 0:3 };
   for(const [ago, n] of Object.entries(plan)){
     const d = new Date(); d.setDate(d.getDate() - Number(ago));
     u.log[dateKey(d)] = n;
@@ -101,24 +91,18 @@ async function seedDemo(){
   saveDB();
 }
 
-/* =========================================================
-   DATAS E SEQUÊNCIA DE DIAS
-   ========================================================= */
 function dateKey(d = new Date()){
   return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
 }
 function streakOf(u){
   const d = new Date();
-  if(!u.log[dateKey(d)]) d.setDate(d.getDate() - 1);   // a sequência continua viva até o fim do dia
+  if(!u.log[dateKey(d)]) d.setDate(d.getDate() - 1);
   let n = 0;
   while(u.log[dateKey(d)]){ n++; d.setDate(d.getDate() - 1); }
   return n;
 }
 function todayCount(){ return user.log[dateKey()] || 0; }
 
-/* =========================================================
-   UTILITÁRIOS DE INTERFACE
-   ========================================================= */
 function shuffle(arr){
   const a = [...arr];
   for(let i = a.length - 1; i > 0; i--){ const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; }
@@ -151,7 +135,6 @@ function clearErrors(form){
 }
 const isEmail = v => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v);
 
-/* ---------- Modais ---------- */
 function openModal(html, {closeOnBackdrop = false} = {}){
   const root = $('#modalRoot');
   root.innerHTML = `<div class="overlay"><div class="modal">${html}</div></div>`;
@@ -175,9 +158,6 @@ function confetti(modal){
   }
 }
 
-/* =========================================================
-   SOM, MÚSICA E LEITURA EM VOZ ALTA
-   ========================================================= */
 let actx = null;
 function audio(){
   if(!actx){ try { actx = new (window.AudioContext || window.webkitAudioContext)(); } catch { return null; } }
@@ -223,9 +203,6 @@ function speak(text){
   speechSynthesis.speak(u);
 }
 
-/* =========================================================
-   TELAS DE ACESSO
-   ========================================================= */
 function showAuth(card, opts = {}){
   stopMusic();
   $('#app').classList.add('hidden');
@@ -253,7 +230,6 @@ function offlineGuard(alertEl){
   return true;
 }
 
-/* UC001 – Efetuar login */
 async function handleLogin(e){
   e.preventDefault();
   const form = e.target, err = $('#loginError');
@@ -274,7 +250,6 @@ async function handleLogin(e){
   enterApp(u);
 }
 
-/* UC002 – Cadastrar usuário */
 async function handleRegister(e){
   e.preventDefault();
   const form = e.target; clearErrors(form);
@@ -295,7 +270,6 @@ async function handleRegister(e){
   $('#loginPass').focus();
 }
 
-/* UC001 / FA001 – Esqueceu a senha */
 function handleForgot(e){
   e.preventDefault();
   const form = e.target; clearErrors(form);
@@ -322,16 +296,13 @@ async function handleReset(e){
   showAuth('login', { success: 'Senha alterada com sucesso! Entre com a nova senha.', email: em });
 }
 
-/* =========================================================
-   APLICAÇÃO
-   ========================================================= */
 function enterApp(u){
   user = migrate(u);
   $('#auth').classList.add('hidden');
   $('#app').classList.remove('hidden');
   applySettings();
   renderHeader();
-  // No primeiro acesso, o responsável responde o questionário "Conhecendo a criança" (UC013)
+
   showView(user.perfil ? 'home' : 'screening');
 }
 
@@ -371,7 +342,6 @@ function showView(name, opts = {}){
   })[name]?.();
 }
 
-/* ---------- Tela inicial ---------- */
 function renderHome(){
   const c = todayCount();
   const plants = user.flowers.slice(-4);
@@ -399,7 +369,6 @@ function renderHome(){
     `Uau, ${user.childName}! Você completou a meta de hoje!`;
 }
 
-/* ---------- UC003 – Jogo de Vocabulário ---------- */
 const vocab = { queue: [], idx: 0, wrongNow: 0, firstTry: 0, errors: 0, locked: false };
 
 function startVocab(){
@@ -450,11 +419,10 @@ function finishVocab(){
   user.vocab.hits += vocab.firstTry;
   user.vocab.total += vocab.queue.length;
   $('#vocabDots').innerHTML = vocab.queue.map(() => '<span class="done"></span>').join('');
-  const coins = Math.max(4, vocab.firstTry * 3 + 1);   // 3 acertos de primeira = 10 moedas
+  const coins = Math.max(4, vocab.firstTry * 3 + 1);
   grantReward('vocab', coins);
 }
 
-/* ---------- UC004 – Formando Frases ---------- */
 const phrase = { item: null, order: [], placed: [], errors: 0, lastIdx: -1, locked: false };
 
 function startPhrase(){
@@ -508,7 +476,6 @@ function checkPhrase(){
   }
 }
 
-/* ---------- UC005 – Ganhar recompensas  /  UC006 – Desbloquear conquista ---------- */
 function grantReward(game, coins){
   const flower = FLOWER_CYCLE[user.flowers.length % FLOWER_CYCLE.length];
   user.coins += coins;
@@ -563,7 +530,6 @@ function showBadgeQueue(list, done){
   $('#mBadgeClose').onclick = () => showBadgeQueue(rest, done);
 }
 
-/* Fala mesmo com a leitura em voz alta desligada (botão de alto-falante) */
 function speakNow(text){
   const was = user.settings.voice; user.settings.voice = true;
   speak(text); user.settings.voice = was;
@@ -571,7 +537,6 @@ function speakNow(text){
 const pick = arr => arr[Math.floor(Math.random() * arr.length)];
 const escapeHtml = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 
-/* ---------- UC011 – Jogar Siga a Abelha (compreensão de comandos) ---------- */
 const cmd = { queue: [], idx: 0, step: 0, wrongNow: 0, firstTry: 0, errors: 0, locked: false };
 
 function genCommand(tipo){
@@ -610,7 +575,7 @@ function genCommand(tipo){
     ]);
     return { texto: `Toque ${art(o)} ${o} que está ${POSICOES[pos]}.`, tiles, answer: [pos] };
   }
-  // duas etapas: "Toque primeiro na X e depois no Y"
+
   const quatro = shuffle(objs).slice(0, 4);
   const cores = shuffle(coresKeys);
   const tiles = shuffle(quatro.map((o, i) => ({ id: o, svg: objetoSVG(o, cores[i]) })));
@@ -635,7 +600,7 @@ function onCmdTile(tile){
   if(cmd.locked) return;
   const c = cmd.queue[cmd.idx], fb = $('#cmdFeedback');
   if(tile.dataset.id === c.answer[cmd.step]){
-    if(cmd.step < c.answer.length - 1){       // primeira parte de um comando de duas etapas
+    if(cmd.step < c.answer.length - 1){
       tile.insertAdjacentHTML('beforeend', `<span class="tile-order">${cmd.step + 1}</span>`);
       tile.classList.add('disabled');
       cmd.step++; sfx.tap();
@@ -654,7 +619,7 @@ function onCmdTile(tile){
     cmd.wrongNow++; cmd.errors++;
     tile.classList.add('wrong');
     setTimeout(() => tile.classList.remove('wrong'), 700);
-    if(cmd.step > 0){                           // erro no meio do comando de duas etapas: recomeça
+    if(cmd.step > 0){
       cmd.step = 0;
       $$('#cmdGrid .tile-order').forEach(s => s.remove());
       $$('#cmdGrid .match-tile').forEach(t => t.classList.remove('disabled'));
@@ -667,10 +632,9 @@ function finishCommands(){
   user.comandos.hits += cmd.firstTry;
   user.comandos.total += cmd.queue.length;
   $('#cmdDots').innerHTML = cmd.queue.map(() => '<span class="done"></span>').join('');
-  grantReward('commands', Math.max(4, cmd.firstTry * 2 + 2));   // 4 acertos de primeira = 10 moedas
+  grantReward('commands', Math.max(4, cmd.firstTry * 2 + 2));
 }
 
-/* ---------- UC012 – Jogar Conte a História (sequência narrativa) ---------- */
 const story = { h: null, order: [], slots: [], errors: 0, lastIdx: -1, locked: false, opts: [] };
 
 function startStory(){
@@ -742,7 +706,6 @@ function onStoryOption(btn){
   }
 }
 
-/* ---------- UC013 – Responder questionário "Conhecendo a criança" ---------- */
 function fillScreening(){
   const p = user.perfil || {};
   $('#scrDiag').innerHTML = Object.entries(DIAGNOSTICO).map(([k, t]) =>
@@ -798,9 +761,6 @@ function saveScreening(e){
   $('#mScrOk').onclick = () => { closeModal(); showView('home'); };
 }
 
-/* ---------- Aviso de acompanhamento (estatísticas) ----------
-   Não é diagnóstico: só sugere conversar com a escola ou um fonoaudiólogo
-   quando o desempenho fica baixo depois de várias respostas. */
 function renderAlert(){
   const areas = [];
   const baixo = r => r.total >= ALERTA_MIN_RESPOSTAS && r.hits / r.total < ALERTA_ACERTO;
@@ -816,7 +776,6 @@ function renderAlert(){
   renderStatic(box);
 }
 
-/* ---------- UC007 – Visualizar jardim ---------- */
 function renderGarden(){
   const n = user.flowers.length;
   const pct = Math.min(100, Math.round(n / GARDEN_GOAL * 100));
@@ -838,7 +797,6 @@ function renderGarden(){
   }
 }
 
-/* ---------- UC008 – Consultar estatísticas ---------- */
 function renderStats(){
   const v = user.vocab, c = user.comandos;
   const pct = r => (r.total ? Math.round(r.hits / r.total * 100) : 0) + '%';
@@ -868,7 +826,6 @@ function renderStats(){
   requestAnimationFrame(() => $$('#statsBars .bar-fill').forEach(b => b.style.width = b.dataset.w + '%'));
 }
 
-/* ---------- UC009 – Visualizar conquistas ---------- */
 function renderBadges(highlight){
   $('#badgeGrid').innerHTML = BADGES.map(b => {
     const got = user.badges.includes(b.id);
@@ -881,7 +838,6 @@ function renderBadges(highlight){
   }).join('');
 }
 
-/* ---------- UC010 – Manter perfil ---------- */
 let pendingAvatar = 'pessoa';
 function fillProfile(){
   const form = $('#formProfile'); clearErrors(form);
@@ -931,7 +887,6 @@ function saveProfile(e){
   toast('Alterações salvas com sucesso!', 'ok');
 }
 
-/* ---------- RF012 – Sair do sistema ---------- */
 function askLogout(){
   openModal(`
     <div data-bee></div>
@@ -952,9 +907,6 @@ function askLogout(){
   };
 }
 
-/* =========================================================
-   EVENTOS
-   ========================================================= */
 function bindEvents(){
   $('#formLogin').addEventListener('submit', handleLogin);
   $('#formRegister').addEventListener('submit', handleRegister);
@@ -977,7 +929,6 @@ function bindEvents(){
     toast('Enviamos um link de redefinição para ' + user.email, 'ok');
   });
 
-  // Delegação de cliques
   document.addEventListener('click', e => {
     const go = e.target.closest('[data-go]');
     if(go){ e.preventDefault(); showAuth(go.dataset.go); return; }
@@ -1031,7 +982,6 @@ function bindEvents(){
     }
   });
 
-  // Ao digitar, remove o destaque de erro do campo
   document.addEventListener('input', e => {
     if(e.target.classList.contains('input')){
       e.target.classList.remove('invalid');
@@ -1039,7 +989,6 @@ function bindEvents(){
     }
   });
 
-  // Configurações (salvam na hora)
   $$('[data-setting]').forEach(cb => cb.addEventListener('change', () => {
     user.settings[cb.dataset.setting] = cb.checked;
     saveUser(); applySettings();
@@ -1047,7 +996,6 @@ function bindEvents(){
     if(cb.dataset.setting === 'voice' && cb.checked) speak('Leitura em voz alta ligada!');
   }));
 
-  // Conexão (fluxos de exceção FE001)
   window.addEventListener('offline', () => $('#offlineBanner').classList.remove('hidden'));
   window.addEventListener('online', () => {
     $('#offlineBanner').classList.add('hidden');
@@ -1058,9 +1006,6 @@ function bindEvents(){
   document.addEventListener('keydown', e => { if(e.key === 'Escape' && $('#mStay')) closeModal(); });
 }
 
-/* =========================================================
-   INÍCIO
-   ========================================================= */
 async function init(){
   renderStatic();
   $$('.eye-btn').forEach(b => b.innerHTML = ICONS.eye);

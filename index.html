@@ -9,13 +9,8 @@
 </head>
 <body>
 
-<!-- =====================================================
-     TELAS DE ACESSO (login, cadastro, recuperação de senha)
-     ===================================================== -->
-<!-- o fundo (céu, árvores, cerca e flores) é a imagem img/fundo.svg, definida no CSS -->
 <div id="auth" class="sky-scene hidden">
 
-  <!-- UC001 – Efetuar login -->
   <div class="auth-card" id="card-login">
     <div class="auth-bee" data-bee></div>
     <div class="auth-brand"><img src="img/logo.svg" alt=""><span><span class="talk">Talk</span><span class="garden">Garden</span></span></div>
@@ -44,7 +39,6 @@
     <div class="foot">Ainda não tem conta? <button class="link" data-go="register">Cadastre-se</button></div>
   </div>
 
-  <!-- UC002 – Cadastrar usuário -->
   <div class="auth-card wide hidden" id="card-register">
     <div class="auth-bee" data-bee></div>
     <h1>Criar conta</h1>
@@ -84,7 +78,6 @@
     <div class="foot">Já tem conta? <button class="link" data-go="login">Fazer login</button></div>
   </div>
 
-  <!-- UC001 / FA001 – Esqueceu a senha -->
   <div class="auth-card hidden" id="card-forgot">
     <div class="auth-bee" data-bee></div>
     <h1>Esqueceu a senha?</h1>
@@ -100,7 +93,6 @@
     <button class="link back-link" data-go="login">‹ Voltar para o login</button>
   </div>
 
-  <!-- Confirmação de envio -->
   <div class="auth-card hidden" id="card-sent">
     <div class="auth-bee" data-bee></div>
     <div class="icon-circle" data-icon="mail"></div>
@@ -110,7 +102,6 @@
     <button class="link back-link" data-go="login">‹ Voltar para o login</button>
   </div>
 
-  <!-- Criar nova senha -->
   <div class="auth-card hidden" id="card-reset">
     <div class="auth-bee" data-bee></div>
     <h1>Criar nova senha</h1>
@@ -131,9 +122,6 @@
   </div>
 </div>
 
-<!-- =====================================================
-     APLICAÇÃO (após login)
-     ===================================================== -->
 <div id="app" class="app hidden">
 
   <nav class="sidebar">
@@ -158,9 +146,8 @@
       </div>
     </header>
 
-    <!-- ========== INÍCIO ========== -->
     <section class="view" id="view-home">
-      <!-- o fundo com a abelha é a imagem img/fundo-inicio.svg, definida no CSS -->
+
       <div class="scene">
         <div class="greeting">
           <h1>Olá, pequeno jardineiro!</h1>
@@ -215,7 +202,6 @@
       </div>
     </section>
 
-    <!-- ========== JOGO DE VOCABULÁRIO (UC003) ========== -->
     <section class="view" id="view-vocab">
       <div class="subpage">
         <div class="subpage-head">
@@ -237,7 +223,6 @@
       </div>
     </section>
 
-    <!-- ========== FORMANDO FRASES (UC004) ========== -->
     <section class="view" id="view-phrase">
       <div class="subpage">
         <div class="subpage-head">
@@ -261,7 +246,6 @@
       </div>
     </section>
 
-    <!-- ========== SIGA A ABELHA (UC011) ========== -->
     <section class="view" id="view-commands">
       <div class="subpage">
         <div class="subpage-head">
@@ -284,7 +268,6 @@
       </div>
     </section>
 
-    <!-- ========== CONTE A HISTÓRIA (UC012) ========== -->
     <section class="view" id="view-story">
       <div class="subpage">
         <div class="subpage-head">
@@ -316,7 +299,6 @@
       </div>
     </section>
 
-    <!-- ========== CONHECENDO A CRIANÇA (UC013) ========== -->
     <section class="view" id="view-screening">
       <div class="subpage">
         <div class="subpage-head">
@@ -346,7 +328,6 @@
       </div>
     </section>
 
-    <!-- ========== JARDIM (UC007) ========== -->
     <section class="view" id="view-garden">
       <div class="subpage">
         <div class="subpage-head">
@@ -367,7 +348,6 @@
       </div>
     </section>
 
-    <!-- ========== ESTATÍSTICAS (UC008) ========== -->
     <section class="view" id="view-stats">
       <div class="subpage">
         <div class="subpage-head">
@@ -392,7 +372,6 @@
       </div>
     </section>
 
-    <!-- ========== CONQUISTAS (UC009) ========== -->
     <section class="view" id="view-achievements">
       <div class="subpage">
         <div class="subpage-head">
@@ -405,7 +384,6 @@
       </div>
     </section>
 
-    <!-- ========== PERFIL E CONFIGURAÇÕES (UC010) ========== -->
     <section class="view" id="view-profile">
       <div class="subpage">
         <div class="subpage-head">
