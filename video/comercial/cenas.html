@@ -1,0 +1,287 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1920px;height:1080px;overflow:hidden;background:#FDFBF6;font-family:'Segoe UI',sans-serif}
+#palco{position:absolute;inset:0;overflow:hidden}
+#mundo,#frente{position:absolute;left:0;top:0;width:1920px;height:1080px;transform-origin:0 0}
+#fundo{position:absolute;inset:0;width:1920px;height:1080px}
+.flor{position:absolute;bottom:0;transform-origin:50% 100%}
+.flor svg{display:block}
+#chao{position:absolute;left:0;top:0;width:1920px;height:1080px}
+#ju{position:absolute;width:330px;height:572px;transform-origin:50% 100%}
+#ju svg,#abelha svg{width:100%;height:100%;display:block}
+#abelha{position:absolute;width:120px;height:135px;left:0;top:0}
+.balao{position:absolute;background:#fff;border-radius:34px;padding:22px 26px;box-shadow:0 8px 24px rgba(91,79,168,.12);
+  display:flex;gap:12px;align-items:center;flex-wrap:nowrap;transform-origin:10% 100%}
+.balao::after{content:"";position:absolute;left:46px;bottom:-22px;border:14px solid transparent;border-top:16px solid #fff;border-left:16px solid #fff}
+.balao.certo{box-shadow:0 0 0 4px #6FBF73,0 8px 24px rgba(91,79,168,.12)}
+.palavra{position:absolute;background:#F0577E;color:#fff;font-weight:700;font-size:40px;padding:10px 26px;border-radius:999px;white-space:nowrap}
+.fala-abelha{font-size:42px;font-weight:700;color:#3A3550;white-space:nowrap}
+#tablet{position:absolute;width:960px;height:600px;border-radius:44px;background:#3A3550;padding:34px}
+#tablet .tela{width:100%;height:100%;border-radius:14px;overflow:hidden;background:#fff}
+#tablet img{width:100%;height:100%;display:block;object-fit:cover}
+#mesa{position:absolute}
+#numeros{position:absolute;inset:0;background:#FDFBF6;display:flex;flex-direction:column;align-items:center;justify-content:center;opacity:0}
+#turma{display:grid;grid-template-columns:repeat(10,124px);gap:26px 34px}
+.aluno{width:124px;height:124px;transform-origin:50% 100%}
+#numeros h2{font-size:78px;color:#3A3550;margin-top:70px;font-weight:700}
+#numeros h2 b{color:#5B4FA8}
+#numeros p{font-size:38px;color:#6B6789;margin-top:14px}
+#final{position:absolute;inset:0;background:#FDFBF6;display:flex;flex-direction:column;align-items:center;justify-content:center;opacity:0}
+#final img{width:220px;height:220px}
+#final h1{font-size:120px;font-weight:800;letter-spacing:-2px;margin-top:10px}
+#final h1 .t{color:#7C6FCB}#final h1 .g{color:#4C9A50}
+#final .lema{font-size:40px;color:#5D5874;margin-top:6px}
+#final .rodape{position:absolute;bottom:64px;font-size:26px;color:#8A85A3;text-align:center;line-height:1.5}
+#veu{position:absolute;inset:0;background:#FDFBF6;pointer-events:none}
+</style></head><body>
+<div id="palco">
+  <div id="mundo">
+    <img id="fundo" src="../../img/fundo.svg" alt="">
+    <div id="flores"></div>
+    <div id="mesa"></div>
+    <div id="tablet"><div class="tela"><img id="telaImg" alt=""></div></div>
+    <div id="ju"></div>
+    <div class="balao" id="balaoJu"></div>
+    <div class="balao" id="balaoAb"><span class="fala-abelha">Oi, Ju!</span></div>
+    <div id="caidas"></div>
+  </div>
+  <div id="frente"><div id="abelha"></div></div>
+  <div id="numeros"><div id="turma"></div><h2>Cerca de <b>7 em cada 100</b> crianças têm TDL</h2><p>Transtorno do Desenvolvimento da Linguagem</p></div>
+  <div id="final">
+    <img src="../../img/logo.svg" alt="">
+    <h1><span class="t">Talk</span><span class="g">Garden</span></h1>
+    <div class="lema">Aprender brincando, uma flor de cada vez.</div>
+    <div class="rodape">Projeto Integrador · Curso Técnico em Informática · IFAM Campus Manaus Centro · 2026<br>Julliana Emelin de Sousa Andrade e Nicoli Silva de Lima</div>
+  </div>
+  <div id="veu"></div>
+</div>
+<script src="../../js/data.js"></script>
+<script src="personagens.js"></script>
+<script>
+const $ = s => document.querySelector(s);
+const cl = (v, a = 0, b = 1) => Math.max(a, Math.min(b, v));
+const p = (t, a, b) => cl((t - a) / (b - a));                    // progresso 0..1 entre a e b
+const suave = x => x < .5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2;
+const sai = x => 1 - Math.pow(1 - x, 3);
+const mola = x => x === 0 ? 0 : x === 1 ? 1 : Math.pow(2, -10 * x) * Math.sin((x * 10 - .75) * 2.094) + 1;
+const lerp = (a, b, k) => a + (b - a) * k;
+const PARTE = location.hash.slice(1) || 'abertura';
+
+// ---------- cenário ----------
+const CHAO_Y = 1012;                 // onde ficam os pés
+const FLORES = [
+  [90, 'rosa'], [210, 'tulipa'], [330, 'azul'], [1110, 'amarela'], [1230, 'lilas'], [1350, 'rosa'], [1470, 'tulipa'],
+  [1590, 'azul'], [1710, 'amarela'], [1830, 'lilas'], [450, 'lilas'], [990, 'rosa'],
+];
+$('#flores').innerHTML = FLORES.map(([x, f], i) =>
+  `<div class="flor" id="f${i}" style="left:${x - 50}px;top:${CHAO_Y - 230}px;height:230px"><div class="viva">${FLOWERS[f](230)}</div><div class="broto" style="position:absolute;left:0;bottom:0">${FLOWERS.broto(230)}</div></div>`).join('');
+const flores = FLORES.map((_, i) => ({ el: $('#f' + i), viva: $('#f' + i + ' .viva'), broto: $('#f' + i + ' .broto') }));
+function florescer(t, inicio, passo) {          // brotos murchos que viram flores
+  flores.forEach((f, i) => {
+    const k = sai(p(t, inicio + i * passo, inicio + i * passo + .9));
+    f.viva.style.transform = `scaleY(${k})`; f.viva.style.transformOrigin = '50% 100%'; f.viva.style.opacity = k > 0 ? 1 : 0;
+    f.broto.style.opacity = 1 - k;
+    f.broto.style.transform = `rotate(${(1 - k) * 22}deg)`; f.broto.style.transformOrigin = '50% 100%';
+  });
+}
+
+// ---------- Ju ----------
+let juEstado = '';
+function ju(x, opts, escala = 1) {
+  const chave = JSON.stringify(opts);
+  if (chave !== juEstado) { $('#ju').innerHTML = crianca(opts); juEstado = chave; }
+  const j = $('#ju'); j.style.left = (x - 165) + 'px'; j.style.top = (CHAO_Y - 560) + 'px'; j.style.transform = `scale(${escala * 1.22})`;
+}
+const piscando = t => (t % 3.4) > 3.25;
+const falando = (t) => .5 + .5 * Math.sin(t * 2 * Math.PI * 4.2);
+
+// ---------- abelha ----------
+let abEstado = '';
+function abelhaEm(x, y, t, giro = 0, escala = 1) {
+  const asa = .5 + .5 * Math.sin(t * 2 * Math.PI * 7);
+  const chave = asa > .5 ? 'a' : 'b';
+  if (chave !== abEstado) { $('#abelha').innerHTML = abelha({ asa: chave === 'a' ? 1 : .25, piscar: piscando(t + 1.1) }); abEstado = chave; }
+  const bob = Math.sin(t * 2 * Math.PI * .9) * 8;
+  $('#abelha').style.transform = `translate(${x - 60}px,${y - 68 + bob}px) rotate(${giro}deg) scale(${escala})`;
+}
+
+// ---------- palavras ----------
+const FRASE = ['O', 'gato', 'dorme', 'no', 'sofá'];
+$('#caidas').innerHTML = FRASE.map((w, i) => `<div class="palavra" id="w${i}">${w}</div>`).join('');
+const pal = FRASE.map((_, i) => $('#w' + i));
+const LARG_FRASE = () => FRASE.reduce((a, _, i) => a + pal[i].offsetWidth, 0) + 12 * (FRASE.length - 1);
+function largura(i) { return pal[i].offsetWidth; }
+
+// ---------- turma (estatística) ----------
+$('#turma').innerHTML = Array.from({ length: 30 }, (_, i) => {
+  const destaque = i === 7 || i === 22;
+  return `<svg class="aluno" id="a${i}" viewBox="0 0 96 96"><circle cx="48" cy="48" r="46" fill="${destaque ? '#EFECFB' : 'none'}" class="aro"/>
+    <circle cx="48" cy="40" r="22" fill="${['#4A3426', '#2E2A20', '#8A5A3B', '#C9923F'][i % 4]}"/><circle cx="48" cy="46" r="18" fill="${['#F2C9A0', '#E8B88E', '#C98D66', '#F2D3B5'][(i * 7) % 4]}"/>
+    <path d="M20 92q28-30 56 0" fill="${['#6FBF73', '#7FB6E8', '#F0577E', '#F5B92E', '#B497E6'][(i * 3) % 5]}"/>
+    <circle cx="42" cy="45" r="2.4" fill="#3A3550"/><circle cx="54" cy="45" r="2.4" fill="#3A3550"/></svg>`;
+}).join('');
+
+// ---------- tablet ----------
+const TAB = { x: 900, y: 330, w: 960, h: 600 };   // posição no mundo
+const TELA = { x: TAB.x + 34, y: TAB.y + 34, w: TAB.w - 68, h: TAB.h - 68 };
+$('#mesa').innerHTML = `<svg width="1080" height="140" viewBox="0 0 1080 140"><rect x="0" y="0" width="1080" height="34" rx="14" fill="#C98D5A"/><rect x="60" y="34" width="26" height="106" fill="#A8703F"/><rect x="994" y="34" width="26" height="106" fill="#A8703F"/></svg>`;
+function camera(k) {                                 // k=0 mundo inteiro, k=1 tela do tablet ocupa o quadro
+  const s = lerp(1, 1920 / TELA.w, k);
+  const tx = lerp(0, -TELA.x * (1920 / TELA.w), k), ty = lerp(0, -TELA.y * (1920 / TELA.w), k);
+  $('#mundo').style.transform = $('#frente').style.transform = `translate(${tx}px,${ty}px) scale(${s})`;
+}
+function tablet(dy, mostra = 1) {
+  const t = $('#tablet'); t.style.left = TAB.x + 'px'; t.style.top = (TAB.y + dy) + 'px'; t.style.opacity = mostra;
+  const m = $('#mesa'); m.style.left = (TAB.x - 60) + 'px'; m.style.top = (TAB.y + TAB.h + 8 + dy) + 'px'; m.style.opacity = mostra;
+}
+
+function balao(id, x, y, k, conteudo) {
+  const b = $(id); if (conteudo !== undefined && b.dataset.c !== conteudo) { b.innerHTML = conteudo; b.dataset.c = conteudo; }
+  b.style.left = x + 'px'; b.style.top = y + 'px';
+  b.style.opacity = k > 0 ? 1 : 0; b.style.transform = `scale(${mola(k)})`;
+}
+
+// =====================================================================
+// ABERTURA (0 a 44 s): o problema, a chegada da abelha e a ida ao tablet
+// =====================================================================
+const DUR = { abertura: 44, final: 27 };
+function abertura(t) {
+  camera(0);
+  $('#final').style.opacity = 0;
+  // cores: o jardim começa apagado e volta a ter cor quando a abelha chega
+  const cor = sai(p(t, 29, 33));
+  $('#mundo').style.filter = `grayscale(${(1 - cor) * .85}) brightness(${1 - (1 - cor) * .04})`;
+  florescer(t, 30, .25);
+  $('#veu').style.opacity = 1 - p(t, 0, 1.4);
+
+  // Ju
+  let expr = 'triste', braco = 'baixo', boca = 0;
+  if (t >= 3 && t < 9.5) { expr = 'fala'; boca = falando(t); }
+  if (t >= 9.5 && t < 25) expr = t < 12 ? 'confusa' : 'triste';
+  if (t >= 25 && t < 28.5) expr = 'surpresa';
+  if (t >= 28.5) expr = 'feliz';
+  if (t >= 34 && t < 37) braco = 'aceno';
+  if (t >= 39) braco = 'aponta';
+  const juX = lerp(760, 560, suave(p(t, 37.5, 39.5)));
+  ju(juX, { expressao: expr, braco, boca, piscar: expr !== 'fala' && piscando(t) });
+
+  // as palavras saem embaralhadas e caem no chão
+  const ordemErrada = [4, 1, 0, 3, 2];
+  const bx = juX + 150, by = 190;
+  const kb = p(t, 3, 3.5) * (1 - p(t, 9, 9.4));
+  balao('#balaoJu', bx, by, kb, '<div style="width:' + LARG_FRASE() + 'px;height:64px"></div>');
+  let cx = bx + 26;
+  ordemErrada.forEach((i, n) => {
+    const w = largura(i), el = pal[i];
+    const aparece = p(t, 3.6 + n * .9, 4.0 + n * .9);
+    const tremer = t > 8 && t < 9.4 ? Math.sin(t * 40 + n) * 4 : 0;
+    const cai = sai(p(t, 9.4 + n * .12, 10.6 + n * .12));
+    const chaoX = 380 + n * 150, chaoY = CHAO_Y - 62;
+    const x = lerp(cx, chaoX, cai), y = lerp(by + 22, chaoY, cai * cai);
+    el.style.left = x + 'px'; el.style.top = y + 'px';
+    el.style.transform = `rotate(${tremer + cai * (n % 2 ? 14 : -12)}deg) scale(${mola(aparece)})`;
+    el.style.opacity = aparece > 0 ? (1 - p(t, 29, 31)) : 0;
+    el.style.background = '#F0577E';
+    cx += w + 12;
+  });
+
+  // a turma: ~7 em cada 100 crianças
+  const kn = p(t, 12.5, 13.3) * (1 - p(t, 22.2, 23));
+  $('#numeros').style.opacity = kn;
+  for (let i = 0; i < 30; i++) {
+    const k = mola(p(t, 13.2 + (i % 10) * .05 + Math.floor(i / 10) * .12, 13.9 + (i % 10) * .05 + Math.floor(i / 10) * .12));
+    const a = $('#a' + i); a.style.transform = `scale(${k})`;
+    const dest = (i === 7 || i === 22) ? p(t, 15.5, 16.2) : 0;
+    a.querySelector('.aro').setAttribute('stroke', dest ? '#7C6FCB' : 'none');
+    a.querySelector('.aro').setAttribute('stroke-width', 4 * dest);
+    a.style.opacity = (i === 7 || i === 22) ? 1 : 1 - .55 * p(t, 15.5, 16.2);
+  }
+  document.querySelector('#numeros h2').style.opacity = p(t, 16.6, 17.4);
+  document.querySelector('#numeros p').style.opacity = p(t, 17.4, 18.2);
+
+  // a abelha chega voando e dá uma volta em torno da Ju
+  let ax = 2200, ay = 300, giro = 0;
+  if (t >= 24.5) {
+    const k = p(t, 24.5, 28.5);
+    const ang = k * Math.PI * 2.2;
+    ax = lerp(2100, juX + 40, sai(k)) + Math.cos(ang) * 220 * (1 - k * .4);
+    ay = lerp(220, 380, sai(k)) + Math.sin(ang) * 120 * (1 - k * .4);
+    giro = Math.sin(ang) * 12;
+  }
+  if (t >= 28.5 && t < 33) {                         // toca o chão: as cores voltam
+    const k = p(t, 28.5, 30);
+    ax = juX + 230; ay = lerp(380, CHAO_Y - 120, Math.sin(k * Math.PI));
+  }
+  if (t >= 33 && t < 39.5) { ax = juX + 260; ay = 360; }
+  if (t >= 39.5) {                                   // vai até o tablet
+    const k = suave(p(t, 39.5, 41.5));
+    ax = lerp(juX + 260, TAB.x + TAB.w - 40, k); ay = lerp(360, TAB.y - 20, k);
+  }
+  abelhaEm(ax, ay, t, giro);
+  balao('#balaoAb', ax + 70, ay - 170, p(t, 33.6, 34.1) * (1 - p(t, 37.3, 37.6)));
+
+  // o tablet sobe e a câmera entra na tela
+  tablet(lerp(700, 0, sai(p(t, 37.5, 39.3))), t > 37.5 ? 1 : 0);
+  camera(suave(p(t, 41.8, 44)));
+  $('#abelha').style.opacity = 1 - p(t, 42.6, 43.2);
+}
+
+// =====================================================================
+// FINAL (0 a 27 s): sai da tela, a Ju fala a frase inteira, logo
+// =====================================================================
+function final(t) {
+  $('#mundo').style.filter = 'none';
+  $('#numeros').style.opacity = 0;
+  $('#veu').style.opacity = 0;
+  florescer(t, -99, 0);
+  camera(1 - suave(p(t, 0, 2.6)));
+  tablet(lerp(0, 800, suave(p(t, 3, 4.4))), t < 4.4 ? 1 : 0);
+  const juX = lerp(560, 760, suave(p(t, 3.2, 4.6)));
+  let expr = 'feliz', braco = 'baixo', boca = 0;
+  if (t >= 6 && t < 10.5) { expr = 'fala'; boca = falando(t); }
+  if (t >= 13 && t < 17) braco = 'aceno';
+  ju(juX, { expressao: expr, braco, boca, piscar: expr !== 'fala' && piscando(t) });
+
+  // a frase sai inteira e na ordem certa
+  const bx = juX + 150, by = 190;
+  const kb = p(t, 5.6, 6.1) * (1 - p(t, 17, 17.4));
+  balao('#balaoJu', bx, by, kb, '<div style="width:' + LARG_FRASE() + 'px;height:64px"></div>');
+  $('#balaoJu').classList.toggle('certo', t > 9.4);
+  let cx = bx + 26;
+  FRASE.forEach((w, i) => {
+    const el = pal[i]; const k = p(t, 6.2 + i * .65, 6.6 + i * .65);
+    el.style.left = cx + 'px'; el.style.top = (by + 22) + 'px';
+    el.style.transform = `scale(${mola(k)})`; el.style.opacity = k > 0 ? (1 - p(t, 17, 17.4)) : 0;
+    el.style.background = t > 9.4 ? '#4C9A50' : '#F0577E';
+    cx += largura(i) + 12;
+  });
+
+  // a abelha comemora com uma volta no ar
+  let ax = TAB.x + TAB.w - 40, ay = TAB.y - 20, giro = 0;
+  if (t >= 2.6) {
+    const k = suave(p(t, 2.6, 4.6)); ax = lerp(ax, 1480, k); ay = lerp(ay, 560, k);
+  }
+  if (t >= 9.6 && t < 12) {
+    const k = p(t, 9.6, 12), ang = k * Math.PI * 2;
+    ax = 1480 + Math.sin(ang) * 120; ay = 560 - (1 - Math.cos(ang)) * 110; giro = k * 360;
+  }
+  abelhaEm(ax, ay, t, giro);
+  $('#abelha').style.opacity = 1 - p(t, 0, .01) * 0;
+  balao('#balaoAb', ax + 60, ay - 160, p(t, 12.4, 12.9) * (1 - p(t, 16.2, 16.5)), '<span class="fala-abelha">Muito bem!</span>');
+
+  // cartão final
+  $('#final').style.opacity = p(t, 17.6, 18.8);
+  document.querySelector('#final img').style.transform = `scale(${mola(p(t, 18.2, 19.4))})`;
+  document.querySelector('#final h1').style.opacity = p(t, 18.8, 19.6);
+  document.querySelector('#final .lema').style.opacity = p(t, 19.6, 20.4);
+  document.querySelector('#final .rodape').style.opacity = p(t, 20.6, 21.4);
+}
+
+window.DURACAO = DUR[PARTE];
+$('#telaImg').src = PARTE === 'final' ? 'tela-fim.png' : 'tela-inicio.png';
+window.quadro = t => (PARTE === 'final' ? final : abertura)(t);
+window.quadro(0);
+</script>
+</body></html>
