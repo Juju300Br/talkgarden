@@ -1,0 +1,20 @@
+{
+ "1 Resumo do projeto": 3,
+ "2 Como o projeto está organizado": 4,
+ "2.1 Como rodar": 4,
+ "3 O caminho de um clique até o banco": 5,
+ "4 As telas: index.html": 7,
+ "5 O visual: style.css": 8,
+ "6 Os dados dos jogos: data.js e games-data.js": 9,
+ "7 O funcionamento: app.js": 10,
+ "7.1 Navegação entre telas": 10,
+ "7.2 Delegação de cliques": 10,
+ "7.3 Jogo de Vocabulário": 11,
+ "7.4 Os outros jogos": 12,
+ "7.5 Recompensa e gravação no banco": 12,
+ "7.6 Questionário e aviso de acompanhamento": 13,
+ "7.7 Jardim, estatísticas e perfil": 13,
+ "8 A ligação com o banco: pasta api": 14,
+ "9 O banco de dados": 16,
+ "10 Perguntas que a banca pode fazer": 17
+}
