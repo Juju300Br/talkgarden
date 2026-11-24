@@ -77,6 +77,12 @@ p,li{font-size:36px;line-height:1.45}
 .tablet img{width:100%;display:block;border-radius:14px}
 .site{display:grid;grid-template-columns:1fr 1020px;gap:80px;align-items:center;flex:1}
 .site h2{font-size:80px}
+.telas{display:grid;grid-template-columns:1fr 1fr;gap:56px;margin-top:56px}
+.tela{display:flex;flex-direction:column;gap:22px}
+.tela img{width:100%;display:block;border-radius:22px;border:10px solid #fff;box-shadow:0 10px 30px rgba(91,79,168,.14)}
+.tela figcaption{font-size:32px;color:var(--tinta);text-align:center}
+.tela.unica{width:1280px;margin:40px auto 0}
+.espaco-video{flex:none;width:1280px;height:720px;margin:24px auto 0;background:#fff;border-radius:28px}
 .painel{background:rgba(255,255,255,.9);border-radius:36px;padding:50px 56px}
 
 @media print{
@@ -176,6 +182,11 @@ p,li{font-size:36px;line-height:1.45}
 </section>
 
 <section class="slide">
+  <h2>O TalkGarden funcionando</h2>
+  <div class="espaco-video"></div>
+</section>
+
+<section class="slide">
   <h2>Conclusão</h2>
   <div class="dois">
     <div><div class="rot">O que entregamos</div>
@@ -209,12 +220,7 @@ p,li{font-size:36px;line-height:1.45}
   </div>
 </section>
 
-<section class="slide jardim">
-  <div class="site">
-    <div class="painel"><h2>Vamos ver o TalkGarden funcionando</h2></div>
-    <div class="tablet"><img src="{{tela-inicio-pi.png}}" alt=""></div>
-  </div>
-</section>
+
 
 <section class="slide jardim capa">
   <img class="logo" src="{{logo.svg}}" alt="">
