@@ -16,8 +16,13 @@ const FLOWERS = new Function(dados.slice(dados.indexOf('const FLOWERS'), dados.i
 const flores = '<div class="flores">' + ['rosa', 'tulipa', 'azul', 'amarela', 'lilas', 'rosa', 'azul', 'tulipa', 'amarela', 'lilas', 'rosa', 'azul']
   .map((f, i) => (i > 2 && i < 9) ? '' : FLOWERS[f](130)).join('') + '</div>';
 
+const canto = (lado, itens) => '<div class="canto ' + lado + '">' + itens.map(([f, h]) => FLOWERS[f](h)).join('') + '</div>';
+const enfeite = [
+  canto('e', [['tulipa', 118], ['broto', 74], ['rosa', 132]]) + canto('d', [['amarela', 124], ['muda', 88], ['lilas', 108]]),
+  canto('e', [['azul', 126], ['muda', 84], ['amarela', 106]]) + canto('d', [['rosa', 112], ['broto', 70], ['tulipa', 128]]),
+];
 let html = fs.readFileSync(path.join(__dirname, 'slides.html'), 'utf8')
-  .replace('{{flores}}', flores)
+  .replace('{{enfeite}}', JSON.stringify(enfeite))
   .replace(/\{\{([^}]+)\}\}/g, (m, n) => dataUri(n));
 const OUT = path.join(RAIZ, 'docs', 'Apresentacao PI - TalkGarden.html');
 fs.writeFileSync(OUT, html);
