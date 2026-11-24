@@ -9,7 +9,7 @@ const T = require('./textos.js');
 const mmss = t => `${Math.floor(t / 60)}:${String(Math.floor(t % 60)).padStart(2, '0')}`;
 const nomes = { cadastro: 'Cadastro', senha: 'Recuperar a senha', login: 'Login', inicio: 'Tela inicial', vocab: 'Jogo de Vocabulário', recompensa: 'Recompensa', frases: 'Formando Frases', medalha: 'Medalha nova', jardim: 'Jardim', conquistas: 'Conquistas', estatisticas: 'Estatísticas', perfil: 'Perfil e configurações', sair: 'Sair' };
 const cenas = [...T.abertura.map(s => s.logo ? 'Logo do TalkGarden' : 'Criança com dificuldade na lição'),
-  ...T.sistema.map(s => nomes[s.id]), ...T.final.map(s => s.logo ? 'Logo do TalkGarden (final)' : 'Criança feliz estudando com a família')];
+  ...T.sistema.map(s => nomes[s.id]), ...T.final.map(s => s.logo ? 'Logo do TalkGarden (final)' : s.cena)];
 const textos = [...T.abertura, ...T.sistema, ...T.final].map(s => s.texto).filter(Boolean);
 const cenasComFala = [...T.abertura, ...T.sistema, ...T.final].map((s, i) => [s, cenas[i]]).filter(([s]) => s.texto).map(([, c]) => c);
 

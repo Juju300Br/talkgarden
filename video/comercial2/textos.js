@@ -23,9 +23,9 @@ module.exports = {
     { id: 'sair', texto: 'Ao sair, tudo fica guardado para a próxima vez.' },
   ],
   final: [
-    { clipe: 'v6264', de: 2.5, dur: 4.2, texto: 'Com o TalkGarden, aprender vira brincadeira.' },
-    { clipe: 'v6166', de: 4.0, dur: 4.2, texto: 'E cada palavra nova faz o jardim florescer.' },
-    { clipe: 'v4874', de: 3.0, dur: 6.0, texto: 'Um apoio para praticar em casa e na escola, junto com o fonoaudiólogo.' },
+    { clipe: 'v27800', de: 8, dur: 4.2, cena: 'Mãe e filho usando o tablet', texto: 'Com o TalkGarden, aprender vira brincadeira.' },
+    { clipe: 'v11672', de: 1, dur: 4.2, cena: 'Pai e filhos usando o tablet juntos', texto: 'E cada palavra nova faz o jardim florescer.' },
+    { clipe: 'v8781', de: 4, dur: 6.0, cena: 'Professora e aluna usando o tablet', texto: 'Um apoio para praticar em casa e na escola, junto com o fonoaudiólogo.' },
     { logo: true, dur: 4.6, texto: 'TalkGarden: aprender brincando, uma flor de cada vez.' },
   ],
 };
