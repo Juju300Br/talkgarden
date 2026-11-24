@@ -1,7 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 100">
-  <!-- Estágio 1: semente que acabou de brotar da terra -->
-  <!-- Caule bem baixinho -->
-  <rect x="28.5" y="76" width="3" height="24" rx="1.5" fill="#5AA845"/>
-  <!-- Pontinha verde -->
-  <circle cx="30" cy="72" r="6" fill="#6BBF6B"/>
-</svg>

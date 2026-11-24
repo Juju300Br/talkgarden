@@ -1,0 +1,66 @@
+[
+ {
+  "id": "abertura",
+  "t": 0.71
+ },
+ {
+  "id": "cadastro",
+  "t": 11.24
+ },
+ {
+  "id": "login",
+  "t": 20.59
+ },
+ {
+  "id": "questionario",
+  "t": 26.08
+ },
+ {
+  "id": "inicio",
+  "t": 36.24
+ },
+ {
+  "id": "vocab",
+  "t": 41.26
+ },
+ {
+  "id": "recompensa",
+  "t": 53.59
+ },
+ {
+  "id": "frases",
+  "t": 59.76
+ },
+ {
+  "id": "comandos",
+  "t": 70.36
+ },
+ {
+  "id": "historia",
+  "t": 87.82
+ },
+ {
+  "id": "jardim",
+  "t": 100.81
+ },
+ {
+  "id": "conquistas",
+  "t": 107.21
+ },
+ {
+  "id": "estatisticas",
+  "t": 112.72
+ },
+ {
+  "id": "perfil",
+  "t": 119.61
+ },
+ {
+  "id": "sair",
+  "t": 129.1
+ },
+ {
+  "id": "fim",
+  "t": 135.73
+ }
+]

@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TalkGarden</title>
+<link rel="icon" href="img/logo.svg">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- =====================================================
+     TELAS DE ACESSO (login, cadastro, recuperação de senha)
+     ===================================================== -->
+<!-- o fundo (céu, árvores, cerca e flores) é a imagem img/fundo.svg, definida no CSS -->
+<div id="auth" class="sky-scene hidden">
+
+  <!-- UC001 – Efetuar login -->
+  <div class="auth-card" id="card-login">
+    <div class="auth-bee" data-bee></div>
+    <div class="auth-brand"><img src="img/logo.svg" alt=""><span><span class="talk">Talk</span><span class="garden">Garden</span></span></div>
+    <h1>Que bom te ver!</h1>
+    <p class="sub">Entre com a conta do responsável para a criança começar a brincar.</p>
+    <div class="alert error hidden" id="loginError">E-mail ou senha incorretos. Confira os dados e tente novamente.</div>
+    <div class="alert success hidden" id="loginSuccess"></div>
+    <form id="formLogin" novalidate>
+      <div class="field">
+        <label for="loginEmail">E-mail</label>
+        <input class="input" id="loginEmail" type="email" placeholder="seuemail@exemplo.com" autocomplete="email">
+      </div>
+      <div class="field">
+        <label for="loginPass">Senha</label>
+        <div class="input-wrap">
+          <input class="input" id="loginPass" type="password" placeholder="Digite sua senha" autocomplete="current-password">
+          <button type="button" class="eye-btn" data-eye="loginPass" aria-label="Mostrar senha"></button>
+        </div>
+      </div>
+      <div class="row-between">
+        <label class="check"><input type="checkbox" id="loginRemember" checked> Lembrar de mim</label>
+        <button type="button" class="link" data-go="forgot">Esqueceu a senha?</button>
+      </div>
+      <button class="btn btn-purple btn-block" type="submit">Entrar</button>
+    </form>
+    <div class="foot">Ainda não tem conta? <button class="link" data-go="register">Cadastre-se</button></div>
+  </div>
+
+  <!-- UC002 – Cadastrar usuário -->
+  <div class="auth-card wide hidden" id="card-register">
+    <div class="auth-bee" data-bee></div>
+    <h1>Criar conta</h1>
+    <p class="sub">Cadastre o responsável e a criança que vai cuidar do jardim.</p>
+    <form id="formRegister" novalidate>
+      <div class="grid-2">
+        <div class="field">
+          <label for="regName">Nome do responsável</label>
+          <input class="input" id="regName" placeholder="Ex.: Maria Souza" autocomplete="name">
+          <div class="field-error">Informe seu nome</div>
+        </div>
+        <div class="field">
+          <label for="regChild">Nome da criança</label>
+          <input class="input" id="regChild" placeholder="Ex.: Ana">
+          <div class="field-error">Informe o nome da criança</div>
+        </div>
+      </div>
+      <div class="field">
+        <label for="regEmail">E-mail</label>
+        <input class="input" id="regEmail" type="email" placeholder="maria.souza@email.com" autocomplete="email">
+        <div class="field-error">Informe um e-mail válido</div>
+      </div>
+      <div class="grid-2">
+        <div class="field">
+          <label for="regPass">Senha</label>
+          <input class="input" id="regPass" type="password" placeholder="Mínimo 6 caracteres" autocomplete="new-password">
+          <div class="field-error">A senha deve ter pelo menos 6 caracteres</div>
+        </div>
+        <div class="field">
+          <label for="regPass2">Confirmar senha</label>
+          <input class="input" id="regPass2" type="password" placeholder="Repita a senha" autocomplete="new-password">
+          <div class="field-error">As senhas não são iguais</div>
+        </div>
+      </div>
+      <button class="btn btn-green btn-block" type="submit" style="margin-top:8px">Cadastrar</button>
+    </form>
+    <div class="foot">Já tem conta? <button class="link" data-go="login">Fazer login</button></div>
+  </div>
+
+  <!-- UC001 / FA001 – Esqueceu a senha -->
+  <div class="auth-card hidden" id="card-forgot">
+    <div class="auth-bee" data-bee></div>
+    <h1>Esqueceu a senha?</h1>
+    <p class="sub">Sem problemas! Digite o e-mail cadastrado e enviaremos um link para criar uma nova senha.</p>
+    <form id="formForgot" novalidate>
+      <div class="field">
+        <label for="forgotEmail">E-mail cadastrado</label>
+        <input class="input" id="forgotEmail" type="email" placeholder="seuemail@exemplo.com">
+        <div class="field-error">Não encontramos uma conta com este e-mail</div>
+      </div>
+      <button class="btn btn-purple btn-block" type="submit">Enviar</button>
+    </form>
+    <button class="link back-link" data-go="login">‹ Voltar para o login</button>
+  </div>
+
+  <!-- Confirmação de envio -->
+  <div class="auth-card hidden" id="card-sent">
+    <div class="auth-bee" data-bee></div>
+    <div class="icon-circle" data-icon="mail"></div>
+    <h1>Verifique seu e-mail</h1>
+    <p class="sub">Enviamos um link de redefinição de senha para <strong id="sentEmail"></strong>.</p>
+    <button class="btn btn-purple btn-block" data-go="reset">Abrir link recebido</button>
+    <button class="link back-link" data-go="login">‹ Voltar para o login</button>
+  </div>
+
+  <!-- Criar nova senha -->
+  <div class="auth-card hidden" id="card-reset">
+    <div class="auth-bee" data-bee></div>
+    <h1>Criar nova senha</h1>
+    <p class="sub">Escolha uma nova senha de acesso para a sua conta.</p>
+    <form id="formReset" novalidate>
+      <div class="field">
+        <label for="resetPass">Nova senha</label>
+        <input class="input" id="resetPass" type="password" placeholder="Mínimo 6 caracteres" autocomplete="new-password">
+        <div class="field-error">A senha deve ter pelo menos 6 caracteres</div>
+      </div>
+      <div class="field">
+        <label for="resetPass2">Confirmar senha</label>
+        <input class="input" id="resetPass2" type="password" placeholder="Repita a senha" autocomplete="new-password">
+        <div class="field-error">As senhas não são iguais</div>
+      </div>
+      <button class="btn btn-purple btn-block" type="submit">Confirmar</button>
+    </form>
+  </div>
+</div>
+
+<!-- =====================================================
+     APLICAÇÃO (após login)
+     ===================================================== -->
+<div id="app" class="app hidden">
+
+  <nav class="sidebar">
+    <div class="sidebar-avatar" id="sideAvatar"></div>
+    <button class="nav-btn" data-view="home"><span data-icon="home"></span><span class="tip">Início</span></button>
+    <button class="nav-btn" data-view="garden"><span data-icon="sprout"></span><span class="tip">Jardim</span></button>
+    <button class="nav-btn" data-view="stats"><span data-icon="chart"></span><span class="tip">Estatísticas</span></button>
+    <button class="nav-btn" data-view="achievements"><span data-icon="medal"></span><span class="tip">Conquistas</span></button>
+    <div class="sidebar-spacer"></div>
+    <button class="nav-btn logout" id="btnLogout"><span data-icon="logout"></span><span class="tip">Sair</span></button>
+  </nav>
+
+  <div class="main">
+    <header class="topbar">
+      <div class="brand" data-view-link="home"><img src="img/logo.svg" alt=""><span><span class="talk">Talk</span><span class="garden">Garden</span></span></div>
+      <div class="topbar-right">
+        <div class="pill coins" id="coinPill" title="Suas moedas"><span data-icon="coin"></span><span id="coinCount">0</span></div>
+        <button class="profile-chip" data-view-link="profile" title="Perfil">
+          <span class="av" id="topAvatar"></span><span class="name" id="topName"></span>
+        </button>
+        <button class="gear-btn" data-view-link="profile" title="Configurações" data-icon="gear"></button>
+      </div>
+    </header>
+
+    <!-- ========== INÍCIO ========== -->
+    <section class="view" id="view-home">
+      <!-- o fundo com a abelha é a imagem img/fundo-inicio.svg, definida no CSS -->
+      <div class="scene">
+        <div class="greeting">
+          <h1>Olá, pequeno jardineiro!</h1>
+          <p>Vamos cuidar do seu jardim e aprender brincando hoje?</p>
+          <p class="goal-msg" id="homeMsg">Escolha uma atividade para começarmos!</p>
+        </div>
+        <div class="cards-row">
+          <div class="card garden-card" data-view-link="garden">
+            <h3><span data-icon="sprout"></span> Seu jardim</h3>
+            <p id="homeGardenMsg">Continue assim! Suas flores estão crescendo!</p>
+            <div class="plant-row" id="homePlants"></div>
+            <div class="progress-track" id="homeProgress"></div>
+            <div class="goal-label" id="homeGoal"></div>
+          </div>
+          <div class="card game-card vocab">
+            <div class="game-thumb">
+              <div class="icon-box" data-pic="maca"></div>
+              <div class="thumb-lines"><span></span><span></span></div>
+            </div>
+            <h3>Jogo de Vocabulário</h3>
+            <p>Associe imagens às palavras e faça seu jardim crescer!</p>
+            <button class="btn btn-green play-btn" data-view-link="vocab">Jogar <span class="circ" data-icon="next"></span></button>
+          </div>
+          <div class="card game-card phrase">
+            <div class="game-thumb">
+              <div class="icon-box"><svg viewBox="0 0 24 24" fill="none" stroke="#E23D6B" stroke-width="2"><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="9" opacity=".35"/></svg></div>
+              <div class="thumb-lines"><span></span><span></span></div>
+            </div>
+            <h3>Formando Frases</h3>
+            <p>Organize as palavras e crie frases lindas para o jardim florescer!</p>
+            <button class="btn btn-pink play-btn" data-view-link="phrase">Jogar <span class="circ" data-icon="next"></span></button>
+          </div>
+          <div class="card game-card cmd">
+            <div class="game-thumb">
+              <div class="icon-box" data-icon="ear"></div>
+              <div class="thumb-lines"><span></span><span></span></div>
+            </div>
+            <h3>Siga a Abelha</h3>
+            <p>Escute o que a abelha pede e toque na figura certa!</p>
+            <button class="btn btn-blue play-btn" data-view-link="commands">Jogar <span class="circ" data-icon="next"></span></button>
+          </div>
+          <div class="card game-card story">
+            <div class="game-thumb">
+              <div class="icon-box" data-icon="story"></div>
+              <div class="thumb-lines"><span></span><span></span></div>
+            </div>
+            <h3>Conte a História</h3>
+            <p>Coloque as cenas na ordem certa e descubra a história!</p>
+            <button class="btn btn-gold play-btn" data-view-link="story">Jogar <span class="circ" data-icon="next"></span></button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== JOGO DE VOCABULÁRIO (UC003) ========== -->
+    <section class="view" id="view-vocab">
+      <div class="subpage">
+        <div class="subpage-head">
+          <button class="back-btn" data-view-link="home" aria-label="Voltar" data-icon="back"></button>
+          <div>
+            <h2>Jogo de Vocabulário</h2>
+            <p>Toque na imagem que combina com a palavra</p>
+          </div>
+        </div>
+        <div class="board">
+          <div class="round-dots" id="vocabDots"></div>
+          <div class="vocab-prompt">
+            <span class="word-chip" id="vocabWord">MAÇÃ</span>
+            <button class="speak-btn" id="vocabSpeak" aria-label="Ouvir a palavra" data-icon="speaker"></button>
+          </div>
+          <div class="match-grid" id="matchGrid"></div>
+          <div class="feedback-bar" id="vocabFeedback">Escolha uma opção para continuar</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== FORMANDO FRASES (UC004) ========== -->
+    <section class="view" id="view-phrase">
+      <div class="subpage">
+        <div class="subpage-head">
+          <button class="back-btn" data-view-link="home" aria-label="Voltar" data-icon="back"></button>
+          <div>
+            <h2>Formando Frases</h2>
+            <p>Toque nas palavras na ordem certa para montar a frase</p>
+          </div>
+        </div>
+        <div class="board">
+          <div class="phrase-target" id="phraseTarget"></div>
+          <div class="drop-zone empty" id="dropZone"></div>
+          <div class="word-pool" id="wordPool"></div>
+          <div class="phrase-actions">
+            <button class="btn btn-pink" id="btnCheckPhrase" disabled>Confirmar</button>
+            <button class="btn btn-outline" id="btnClearPhrase">Recomeçar</button>
+            <button class="speak-btn" id="phraseSpeak" aria-label="Ouvir a frase" data-icon="speaker" style="align-self:center"></button>
+          </div>
+          <div class="feedback-bar" id="phraseFeedback"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== SIGA A ABELHA (UC011) ========== -->
+    <section class="view" id="view-commands">
+      <div class="subpage">
+        <div class="subpage-head">
+          <button class="back-btn" data-view-link="home" aria-label="Voltar" data-icon="back"></button>
+          <div>
+            <h2>Siga a Abelha</h2>
+            <p>Escute o comando e toque na figura certa</p>
+          </div>
+        </div>
+        <div class="board">
+          <div class="round-dots" id="cmdDots"></div>
+          <div class="command-box">
+            <div class="cmd-bee" data-bee></div>
+            <div class="cmd-speech"><span id="cmdText"></span></div>
+            <button class="speak-btn" id="cmdSpeak" aria-label="Ouvir de novo" data-icon="speaker"></button>
+          </div>
+          <div class="match-grid four" id="cmdGrid"></div>
+          <div class="feedback-bar" id="cmdFeedback"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== CONTE A HISTÓRIA (UC012) ========== -->
+    <section class="view" id="view-story">
+      <div class="subpage">
+        <div class="subpage-head">
+          <button class="back-btn" data-view-link="home" aria-label="Voltar" data-icon="back"></button>
+          <div>
+            <h2>Conte a História</h2>
+            <p>Ouça a história e coloque as cenas na ordem certa</p>
+          </div>
+        </div>
+        <div class="board">
+          <div class="story-text">
+            <button class="speak-btn" id="storySpeak" aria-label="Ouvir a história" data-icon="speaker"></button>
+            <div><strong id="storyTitle"></strong><p id="storySentences"></p></div>
+          </div>
+          <div id="storyStep1">
+            <div class="story-slots" id="storySlots"></div>
+            <div class="story-pool" id="storyPool"></div>
+            <div class="phrase-actions">
+              <button class="btn btn-gold" id="btnCheckStory" disabled>Confirmar</button>
+              <button class="btn btn-outline" id="btnClearStory">Recomeçar</button>
+            </div>
+          </div>
+          <div id="storyStep2" class="hidden">
+            <h3 class="story-q">Sobre o que é a história?</h3>
+            <div class="story-options" id="storyOptions"></div>
+          </div>
+          <div class="feedback-bar" id="storyFeedback"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== CONHECENDO A CRIANÇA (UC013) ========== -->
+    <section class="view" id="view-screening">
+      <div class="subpage">
+        <div class="subpage-head">
+          <div>
+            <h2>Conhecendo a criança</h2>
+            <p>Responda para que a plataforma possa orientar você</p>
+          </div>
+        </div>
+        <div class="panel screening">
+          <div class="notice-box"><span data-icon="alert"></span><p><strong>Este questionário não faz diagnóstico.</strong> Somente um fonoaudiólogo pode avaliar e diagnosticar o Transtorno do Desenvolvimento da Linguagem (TDL). As respostas servem apenas para a plataforma orientar você.</p></div>
+          <form id="formScreening" novalidate>
+            <h3>1. A criança tem diagnóstico de TDL feito por um fonoaudiólogo?</h3>
+            <div class="radio-group" id="scrDiag"></div>
+            <div class="field-error" id="scrDiagErr">Escolha uma opção</div>
+            <h3>2. Quais destes sinais você percebe na criança no dia a dia?</h3>
+            <p class="hint">Marque todos os que se aplicam. Se nenhum se aplicar, deixe em branco.</p>
+            <div class="check-group" id="scrSinais"></div>
+            <h3>3. Qual a idade da criança?</h3>
+            <div class="field age-field">
+              <input class="input" id="scrIdade" type="number" min="3" max="14" placeholder="Ex.: 7">
+              <div class="field-error">Informe uma idade entre 3 e 14 anos</div>
+            </div>
+            <p class="hint">O TalkGarden foi pensado para crianças de 6 a 9 anos.</p>
+            <button class="btn btn-purple" type="submit">Salvar respostas</button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== JARDIM (UC007) ========== -->
+    <section class="view" id="view-garden">
+      <div class="subpage">
+        <div class="subpage-head">
+          <div>
+            <h2>Seu jardim</h2>
+            <p>Cada atividade concluída faz uma nova flor nascer</p>
+          </div>
+        </div>
+        <div class="garden-full">
+          <div class="garden-stats">
+            <div class="stat-chip"><div class="num" id="gFlowers">0</div><div class="lbl">Flores plantadas</div></div>
+            <div class="stat-chip"><div class="num" id="gStreak">0</div><div class="lbl">Dias seguidos</div></div>
+            <div class="stat-chip"><div class="num" id="gPercent">0%</div><div class="lbl">Jardim completo</div></div>
+          </div>
+          <div class="garden-meter"><span id="gMeter" style="width:0"></span></div>
+          <div class="garden-plants" id="gardenPlants"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== ESTATÍSTICAS (UC008) ========== -->
+    <section class="view" id="view-stats">
+      <div class="subpage">
+        <div class="subpage-head">
+          <div>
+            <h2>Estatísticas</h2>
+            <p>Seu progresso nos últimos dias</p>
+          </div>
+        </div>
+        <div class="notice hidden" id="statsEmpty">Ainda não há atividades registradas. Jogue uma atividade para ver o progresso aqui!</div>
+        <div id="statsAlert"></div>
+        <div class="stats-grid">
+          <div class="kpi"><div class="num" id="sVocab">0%</div><div class="lbl">Acertos no vocabulário</div></div>
+          <div class="kpi"><div class="num" id="sCmd">0%</div><div class="lbl">Acertos nos comandos</div></div>
+          <div class="kpi"><div class="num" id="sPhrases">0</div><div class="lbl">Frases montadas</div></div>
+          <div class="kpi"><div class="num" id="sStories">0</div><div class="lbl">Histórias organizadas</div></div>
+          <div class="kpi"><div class="num" id="sDays">0</div><div class="lbl">Dias de prática</div></div>
+        </div>
+        <div class="bars">
+          <h3>Atividades nesta semana</h3>
+          <div id="statsBars"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== CONQUISTAS (UC009) ========== -->
+    <section class="view" id="view-achievements">
+      <div class="subpage">
+        <div class="subpage-head">
+          <div>
+            <h2>Conquistas</h2>
+            <p>Continue jogando para desbloquear novas medalhas</p>
+          </div>
+        </div>
+        <div class="badges" id="badgeGrid"></div>
+      </div>
+    </section>
+
+    <!-- ========== PERFIL E CONFIGURAÇÕES (UC010) ========== -->
+    <section class="view" id="view-profile">
+      <div class="subpage">
+        <div class="subpage-head">
+          <button class="back-btn" data-view-link="home" aria-label="Voltar" data-icon="back"></button>
+          <div>
+            <h2>Perfil e configurações</h2>
+            <p>Dados da conta do responsável e da criança</p>
+          </div>
+        </div>
+        <div class="profile-grid">
+          <div class="panel">
+            <h3>Avatar da criança</h3>
+            <p class="hint">Escolha o personagem que vai aparecer no topo da tela</p>
+            <div class="avatar-pick" id="avatarPick"></div>
+            <h3>Dados do perfil</h3>
+            <p class="hint">Campos com * são obrigatórios</p>
+            <form id="formProfile" novalidate>
+              <div class="grid-2">
+                <div class="field">
+                  <label for="pName">Nome do responsável *</label>
+                  <input class="input" id="pName">
+                  <div class="field-error">Este campo é obrigatório</div>
+                </div>
+                <div class="field">
+                  <label for="pChild">Nome da criança *</label>
+                  <input class="input" id="pChild">
+                  <div class="field-error">Este campo é obrigatório</div>
+                </div>
+                <div class="field">
+                  <label for="pEmail">E-mail *</label>
+                  <input class="input" id="pEmail" type="email">
+                  <div class="field-error">Informe um e-mail válido</div>
+                </div>
+                <div class="field">
+                  <label for="pAge">Idade da criança</label>
+                  <input class="input" id="pAge" type="number" min="2" max="14">
+                  <div class="field-error">Informe uma idade entre 2 e 14 anos</div>
+                </div>
+              </div>
+              <div class="form-actions">
+                <button class="btn btn-purple" type="submit">Salvar</button>
+                <button class="btn btn-outline" type="button" id="btnCancelProfile">Cancelar</button>
+              </div>
+            </form>
+          </div>
+          <div class="panel">
+            <h3>Configurações</h3>
+            <p class="hint">Ajuste a plataforma para a criança</p>
+            <div class="setting">
+              <div><strong>Sons dos jogos</strong><span>Sons de acerto e erro nas atividades</span></div>
+              <label class="switch"><input type="checkbox" data-setting="sound"><span class="slider"></span></label>
+            </div>
+            <div class="setting">
+              <div><strong>Música de fundo</strong><span>Melodia calma enquanto a criança joga</span></div>
+              <label class="switch"><input type="checkbox" data-setting="music"><span class="slider"></span></label>
+            </div>
+            <div class="setting">
+              <div><strong>Leitura em voz alta</strong><span>A abelha lê as palavras e instruções</span></div>
+              <label class="switch"><input type="checkbox" data-setting="voice"><span class="slider"></span></label>
+            </div>
+            <div class="setting">
+              <div><strong>Letras grandes</strong><span>Aumenta o tamanho dos textos</span></div>
+              <label class="switch"><input type="checkbox" data-setting="bigText"><span class="slider"></span></label>
+            </div>
+            <div class="setting">
+              <div><strong>Conhecendo a criança</strong><span id="scrSummary">Questionário sobre sinais de dificuldade de linguagem</span></div>
+              <button class="link" data-view-link="screening">Atualizar</button>
+            </div>
+            <div class="setting">
+              <div><strong>Alterar senha</strong><span>Receba um link no e-mail cadastrado</span></div>
+              <button class="link" id="btnSendReset">Enviar link</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+
+<div id="modalRoot"></div>
+<div class="toast" id="toast"></div>
+<div class="offline-banner hidden" id="offlineBanner">Você está sem internet. Seu progresso será salvo assim que a conexão voltar.</div>
+
+<script src="js/data.js"></script>
+<script src="js/games-data.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

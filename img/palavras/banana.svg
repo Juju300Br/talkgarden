@@ -1,8 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-  <!-- BANANA -->
-  <!-- Banana amarela (formato curvado) -->
-  <path d="M22 22 C20 62 50 86 86 72 L86 62 C56 70 34 52 34 20 Z" fill="#F5D04A"/>
-  <!-- Pontinhas marrons -->
-  <rect x="22" y="13" width="12" height="9" rx="3" fill="#8B5A3C"/>
-  <circle cx="87" cy="67" r="4" fill="#8B5A3C"/>
-</svg>
