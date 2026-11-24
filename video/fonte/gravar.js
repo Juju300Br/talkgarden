@@ -10,7 +10,7 @@ const roteiro = require('./roteiro.js');
 const DUR = require('./duracoes.json');
 
 const SAIDA = path.resolve(process.argv[2] || path.join(__dirname, '..', 'TalkGarden-demonstracao.mp4'));
-const APP = 'file:///' + path.resolve(__dirname, '..', '..', 'index.html').replace(/\\/g, '/');
+const APP = process.env.TG_URL || 'http://localhost/talkgarden/';
 const EDGE = 'C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe';
 const W = 1600, H = 900, ESCALA = 1.2; // quadros de 1920x1080
 const QUADROS = path.join(__dirname, 'quadros');

@@ -1,94 +1,26 @@
-const DB_KEY = 'talkgarden_db';
-const SESSION_KEY = 'talkgarden_session';
 const DAILY_GOAL = 4;
-const DEMO_EMAIL = 'demo@talkgarden.com';
-const DEMO_PASS = '123456';
 
 const $ = (sel, root = document) => root.querySelector(sel);
 const $$ = (sel, root = document) => [...root.querySelectorAll(sel)];
 
-let db = { users: {} };
 let user = null;
 let resetEmail = null;
 
-function loadDB(){
-  try { db = JSON.parse(localStorage.getItem(DB_KEY)) || { users: {} }; }
-  catch { db = { users: {} }; }
-  if(!db.users) db.users = {};
-}
-function saveDB(){
-  try { localStorage.setItem(DB_KEY, JSON.stringify(db)); }
-  catch { toast('Não foi possível salvar o progresso.', 'err'); }
-}
-function saveUser(){ if(user){ db.users[user.email] = user; saveDB(); } }
-
-function getSession(){
-  return localStorage.getItem(SESSION_KEY) || sessionStorage.getItem(SESSION_KEY);
-}
-function setSession(email, remember){
-  clearSession();
-  (remember ? localStorage : sessionStorage).setItem(SESSION_KEY, email);
-}
-function clearSession(){
-  localStorage.removeItem(SESSION_KEY);
-  sessionStorage.removeItem(SESSION_KEY);
-}
-
-async function hashPass(pass){
-  const text = 'talkgarden:' + pass;
-  if(window.crypto && crypto.subtle){
-    const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(text));
-    return [...new Uint8Array(buf)].map(b => b.toString(16).padStart(2,'0')).join('');
+async function api(rota, dados = {}){
+  try {
+    const resp = await fetch('api/' + rota + '.php', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(dados),
+    });
+    return await resp.json();
+  } catch {
+    return { ok: false, erro: 'servidor' };
   }
-  let h = 0; for(const c of text){ h = (h * 31 + c.charCodeAt(0)) | 0; }
-  return 'x' + h;
 }
-
-function newUser({name, email, childName, passHash}){
-  return {
-    name, email, childName, passHash,
-    childAge: '', avatar: 'pessoa',
-    coins: 0, flowers: [], activities: 0, phrases: 0,
-    vocab: { hits: 0, total: 0 },
-    comandos: { hits: 0, total: 0 },
-    historias: 0,
-    perfil: null,
-    log: {},
-    badges: [], lastBadge: null,
-    settings: { sound: true, music: false, voice: true, bigText: false },
-    createdAt: Date.now(),
-  };
-}
-
-function demoExtras(u){
-  u.childAge = 7;
-  u.comandos = { hits: 14, total: 20 };
-  u.historias = 6;
-  u.perfil = { diagnostico: 'avaliacao', sinais: [0, 1, 3], idade: 7, data: Date.now() };
-}
-
-function migrate(u){
-  if(!u.comandos) u.comandos = { hits: 0, total: 0 };
-  if(u.historias == null) u.historias = 0;
-  if(u.perfil === undefined) u.perfil = null;
-  if(u.email === DEMO_EMAIL && !u.perfil) demoExtras(u);
-  return u;
-}
-async function seedDemo(){
-  if(db.users[DEMO_EMAIL]){ migrate(db.users[DEMO_EMAIL]); saveDB(); return; }
-  const u = newUser({ name:'Ana Souza', email:DEMO_EMAIL, childName:'Ju', passHash: await hashPass(DEMO_PASS) });
-  demoExtras(u);
-  const plan = { 12:1, 10:2, 9:1, 3:2, 2:2, 1:1, 0:3 };
-  for(const [ago, n] of Object.entries(plan)){
-    const d = new Date(); d.setDate(d.getDate() - Number(ago));
-    u.log[dateKey(d)] = n;
-  }
-  u.activities = 12;
-  u.flowers = Array.from({length:12}, (_, i) => FLOWER_CYCLE[i % FLOWER_CYCLE.length]);
-  u.coins = 120; u.phrases = 24; u.vocab = { hits: 31, total: 36 };
-  u.badges = ['primeiro','florido'];
-  db.users[DEMO_EMAIL] = u;
-  saveDB();
+function avisarFalha(r){
+  if(!r.ok) toast('Não foi possível falar com o servidor. Verifique se o XAMPP está ligado.', 'err');
+  return r.ok;
 }
 
 function dateKey(d = new Date()){
@@ -237,17 +169,18 @@ async function handleLogin(e){
   if(offlineGuard(err)) return;
   const email = $('#loginEmail').value.trim().toLowerCase();
   const pass = $('#loginPass').value;
-  const u = db.users[email];
-  if(!u || u.passHash !== await hashPass(pass)){
-    err.textContent = 'E-mail ou senha incorretos. Confira os dados e tente novamente.';
+  const r = await api('entrar', { email, senha: pass, lembrar: $('#loginRemember').checked });
+  if(!r.ok){
+    err.textContent = r.erro === 'servidor'
+      ? 'Não foi possível falar com o servidor. Verifique se o XAMPP está ligado.'
+      : 'E-mail ou senha incorretos. Confira os dados e tente novamente.';
     err.classList.remove('hidden');
     $('#loginEmail').classList.add('invalid');
     $('#loginPass').classList.add('invalid');
     return;
   }
-  setSession(email, $('#loginRemember').checked);
   $('#loginPass').value = '';
-  enterApp(u);
+  enterApp(r.user);
 }
 
 async function handleRegister(e){
@@ -260,24 +193,26 @@ async function handleRegister(e){
   if(!child.value.trim()){ setFieldError(child, 'Informe o nome da criança'); ok = false; }
   const em = email.value.trim().toLowerCase();
   if(!isEmail(em)){ setFieldError(email, 'Informe um e-mail válido'); ok = false; }
-  else if(db.users[em]){ setFieldError(email, 'Este e-mail já está cadastrado. Informe outro.'); ok = false; }
   if(p1.value.length < 6){ setFieldError(p1, 'A senha deve ter pelo menos 6 caracteres'); ok = false; }
   if(p1.value !== p2.value || !p2.value){ setFieldError(p2, 'As senhas não são iguais'); ok = false; }
   if(!ok) return;
-  db.users[em] = newUser({ name: name.value.trim(), email: em, childName: child.value.trim(), passHash: await hashPass(p1.value) });
-  saveDB();
+  const r = await api('cadastrar', { nome: name.value.trim(), crianca: child.value.trim(), email: em, senha: p1.value });
+  if(r.erro === 'email'){ setFieldError(email, 'Este e-mail já está cadastrado. Informe outro.'); return; }
+  if(!avisarFalha(r)) return;
   showAuth('login', { success: 'Conta criada com sucesso! Faça login para começar.', email: em });
   $('#loginPass').focus();
 }
 
-function handleForgot(e){
+async function handleForgot(e){
   e.preventDefault();
   const form = e.target; clearErrors(form);
   if(offlineGuard()) return;
   const input = $('#forgotEmail');
   const em = input.value.trim().toLowerCase();
   if(!isEmail(em)){ setFieldError(input, 'Informe um e-mail válido'); return; }
-  if(!db.users[em]){ setFieldError(input, 'Não encontramos uma conta com este e-mail'); return; }
+  const r = await api('esqueci', { email: em });
+  if(r.erro === 'servidor'){ avisarFalha(r); return; }
+  if(!r.ok){ setFieldError(input, 'Não encontramos uma conta com este e-mail'); return; }
   resetEmail = em;
   $('#sentEmail').textContent = em;
   showAuth('sent');
@@ -289,15 +224,15 @@ async function handleReset(e){
   let ok = true;
   if(p1.value.length < 6){ setFieldError(p1); ok = false; }
   if(p1.value !== p2.value || !p2.value){ setFieldError(p2); ok = false; }
-  if(!ok || !resetEmail || !db.users[resetEmail]) return;
-  db.users[resetEmail].passHash = await hashPass(p1.value);
-  saveDB();
+  if(!ok || !resetEmail) return;
+  const r = await api('redefinir', { email: resetEmail, senha: p1.value });
+  if(!avisarFalha(r)) return;
   const em = resetEmail; resetEmail = null;
   showAuth('login', { success: 'Senha alterada com sucesso! Entre com a nova senha.', email: em });
 }
 
 function enterApp(u){
-  user = migrate(u);
+  user = u;
   $('#auth').classList.add('hidden');
   $('#app').classList.remove('hidden');
   applySettings();
@@ -420,7 +355,7 @@ function finishVocab(){
   user.vocab.total += vocab.queue.length;
   $('#vocabDots').innerHTML = vocab.queue.map(() => '<span class="done"></span>').join('');
   const coins = Math.max(4, vocab.firstTry * 3 + 1);
-  grantReward('vocab', coins);
+  grantReward('vocab', coins, vocab.firstTry, vocab.queue.length);
 }
 
 const phrase = { item: null, order: [], placed: [], errors: 0, lastIdx: -1, locked: false };
@@ -464,7 +399,7 @@ function checkPhrase(){
     $('#btnCheckPhrase').disabled = true;
     user.phrases++;
     const coins = Math.max(4, 10 - phrase.errors * 3);
-    setTimeout(() => grantReward('phrase', coins), 1100);
+    setTimeout(() => grantReward('phrase', coins, phrase.errors === 0 ? 1 : 0, 1), 1100);
   } else {
     phrase.errors++;
     zone.classList.add('bad');
@@ -476,7 +411,7 @@ function checkPhrase(){
   }
 }
 
-function grantReward(game, coins){
+function grantReward(game, coins, acertos, total){
   const flower = FLOWER_CYCLE[user.flowers.length % FLOWER_CYCLE.length];
   user.coins += coins;
   user.flowers.push(flower);
@@ -487,9 +422,8 @@ function grantReward(game, coins){
 
   const unlocked = BADGES.filter(b => !user.badges.includes(b.id) && b.test(user));
   unlocked.forEach(b => { user.badges.push(b.id); user.lastBadge = b.id; });
-  saveUser();
+  api('atividade', { jogo: game, acertos, total, moedas: coins, flor: flower, conquistas: unlocked.map(b => b.id) }).then(avisarFalha);
   renderHeader(true);
-  if(!navigator.onLine) toast('Sem internet: a recompensa foi guardada e será sincronizada quando a conexão voltar.', 'err');
 
   sfx.win();
   const text = {
@@ -632,7 +566,7 @@ function finishCommands(){
   user.comandos.hits += cmd.firstTry;
   user.comandos.total += cmd.queue.length;
   $('#cmdDots').innerHTML = cmd.queue.map(() => '<span class="done"></span>').join('');
-  grantReward('commands', Math.max(4, cmd.firstTry * 2 + 2));
+  grantReward('commands', Math.max(4, cmd.firstTry * 2 + 2), cmd.firstTry, cmd.queue.length);
 }
 
 const story = { h: null, order: [], slots: [], errors: 0, lastIdx: -1, locked: false, opts: [] };
@@ -696,7 +630,7 @@ function onStoryOption(btn){
     fb.className = 'feedback-bar ok'; fb.textContent = 'Muito bem! Você entendeu a história.';
     sfx.ok();
     user.historias++;
-    setTimeout(() => grantReward('story', Math.max(4, 10 - story.errors * 3)), 1000);
+    setTimeout(() => grantReward('story', Math.max(4, 10 - story.errors * 3), story.errors === 0 ? 1 : 0, 1), 1000);
   } else {
     story.errors++;
     btn.classList.add('wrong');
@@ -751,7 +685,7 @@ function saveScreening(e){
     idade, data: Date.now(),
   };
   user.childAge = idade;
-  saveUser();
+  api('questionario', user.perfil).then(avisarFalha);
   const o = orientacao(user.perfil);
   openModal(`
     <div data-bee></div>
@@ -793,7 +727,7 @@ function renderGarden(){
   box.innerHTML = user.flowers.map(f => FLOWERS[f](120)).join('');
   if(user.newFlower){
     box.lastElementChild?.classList.add('new');
-    user.newFlower = false; saveUser();
+    user.newFlower = false;
   }
 }
 
@@ -857,7 +791,7 @@ function renderAvatarPick(){
   $('#avatarPick').innerHTML = Object.keys(AVATARS).map(k =>
     `<button type="button" class="avatar-opt ${k === pendingAvatar ? 'selected' : ''}" data-avatar="${k}" aria-label="Avatar ${k}">${AVATARS[k]}</button>`).join('');
 }
-function saveProfile(e){
+async function saveProfile(e){
   e.preventDefault();
   const form = e.target; clearErrors(form);
   const name = $('#pName'), child = $('#pChild'), email = $('#pEmail'), age = $('#pAge');
@@ -866,23 +800,19 @@ function saveProfile(e){
   if(!child.value.trim()){ setFieldError(child, 'Este campo é obrigatório'); ok = false; }
   const em = email.value.trim().toLowerCase();
   if(!isEmail(em)){ setFieldError(email, 'Informe um e-mail válido'); ok = false; }
-  else if(em !== user.email && db.users[em]){ setFieldError(email, 'Este e-mail já está cadastrado'); ok = false; }
   const a = age.value.trim();
   if(a && (isNaN(a) || a < 2 || a > 14)){ setFieldError(age); ok = false; }
   if(!ok){ toast('Confira os campos destacados.', 'err'); $('.invalid', form)?.focus(); return; }
   if(offlineGuard()) return;
 
-  if(em !== user.email){
-    delete db.users[user.email];
-    const remember = !!localStorage.getItem(SESSION_KEY);
-    user.email = em;
-    setSession(em, remember);
-  }
+  const r = await api('perfil', { nome: name.value.trim(), crianca: child.value.trim(), email: em, idade: a, avatar: pendingAvatar });
+  if(r.erro === 'email'){ setFieldError(email, 'Este e-mail já está cadastrado'); return; }
+  if(!avisarFalha(r)) return;
+  user.email = em;
   user.name = name.value.trim();
   user.childName = child.value.trim();
   user.childAge = a ? Number(a) : '';
   user.avatar = pendingAvatar;
-  saveUser();
   renderHeader();
   toast('Alterações salvas com sucesso!', 'ok');
 }
@@ -899,7 +829,7 @@ function askLogout(){
   $('#mStay').onclick = closeModal;
   $('#mLeave').onclick = () => {
     closeModal();
-    clearSession();
+    api('sair');
     window.speechSynthesis?.cancel();
     document.body.classList.remove('big-text');
     user = null;
@@ -991,7 +921,7 @@ function bindEvents(){
 
   $$('[data-setting]').forEach(cb => cb.addEventListener('change', () => {
     user.settings[cb.dataset.setting] = cb.checked;
-    saveUser(); applySettings();
+    api('configuracoes', user.settings).then(avisarFalha); applySettings();
     if(cb.dataset.setting === 'sound' && cb.checked) sfx.ok();
     if(cb.dataset.setting === 'voice' && cb.checked) speak('Leitura em voz alta ligada!');
   }));
@@ -999,8 +929,7 @@ function bindEvents(){
   window.addEventListener('offline', () => $('#offlineBanner').classList.remove('hidden'));
   window.addEventListener('online', () => {
     $('#offlineBanner').classList.add('hidden');
-    saveDB();
-    toast('Conexão restabelecida! Seu progresso foi salvo.', 'ok');
+    toast('Conexão restabelecida!', 'ok');
   });
 
   document.addEventListener('keydown', e => { if(e.key === 'Escape' && $('#mStay')) closeModal(); });
@@ -1010,11 +939,9 @@ async function init(){
   renderStatic();
   $$('.eye-btn').forEach(b => b.innerHTML = ICONS.eye);
   bindEvents();
-  loadDB();
-  await seedDemo();
   if(!navigator.onLine) $('#offlineBanner').classList.remove('hidden');
-  const email = getSession();
-  if(email && db.users[email]) enterApp(db.users[email]);
+  const r = await api('sessao');
+  if(r.ok) enterApp(r.user);
   else showAuth('login');
 }
 init();

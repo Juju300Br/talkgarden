@@ -6,20 +6,30 @@ Projeto do Curso Técnico de Nível Médio em Informática do IFAM – Campus Ma
 Autoras: Julliana Emelin de Sousa Andrade e Nicoli Silva de Lima.
 Orientadora: Profa. Dra. Josiane Rodrigues Sandes.
 
-## Como abrir
+## Como rodar no XAMPP
 
-Basta abrir o arquivo `index.html` no navegador. Não precisa instalar nada.
+1. Instale o XAMPP (https://www.apachefriends.org) e abra o **XAMPP Control Panel**.
+2. Clique em **Start** no **Apache** e no **MySQL**.
+3. Copie a pasta `TalkGarden` inteira para `C:\xampp\htdocs\` e renomeie para `talkgarden`.
+4. Abra http://localhost/phpmyadmin, clique em **Importar**, escolha o arquivo `banco/talkgarden.sql` e clique em **Importar** no fim da página. Isso cria o banco `talkgarden` com todas as tabelas.
+5. Abra http://localhost/talkgarden no navegador.
 
 Conta de demonstração: `demo@talkgarden.com` / senha `123456`.
+
+Não abra o `index.html` com dois cliques: sem o Apache e o MySQL ligados, o sistema não consegue salvar nem ler os dados.
 
 ## Estrutura
 
 - `index.html`: todas as telas do sistema
 - `css/style.css`: visual
 - `js/data.js` e `js/games-data.js`: palavras, frases, histórias, medalhas e outros dados dos jogos
-- `js/app.js`: funcionamento do sistema
+- `js/app.js`: funcionamento das telas e dos jogos; a função `api()` envia e recebe os dados do PHP
+- `api/`: arquivos PHP que gravam e leem os dados no MySQL (`conexao.php` faz a conexão com o banco)
+- `banco/talkgarden.sql`: script que cria o banco de dados, as tabelas e a conta de demonstração
 - `img/`: logo e fundos
 - `docs/`: TCC, projeto integrador, manuais, diagramas e prints das telas
 - `video/`: vídeo de demonstração e roteiro de dublagem
 
-Os dados ficam salvos no próprio navegador (localStorage), simulando o banco de dados MySQL modelado em `docs/`.
+## Banco de dados
+
+O banco `talkgarden` tem oito tabelas: `responsavel`, `configuracao`, `crianca`, `perfil_linguagem`, `atividade`, `flor`, `conquista` e `crianca_conquista`. A senha é guardada com `password_hash` do PHP. Para ver o diagrama no MySQL Workbench, abra o Workbench, vá em **Database > Reverse Engineer**, conecte em `localhost` com o usuário `root` (sem senha) e escolha o banco `talkgarden`.
