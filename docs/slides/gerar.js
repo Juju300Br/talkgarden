@@ -17,9 +17,14 @@ const flores = '<div class="flores">' + ['rosa', 'tulipa', 'azul', 'amarela', 'l
   .map((f, i) => (i > 2 && i < 9) ? '' : FLOWERS[f](130)).join('') + '</div>';
 
 const canto = (lado, itens) => '<div class="canto ' + lado + '">' + itens.map(([f, h]) => FLOWERS[f](h)).join('') + '</div>';
+const { abelha } = require('../../video/comercial/personagens.js');
+const ab = '<div class="ab">' + abelha({ asa: 1 }) + '</div>';
+// ramo com folhas saindo do canto (espelhado no lado direito)
+const ramo = (h, esp) => `<svg viewBox="-8 -14 222 276" height="${h}" style="transform:scaleX(${esp ? -1 : 1})"><path d="M10 260C30 190 60 140 120 90S190 20 196 8" stroke="#5D9E3B" stroke-width="5" fill="none" stroke-linecap="round"/>${[[42,190,-40],[70,150,30],[98,116,-35],[132,84,25],[160,52,-30],[184,24,20]].map(([x,y,r],i)=>`<ellipse cx="${x}" cy="${y}" rx="22" ry="10" fill="${i%2?'#79B84A':'#93C96A'}" transform="rotate(${r} ${x} ${y}) translate(${i%2?14:-14} 0)"/>`).join('')}<circle cx="196" cy="8" r="8" fill="#F7A6C2"/></svg>`;
 const enfeite = [
   canto('e', [['tulipa', 118], ['broto', 74], ['rosa', 132]]) + canto('d', [['amarela', 124], ['muda', 88], ['lilas', 108]]),
-  canto('e', [['azul', 126], ['muda', 84], ['amarela', 106]]) + canto('d', [['rosa', 112], ['broto', 70], ['tulipa', 128]]),
+  '<div class="canto e">' + FLOWERS.azul(126) + ab + FLOWERS.amarela(108) + FLOWERS.broto(70) + '</div>' + '<div class="canto d">' + FLOWERS.muda(86) + FLOWERS.rosa(120) + '</div>',
+  '<div class="canto e">' + ramo(300, false) + FLOWERS.broto(80) + '</div><div class="canto d">' + FLOWERS.tulipa(110) + ramo(270, true) + '</div>',
 ];
 let html = fs.readFileSync(path.join(__dirname, 'slides.html'), 'utf8')
   .replace('{{enfeite}}', JSON.stringify(enfeite))

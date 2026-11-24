@@ -17,6 +17,9 @@ html,body{height:100%;background:#2E2A3F;overflow:hidden;font-family:'Segoe UI',
 .canto{position:absolute;bottom:0;display:flex;align-items:flex-end;gap:2px;pointer-events:none;z-index:2}
 .canto.e{left:34px}.canto.d{right:34px}
 .canto svg{width:auto}
+.canto{opacity:.78}
+.canto .ab{position:relative;width:78px;height:88px;margin:0 -40px 150px -10px;transform:rotate(-8deg)}
+.canto .ab svg{width:78px;height:88px}
 h2{font-size:76px;font-weight:700;color:var(--roxo-esc);line-height:1.1;letter-spacing:-1px}
 .sub{font-size:34px;color:var(--suave);margin-top:14px}
 p,li{font-size:36px;line-height:1.45}
@@ -31,12 +34,18 @@ p,li{font-size:36px;line-height:1.45}
 .capa .desc{font-size:42px;color:var(--tinta);margin-top:22px;max-width:1250px;line-height:1.3}
 .capa .quem{margin-top:auto;background:rgba(255,255,255,.88);border-radius:28px;padding:26px 46px;font-size:29px;line-height:1.6;color:var(--tinta)}
 .capa .quem span{color:var(--suave)}
-.topo{display:flex;align-items:center;gap:26px;background:rgba(255,255,255,.9);border-radius:24px;padding:14px 30px;margin-bottom:26px}
-.topo img{height:74px}
-.topo span{font-size:34px;font-weight:700;color:var(--roxo-esc);border-left:3px solid #DCD6F5;padding-left:26px}
-.primeira{padding-top:44px}
-.primeira .logo{width:150px;height:150px}
-.primeira h1{font-size:130px}
+.primeira{padding:0}
+.topo{position:absolute;left:70px;top:46px;display:flex;align-items:center;gap:24px}
+.topo img{height:96px}
+.topo span{font-size:36px;font-weight:700;color:var(--roxo-esc);border-left:3px solid rgba(91,79,168,.35);padding-left:24px}
+.centro{position:absolute;left:0;right:0;top:50%;transform:translateY(-63%);display:flex;flex-direction:column;align-items:center;text-align:center}
+.centro .logo{width:170px;height:170px}
+.centro h1{font-size:150px;font-weight:800;letter-spacing:-3px;line-height:1;margin-top:6px}
+.centro .desc{font-size:44px;color:var(--tinta);margin-top:22px;max-width:1300px;line-height:1.3}
+.creditos{position:absolute;left:80px;bottom:60px;display:flex;flex-direction:column;gap:6px;text-align:left}
+.creditos b{font-size:36px;font-weight:700;color:var(--tinta)}
+.creditos span{font-size:29px;color:#4E4A66}
+.creditos .orient{margin-top:14px;font-weight:600;color:var(--roxo-esc)}
 
 .sumario{list-style:none;display:grid;grid-template-columns:1fr 1fr;grid-auto-flow:column;grid-template-rows:repeat(5,auto);gap:34px 120px;margin-top:70px}
 .sumario li{display:flex;align-items:center;gap:26px;font-size:40px}
@@ -109,13 +118,18 @@ p,li{font-size:36px;line-height:1.45}
 </style></head><body>
 <div id="janela"><div id="palco">
 
-<section class="slide jardim capa primeira">
-  <div class="topo"><img src="{{ifam.png}}" alt="IFAM"><span>Projeto Integrador</span></div>
-  <img class="logo" src="{{logo.svg}}" alt="">
-  <h1><span class="t">Talk</span><span class="g">Garden</span></h1>
-  <div class="desc">Plataforma web de apoio ao desenvolvimento da linguagem em crianças com TDL</div>
-  <div class="quem">Deborah Gabriely Moraes Martins · Julliana Emelin de Sousa Andrade · Nicoli Silva de Lima<br>
-    <span>Orientadora: Profa. Jorlene · Curso Técnico em Informática · IFAM Campus Manaus Centro · 2026</span></div>
+<section class="slide jardim primeira">
+  <div class="topo"><img src="{{ifam-transparente.png}}" alt="IFAM"><span>Projeto Integrador</span></div>
+  <div class="centro">
+    <img class="logo" src="{{logo.svg}}" alt="">
+    <h1><span class="t">Talk</span><span class="g">Garden</span></h1>
+    <div class="desc">Plataforma web de apoio ao desenvolvimento da linguagem em crianças com TDL</div>
+  </div>
+  <div class="creditos">
+    <b>Deborah Gabriely Moraes Martins</b><b>Julliana Emelin de Sousa Andrade</b><b>Nicoli Silva de Lima</b>
+    <span class="orient">Orientadora: Profa. Jorlene</span>
+    <span>Curso Técnico em Informática · IFAM Campus Manaus Centro · 2026</span>
+  </div>
 </section>
 
 <section class="slide">
@@ -258,7 +272,7 @@ slides.forEach((s, i) => {
     s.querySelector('h2').style.marginTop = '0';
   }
   if (i > 0) s.insertAdjacentHTML('beforeend', '<div class="num">' + (i + 1) + '</div>');
-  if (!s.classList.contains('jardim')) s.insertAdjacentHTML('beforeend', ENFEITE[i % 2]);
+  if (!s.classList.contains('jardim')) s.insertAdjacentHTML('beforeend', ENFEITE[i % ENFEITE.length]);
 });
 let atual = Math.max(0, Math.min(slides.length - 1, parseInt(location.hash.slice(1) || '1') - 1));
 function mostra(n) { atual = Math.max(0, Math.min(slides.length - 1, n)); slides.forEach((s, i) => s.classList.toggle('ativo', i === atual)); history.replaceState(null, '', '#' + (atual + 1)); }
