@@ -31,7 +31,7 @@ const doc = new Document({ sections: [{
   children: [
     par([run('Roteiro de dublagem do comercial', { size: 36, bold: true, color: '2E2A3F' })], 60),
     par([run(`TalkGarden – Projeto Integrador · vídeo de ${mmss(LT.total)}`, { size: 24, color: '5D5874' })], 240),
-    par([run('Uma voz só, de narração. A legenda do vídeo é exatamente o texto de cada fala e aparece no ritmo de leitura, então é só ler acompanhando a legenda. A música de fundo já está no vídeo, mais baixa, para a voz ficar por cima.')], 260),
+    par([run('Uma voz só, de narração. O vídeo não tem legenda: cada fala tem a janela de tempo indicada na primeira coluna, então é só começar a fala no tempo marcado, num ritmo calmo. Se sobrar um pouquinho de tempo, tudo bem, é melhor do que correr. A música de fundo já está no vídeo, mais baixa, para a voz ficar por cima.')], 260),
     new Table({ width: { size: 9026, type: WidthType.DXA }, columnWidths: W, rows: [
       new TableRow({ tableHeader: true, children: ['Tempo', 'O que aparece', 'Fala'].map((h, i) => cel([run(h, { bold: true })], i, true)) }), ...linhas] }),
   ] }] });

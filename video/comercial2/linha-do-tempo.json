@@ -10,54 +10,65 @@
   {
    "tipo": "clipe",
    "ini": 5.2,
-   "fim": 10.2,
+   "fim": 12.2,
    "dir": "clipes/v5927-1",
-   "n": 150
+   "n": 210
   },
   {
    "tipo": "clipe",
-   "ini": 10.2,
-   "fim": 14.799999999999999,
+   "ini": 12.2,
+   "fim": 17.6,
    "dir": "clipes/v6100-12",
-   "n": 138
+   "n": 162
   },
   {
    "tipo": "logo",
-   "ini": 14.799999999999999,
-   "fim": 17.599999999999998,
-   "rodape": false
+   "ini": 17.6,
+   "fim": 32.1,
+   "rodape": false,
+   "itens": [
+    "Plataforma web gratuita",
+    "Para crianças de 6 a 9 anos com TDL",
+    "Jogos, recompensas e um jardim que cresce"
+   ],
+   "vezes": [
+    3.4,
+    6.199999999999999,
+    9
+   ]
   },
   {
    "tipo": "sistema",
-   "ini": 17.599999999999998,
-   "fim": 115.04799999999999
+   "ini": 32.1,
+   "fim": 129.548
   },
   {
    "tipo": "clipe",
-   "ini": 115.04799999999999,
-   "fim": 119.24799999999999,
+   "ini": 129.548,
+   "fim": 133.748,
    "dir": "clipes/v6264-2.5",
    "n": 126
   },
   {
    "tipo": "clipe",
-   "ini": 119.24799999999999,
-   "fim": 123.448,
+   "ini": 133.748,
+   "fim": 137.94799999999998,
    "dir": "clipes/v6166-4",
    "n": 126
   },
   {
    "tipo": "clipe",
-   "ini": 123.448,
-   "fim": 127.04799999999999,
+   "ini": 137.94799999999998,
+   "fim": 143.94799999999998,
    "dir": "clipes/v4874-3",
-   "n": 108
+   "n": 180
   },
   {
    "tipo": "logo",
-   "ini": 127.04799999999999,
-   "fim": 131.44799999999998,
-   "rodape": true
+   "ini": 143.94799999999998,
+   "fim": 148.54799999999997,
+   "rodape": true,
+   "vezes": null
   }
  ],
  "legendas": [
@@ -67,525 +78,636 @@
    "pedacos": [
     {
      "ini": 0,
-     "fim": 1.204,
+     "fim": 1.221,
      "html": "Sabe aquela criança"
     },
     {
-     "ini": 1.204,
-     "fim": 2.408,
-     "html": "que <span class=\"am\">trava</span> na"
+     "ini": 1.221,
+     "fim": 2.441,
+     "html": "que trava na"
     },
     {
-     "ini": 2.408,
-     "fim": 3.612,
-     "html": "hora de falar"
-    },
-    {
-     "ini": 3.612,
-     "fim": 4.815,
-     "html": "ou de ler?"
+     "ini": 2.441,
+     "fim": 3.662,
+     "html": "hora de falar?"
     }
    ]
   },
   {
    "ini": 5.2,
-   "fim": 10.2,
+   "fim": 12.2,
    "pedacos": [
     {
      "ini": 5.2,
-     "fim": 6.408,
-     "html": "Pode ser o"
+     "fim": 6.391,
+     "html": "Pode ser TDL,"
     },
     {
-     "ini": 6.408,
-     "fim": 6.811,
-     "html": "<span class=\"am\">TDL,</span>"
+     "ini": 6.391,
+     "fim": 7.583,
+     "html": "o Transtorno do"
     },
     {
-     "ini": 6.811,
-     "fim": 8.02,
+     "ini": 7.583,
+     "fim": 8.774,
+     "html": "Desenvolvimento da Linguagem,"
+    },
+    {
+     "ini": 8.774,
+     "fim": 9.965,
      "html": "que atinge sete"
     },
     {
-     "ini": 8.02,
-     "fim": 9.228,
+     "ini": 9.965,
+     "fim": 11.157,
      "html": "em cada cem"
     },
     {
-     "ini": 9.228,
-     "fim": 9.631,
+     "ini": 11.157,
+     "fim": 11.554,
      "html": "crianças."
     }
    ]
   },
   {
-   "ini": 10.2,
-   "fim": 14.799999999999999,
+   "ini": 12.2,
+   "fim": 17.6,
    "pedacos": [
     {
-     "ini": 10.2,
-     "fim": 11.44,
+     "ini": 12.2,
+     "fim": 13.421,
      "html": "E muitas famílias"
     },
     {
-     "ini": 11.44,
-     "fim": 12.679,
-     "html": "não conseguem um"
+     "ini": 13.421,
+     "fim": 14.641,
+     "html": "não conseguem acompanhamento"
     },
     {
-     "ini": 12.679,
-     "fim": 13.092,
-     "html": "<span class=\"am\">fonoaudiólogo.</span>"
+     "ini": 14.641,
+     "fim": 15.862,
+     "html": "com um fonoaudiólogo."
     }
    ]
   },
   {
-   "ini": 14.799999999999999,
-   "fim": 17.599999999999998,
+   "ini": 17.6,
+   "fim": 32.1,
    "pedacos": [
     {
-     "ini": 14.8,
-     "fim": 16.154,
-     "html": "Conheça o <span class=\"am\">TalkGarden!</span>"
+     "ini": 17.6,
+     "fim": 18.771,
+     "html": "Para ajudar essas"
+    },
+    {
+     "ini": 18.771,
+     "fim": 19.161,
+     "html": "crianças,"
+    },
+    {
+     "ini": 19.161,
+     "fim": 20.331,
+     "html": "criamos o TalkGarden:"
+    },
+    {
+     "ini": 20.331,
+     "fim": 21.502,
+     "html": "uma plataforma web"
+    },
+    {
+     "ini": 21.502,
+     "fim": 21.892,
+     "html": "gratuita,"
+    },
+    {
+     "ini": 21.892,
+     "fim": 23.062,
+     "html": "para crianças de"
+    },
+    {
+     "ini": 23.062,
+     "fim": 24.233,
+     "html": "seis a nove"
+    },
+    {
+     "ini": 24.233,
+     "fim": 24.623,
+     "html": "anos,"
+    },
+    {
+     "ini": 24.623,
+     "fim": 25.794,
+     "html": "que trabalha a"
+    },
+    {
+     "ini": 25.794,
+     "fim": 26.964,
+     "html": "linguagem com jogos,"
+    },
+    {
+     "ini": 26.964,
+     "fim": 28.135,
+     "html": "recompensas e um"
+    },
+    {
+     "ini": 28.135,
+     "fim": 29.305,
+     "html": "jardim que cresce"
+    },
+    {
+     "ini": 29.305,
+     "fim": 30.476,
+     "html": "a cada atividade."
+    },
+    {
+     "ini": 30.476,
+     "fim": 31.646,
+     "html": "Veja como funciona."
     }
    ]
   },
   {
-   "ini": 17.676,
-   "fim": 28.051,
+   "ini": 32.176,
+   "fim": 42.551,
    "pedacos": [
     {
-     "ini": 17.676,
-     "fim": 18.876,
-     "html": "O responsável cria"
+     "ini": 32.176,
+     "fim": 32.576,
+     "html": "Primeiro,"
     },
     {
-     "ini": 18.876,
-     "fim": 19.676,
-     "html": "a <span class=\"am\">conta,</span>"
+     "ini": 32.576,
+     "fim": 33.776,
+     "html": "o responsável cria"
     },
     {
-     "ini": 19.676,
-     "fim": 20.876,
-     "html": "e o sistema"
+     "ini": 33.776,
+     "fim": 34.576,
+     "html": "a conta."
     },
     {
-     "ini": 20.876,
-     "fim": 22.076,
-     "html": "avisa se faltar"
+     "ini": 34.576,
+     "fim": 35.776,
+     "html": "Se faltar alguma"
     },
     {
-     "ini": 22.076,
-     "fim": 22.876,
-     "html": "alguma informação."
+     "ini": 35.776,
+     "fim": 36.176,
+     "html": "informação,"
+    },
+    {
+     "ini": 36.176,
+     "fim": 37.376,
+     "html": "o sistema avisa."
     }
    ]
   },
   {
-   "ini": 28.051,
-   "fim": 38.111999999999995,
+   "ini": 42.551,
+   "fim": 52.612,
    "pedacos": [
     {
-     "ini": 28.051,
-     "fim": 29.259,
-     "html": "Esqueceu a <span class=\"am\">senha?</span>"
+     "ini": 42.551,
+     "fim": 43.759,
+     "html": "Esqueceu a senha?"
     },
     {
-     "ini": 29.259,
-     "fim": 30.468,
+     "ini": 43.759,
+     "fim": 44.968,
      "html": "Dá para criar"
     },
     {
-     "ini": 30.468,
-     "fim": 31.676,
+     "ini": 44.968,
+     "fim": 46.176,
      "html": "uma nova em"
     },
     {
-     "ini": 31.676,
-     "fim": 32.482,
+     "ini": 46.176,
+     "fim": 46.982,
      "html": "poucos passos."
     }
    ]
   },
   {
-   "ini": 38.111999999999995,
-   "fim": 44.501999999999995,
+   "ini": 52.612,
+   "fim": 59.002,
    "pedacos": [
     {
-     "ini": 38.112,
-     "fim": 38.915,
-     "html": "No <span class=\"am\">login,</span>"
+     "ini": 52.612,
+     "fim": 53.415,
+     "html": "No login,"
     },
     {
-     "ini": 38.915,
-     "fim": 40.118,
+     "ini": 53.415,
+     "fim": 54.618,
      "html": "o e-mail e"
     },
     {
-     "ini": 40.118,
-     "fim": 41.322,
+     "ini": 54.618,
+     "fim": 55.822,
      "html": "a senha são"
     },
     {
-     "ini": 41.322,
-     "fim": 42.526,
+     "ini": 55.822,
+     "fim": 57.026,
      "html": "conferidos antes de"
     },
     {
-     "ini": 42.526,
-     "fim": 42.927,
+     "ini": 57.026,
+     "fim": 57.427,
      "html": "entrar."
     }
    ]
   },
   {
-   "ini": 44.501999999999995,
-   "fim": 49.925,
+   "ini": 59.002,
+   "fim": 64.42500000000001,
    "pedacos": [
     {
-     "ini": 44.502,
-     "fim": 45.706,
+     "ini": 59.002,
+     "fim": 60.21,
      "html": "Na tela inicial,"
     },
     {
-     "ini": 45.706,
-     "fim": 46.91,
-     "html": "a criança vê"
+     "ini": 60.21,
+     "fim": 61.419,
+     "html": "ela vê o"
     },
     {
-     "ini": 46.91,
-     "fim": 48.114,
-     "html": "o seu <span class=\"am\">jardim</span>"
+     "ini": 61.419,
+     "fim": 62.627,
+     "html": "jardim e os"
     },
     {
-     "ini": 48.114,
-     "fim": 49.317,
-     "html": "e os jogos."
+     "ini": 62.627,
+     "fim": 63.433,
+     "html": "dois jogos."
     }
    ]
   },
   {
-   "ini": 49.925,
-   "fim": 61.67,
+   "ini": 64.42500000000001,
+   "fim": 76.17,
    "pedacos": [
     {
-     "ini": 49.925,
-     "fim": 51.112,
+     "ini": 64.425,
+     "fim": 65.606,
      "html": "No Jogo de"
     },
     {
-     "ini": 51.112,
-     "fim": 51.508,
-     "html": "<span class=\"am\">Vocabulário,</span>"
+     "ini": 65.606,
+     "fim": 66,
+     "html": "Vocabulário,"
     },
     {
-     "ini": 51.508,
-     "fim": 52.695,
+     "ini": 66,
+     "fim": 67.181,
      "html": "ela ouve a"
     },
     {
-     "ini": 52.695,
-     "fim": 53.882,
+     "ini": 67.181,
+     "fim": 68.362,
      "html": "palavra e toca"
     },
     {
-     "ini": 53.882,
-     "fim": 55.069,
+     "ini": 68.362,
+     "fim": 69.543,
      "html": "na imagem certa."
     },
     {
-     "ini": 55.069,
-     "fim": 55.861,
+     "ini": 69.543,
+     "fim": 70.331,
      "html": "Se errar,"
     },
     {
-     "ini": 55.861,
-     "fim": 57.048,
-     "html": "recebe um <span class=\"am\">incentivo.</span>"
+     "ini": 70.331,
+     "fim": 71.512,
+     "html": "recebe um incentivo"
+    },
+    {
+     "ini": 71.512,
+     "fim": 72.693,
+     "html": "para tentar de"
+    },
+    {
+     "ini": 72.693,
+     "fim": 73.087,
+     "html": "novo."
     }
    ]
   },
   {
-   "ini": 61.67,
-   "fim": 66.329,
+   "ini": 76.17,
+   "fim": 80.82900000000001,
    "pedacos": [
     {
-     "ini": 61.67,
-     "fim": 62.884,
+     "ini": 76.17,
+     "fim": 77.384,
      "html": "Cada jogo concluído"
     },
     {
-     "ini": 62.884,
-     "fim": 64.098,
-     "html": "dá <span class=\"am\">moedas</span> e"
+     "ini": 77.384,
+     "fim": 78.598,
+     "html": "dá moedas e"
     },
     {
-     "ini": 64.098,
-     "fim": 65.312,
-     "html": "faz uma flor"
+     "ini": 78.598,
+     "fim": 79.812,
+     "html": "faz nascer uma"
     },
     {
-     "ini": 65.312,
-     "fim": 65.716,
-     "html": "nascer."
+     "ini": 79.812,
+     "fim": 80.216,
+     "html": "flor."
     }
    ]
   },
   {
-   "ini": 66.329,
-   "fim": 81.866,
+   "ini": 80.82900000000001,
+   "fim": 96.36600000000001,
    "pedacos": [
     {
-     "ini": 66.329,
-     "fim": 67.526,
-     "html": "No Formando <span class=\"am\">Frases,</span>"
+     "ini": 80.829,
+     "fim": 82.026,
+     "html": "No Formando Frases,"
     },
     {
-     "ini": 67.526,
-     "fim": 68.722,
+     "ini": 82.026,
+     "fim": 83.222,
      "html": "ela toca nas"
     },
     {
-     "ini": 68.722,
-     "fim": 69.919,
+     "ini": 83.222,
+     "fim": 84.419,
      "html": "palavras na ordem"
     },
     {
-     "ini": 69.919,
-     "fim": 71.116,
+     "ini": 84.419,
+     "fim": 85.616,
      "html": "certa para montar"
     },
     {
-     "ini": 71.116,
-     "fim": 71.914,
+     "ini": 85.616,
+     "fim": 86.414,
      "html": "a frase."
     }
    ]
   },
   {
-   "ini": 81.866,
-   "fim": 85.75,
+   "ini": 96.36600000000001,
+   "fim": 100.25,
    "pedacos": [
     {
-     "ini": 81.866,
-     "fim": 83.095,
-     "html": "Ao bater uma"
+     "ini": 96.366,
+     "fim": 97.606,
+     "html": "Bateu uma meta?"
     },
     {
-     "ini": 83.095,
-     "fim": 83.504,
-     "html": "meta,"
+     "ini": 97.606,
+     "fim": 98.845,
+     "html": "Ganha uma medalha"
     },
     {
-     "ini": 83.504,
-     "fim": 84.733,
-     "html": "ganha uma <span class=\"am\">medalha</span>"
-    },
-    {
-     "ini": 84.733,
-     "fim": 85.143,
+     "ini": 98.845,
+     "fim": 99.258,
      "html": "nova."
     }
    ]
   },
   {
-   "ini": 85.75,
-   "fim": 89.842,
+   "ini": 100.25,
+   "fim": 104.34200000000001,
    "pedacos": [
     {
-     "ini": 85.75,
-     "fim": 87.004,
-     "html": "O <span class=\"am\">jardim</span> cresce"
+     "ini": 100.25,
+     "fim": 101.076,
+     "html": "No jardim,"
     },
     {
-     "ini": 87.004,
-     "fim": 88.258,
-     "html": "a cada atividade."
+     "ini": 101.076,
+     "fim": 102.316,
+     "html": "ela vê o"
+    },
+    {
+     "ini": 102.316,
+     "fim": 103.142,
+     "html": "progresso florescer."
     }
    ]
   },
   {
-   "ini": 89.842,
-   "fim": 95.64699999999999,
+   "ini": 104.34200000000001,
+   "fim": 110.14699999999999,
    "pedacos": [
     {
-     "ini": 89.842,
-     "fim": 90.642,
-     "html": "Nas <span class=\"am\">conquistas,</span>"
+     "ini": 104.342,
+     "fim": 105.151,
+     "html": "Nas conquistas,"
     },
     {
-     "ini": 90.642,
-     "fim": 91.842,
+     "ini": 105.151,
+     "fim": 106.365,
      "html": "ela vê as"
     },
     {
-     "ini": 91.842,
-     "fim": 93.042,
-     "html": "medalhas e o"
+     "ini": 106.365,
+     "fim": 107.579,
+     "html": "medalhas ganhas e"
     },
     {
-     "ini": 93.042,
-     "fim": 94.242,
-     "html": "que falta para"
-    },
-    {
-     "ini": 94.242,
-     "fim": 95.042,
+     "ini": 107.579,
+     "fim": 108.388,
      "html": "as próximas."
     }
    ]
   },
   {
-   "ini": 95.64699999999999,
-   "fim": 100.54199999999999,
+   "ini": 110.14699999999999,
+   "fim": 115.042,
    "pedacos": [
     {
-     "ini": 95.647,
-     "fim": 96.876,
+     "ini": 110.147,
+     "fim": 111.361,
      "html": "E o responsável"
     },
     {
-     "ini": 96.876,
-     "fim": 98.105,
+     "ini": 111.361,
+     "fim": 112.575,
      "html": "acompanha o desempenho"
     },
     {
-     "ini": 98.105,
-     "fim": 98.924,
-     "html": "nas <span class=\"am\">estatísticas.</span>"
+     "ini": 112.575,
+     "fim": 113.789,
+     "html": "da criança pelas"
+    },
+    {
+     "ini": 113.789,
+     "fim": 114.193,
+     "html": "estatísticas."
     }
    ]
   },
   {
-   "ini": 100.54199999999999,
-   "fim": 109.86999999999999,
+   "ini": 115.042,
+   "fim": 124.37,
    "pedacos": [
     {
-     "ini": 100.542,
-     "fim": 101.335,
-     "html": "No <span class=\"am\">perfil,</span>"
+     "ini": 115.042,
+     "fim": 115.835,
+     "html": "No perfil,"
     },
     {
-     "ini": 101.335,
-     "fim": 102.524,
+     "ini": 115.835,
+     "fim": 117.024,
      "html": "dá para trocar"
     },
     {
-     "ini": 102.524,
-     "fim": 103.713,
+     "ini": 117.024,
+     "fim": 118.213,
      "html": "o avatar e"
     },
     {
-     "ini": 103.713,
-     "fim": 104.506,
+     "ini": 118.213,
+     "fim": 119.006,
      "html": "ajustar sons,"
     },
     {
-     "ini": 104.506,
-     "fim": 105.695,
+     "ini": 119.006,
+     "fim": 120.195,
      "html": "leitura em voz"
     },
     {
-     "ini": 105.695,
-     "fim": 106.884,
+     "ini": 120.195,
+     "fim": 121.384,
      "html": "alta e letras"
     },
     {
-     "ini": 106.884,
-     "fim": 107.28,
+     "ini": 121.384,
+     "fim": 121.78,
      "html": "grandes."
     }
    ]
   },
   {
-   "ini": 109.86999999999999,
-   "fim": 115.04799999999999,
+   "ini": 124.37,
+   "fim": 129.548,
    "pedacos": [
     {
-     "ini": 109.87,
-     "fim": 110.679,
+     "ini": 124.37,
+     "fim": 125.184,
      "html": "Ao sair,"
     },
     {
-     "ini": 110.679,
-     "fim": 111.893,
-     "html": "o jardim fica"
+     "ini": 125.184,
+     "fim": 126.404,
+     "html": "tudo fica guardado"
     },
     {
-     "ini": 111.893,
-     "fim": 113.107,
-     "html": "<span class=\"am\">guardado</span> para a"
+     "ini": 126.404,
+     "fim": 127.625,
+     "html": "para a próxima"
     },
     {
-     "ini": 113.107,
-     "fim": 113.916,
-     "html": "próxima vez."
+     "ini": 127.625,
+     "fim": 128.032,
+     "html": "vez."
     }
    ]
   },
   {
-   "ini": 115.04799999999999,
-   "fim": 119.24799999999999,
+   "ini": 129.548,
+   "fim": 133.748,
    "pedacos": [
     {
-     "ini": 115.048,
-     "fim": 116.302,
+     "ini": 129.548,
+     "fim": 130.802,
      "html": "Com o TalkGarden,"
     },
     {
-     "ini": 116.302,
-     "fim": 117.556,
-     "html": "aprender vira <span class=\"am\">brincadeira.</span>"
+     "ini": 130.802,
+     "fim": 132.056,
+     "html": "aprender vira brincadeira."
     }
    ]
   },
   {
-   "ini": 119.24799999999999,
-   "fim": 123.448,
+   "ini": 133.748,
+   "fim": 137.94799999999998,
    "pedacos": [
     {
-     "ini": 119.248,
-     "fim": 120.477,
+     "ini": 133.748,
+     "fim": 134.977,
      "html": "E cada palavra"
     },
     {
-     "ini": 120.477,
-     "fim": 121.706,
+     "ini": 134.977,
+     "fim": 136.206,
      "html": "nova faz o"
     },
     {
-     "ini": 121.706,
-     "fim": 122.525,
-     "html": "jardim <span class=\"am\">florescer.</span>"
+     "ini": 136.206,
+     "fim": 137.025,
+     "html": "jardim florescer."
     }
    ]
   },
   {
-   "ini": 127.04799999999999,
-   "fim": 131.44799999999998,
+   "ini": 137.94799999999998,
+   "fim": 143.94799999999998,
    "pedacos": [
     {
-     "ini": 127.048,
-     "fim": 127.458,
-     "html": "<span class=\"am\">TalkGarden:</span>"
+     "ini": 137.948,
+     "fim": 139.148,
+     "html": "Um apoio para"
     },
     {
-     "ini": 127.458,
-     "fim": 128.277,
+     "ini": 139.148,
+     "fim": 140.348,
+     "html": "praticar em casa"
+    },
+    {
+     "ini": 140.348,
+     "fim": 141.548,
+     "html": "e na escola,"
+    },
+    {
+     "ini": 141.548,
+     "fim": 142.748,
+     "html": "junto com o"
+    },
+    {
+     "ini": 142.748,
+     "fim": 143.148,
+     "html": "fonoaudiólogo."
+    }
+   ]
+  },
+  {
+   "ini": 143.94799999999998,
+   "fim": 148.54799999999997,
+   "pedacos": [
+    {
+     "ini": 143.948,
+     "fim": 144.358,
+     "html": "TalkGarden:"
+    },
+    {
+     "ini": 144.358,
+     "fim": 145.177,
      "html": "aprender brincando,"
     },
     {
-     "ini": 128.277,
-     "fim": 129.506,
+     "ini": 145.177,
+     "fim": 146.406,
      "html": "uma flor de"
     },
     {
-     "ini": 129.506,
-     "fim": 130.325,
+     "ini": 146.406,
+     "fim": 147.225,
      "html": "cada vez."
     }
    ]
   }
  ],
- "total": 131.44799999999998
+ "total": 148.54799999999997
 }

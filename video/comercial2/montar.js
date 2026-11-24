@@ -34,7 +34,7 @@ function addFala(ini, fim, texto) {
 }
 function addLista(lista, rodape) {
   for (const s of lista) {
-    const seg = s.logo ? { tipo: 'logo', ini: t, fim: t + s.dur, rodape } : { tipo: 'clipe', ini: t, fim: t + s.dur, dir: `clipes/${s.clipe}-${s.de}` };
+    const seg = s.logo ? { tipo: 'logo', ini: t, fim: t + s.dur, rodape, itens: s.itens, vezes: s.itens ? s.itens.map((_, i) => 3.4 + i * 2.8) : null } : { tipo: 'clipe', ini: t, fim: t + s.dur, dir: `clipes/${s.clipe}-${s.de}` };
     if (seg.tipo === 'clipe') seg.n = fs.readdirSync(path.join(DIR, seg.dir)).length;
     segmentos.push(seg); addFala(t, t + s.dur, s.texto); t += s.dur;
   }
