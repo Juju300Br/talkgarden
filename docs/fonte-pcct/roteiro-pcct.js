@@ -41,46 +41,46 @@ const slides = [
   { n: 3, t: 'Objetivos', q: J, c: CJ, tempo: '1 min', falas: [
     'O TalkGarden é para crianças de **6 a 9 anos** com TDL ou com sinais de dificuldade de linguagem. Escolhemos essa faixa porque o TDL é identificado quando as dificuldades continuam depois dos 5 anos, e porque é a fase da alfabetização.',
     'O objetivo geral foi desenvolver um sistema web educativo, lúdico e acessível, focado em vocabulário, construção de frases e compreensão de comandos e de histórias.',
-    'Para isso, os objetivos específicos foram: relacionar a BNCC às atividades; estudar as plataformas que já existem e as evidências científicas; oferecer um questionário e avisos ao responsável, sem fazer diagnóstico; modelar o sistema com a UML; projetar telas pensadas para crianças; desenvolver com HTML, CSS e JavaScript; e modelar o banco de dados.'] },
-  { n: 4, t: 'O que já existe e o que falta', q: J, c: CJ, tempo: '1 min 15 s', falas: [
-    'Mas por que criar mais uma plataforma? Para explicar, usamos a **Visão Simples da Leitura**, de Gough e Tunmer. Ela diz que entender um texto depende de duas coisas: **decodificar**, que é reconhecer as palavras escritas, e **compreender a linguagem**, que é entender o vocabulário, as frases, as instruções e as histórias.',
+    'Para isso, os objetivos específicos foram: relacionar a BNCC às atividades; estudar as plataformas que já existem e as evidências científicas; oferecer um questionário e avisos ao responsável, sem fazer diagnóstico; modelar o sistema com a UML; projetar telas pensadas para crianças; desenvolver com HTML, CSS e JavaScript; e modelar o banco de dados. Agora a Nicoli continua.'] },
+  { n: 4, t: 'O que já existe e o que falta', q: N, c: CN, tempo: '1 min 15 s', falas: [
+    'Obrigada, Julliana. Mas por que criar mais uma plataforma? Para explicar, usamos a **Visão Simples da Leitura**, de Gough e Tunmer. Ela diz que entender um texto depende de duas coisas: **decodificar**, que é reconhecer as palavras escritas, e **compreender a linguagem**, que é entender o vocabulário, as frases, as instruções e as histórias.',
     'Já existem boas plataformas gratuitas de alfabetização, como o **GraphoGame**, do MEC, e o **Escribo Play**. Mas elas focam na decodificação, ou seja, nas letras e nos sons. E uma revisão de 2025 sobre intervenções digitais para o TDL mostrou que vocabulário e gramática ainda são pouco trabalhados.',
     'Só que a criança com TDL tem mais dificuldade justamente na **compreensão**. Então o TalkGarden trabalha essa parte, de graça e direto no navegador. Ele não substitui essas plataformas nem o fonoaudiólogo: ele **complementa**.'] },
-  { n: 5, t: 'Decisões baseadas em evidências', q: J, c: CJ, tempo: '1 min 15 s', falas: [
+  { n: 5, t: 'Decisões baseadas em evidências', q: N, c: CN, tempo: '1 min 15 s', falas: [
     'E não foi só isso: cada decisão do projeto partiu de um estudo. Como a dificuldade está mais na compreensão, os jogos trabalham **vocabulário, frases, comandos e histórias**. Como as intervenções digitais focam no fonológico, o nosso foco é **vocabulário e sintaxe**.',
     'O NIDCD aponta que crianças com TDL têm dificuldade para seguir instruções e organizar narrativas: daí vieram o **Siga a Abelha** e o **Conte a História**. Um estudo de Storkel mostrou que são precisas cerca de **36 exposições** para aprender uma palavra nova, por isso as rodadas são curtas e o jardim incentiva a criança a voltar todo dia. E intervenções feitas com os pais melhoram a linguagem, então o **responsável** tem login próprio e acompanha as estatísticas.'] },
-  { n: 6, t: 'Como o projeto foi feito', q: J, c: CJ, tempo: '50 s', falas: [
+  { n: 6, t: 'Como o projeto foi feito', q: N, c: CN, tempo: '50 s', falas: [
     'Quanto ao método, foi uma pesquisa aplicada, de abordagem qualitativa, feita em três etapas.',
     'Na primeira, o **levantamento**: pesquisamos sobre TDL, alfabetização e jogos digitais, e analisamos a BNCC e plataformas parecidas. Na segunda, o **planejamento**: fizemos os diagramas da UML no StarUML e os protótipos das telas no Canva. Na terceira, o **desenvolvimento**: programamos no VS Code com HTML, CSS e JavaScript e modelamos o banco de dados no MySQL Workbench. As tarefas foram organizadas no Trello e o código ficou guardado no GitHub.',
-    'Agora a Nicoli vai mostrar como a plataforma funciona.'] },
-  { n: 7, t: 'Quatro minijogos, quatro habilidades', q: N, c: CN, tempo: '1 min 30 s', falas: [
-    'Obrigada, Julliana. O TalkGarden tem quatro minijogos, e cada um treina uma habilidade. Todos têm rodadas curtas, leitura em voz alta e retorno imediato, **sem punição**: quando a criança erra, recebe um incentivo e tenta de novo.',
+    'Agora a Julliana vai mostrar como a plataforma funciona.'] },
+  { n: 7, t: 'Quatro minijogos, quatro habilidades', q: J, c: CJ, tempo: '1 min 30 s', falas: [
+    'Obrigada, Nicoli. O TalkGarden tem quatro minijogos, e cada um treina uma habilidade. Todos têm rodadas curtas, leitura em voz alta e retorno imediato, **sem punição**: quando a criança erra, recebe um incentivo e tenta de novo.',
     'No **Jogo de Vocabulário**, a criança ouve a palavra e toca na imagem certa entre três opções. No **Formando Frases**, ela toca nas palavras, uma de cada vez, na ordem certa, para montar a frase.',
     'No **Siga a Abelha**, ela escuta um comando e toca na figura certa. Os comandos vão ficando mais difíceis: primeiro a cor, depois o tamanho, depois a posição, como em cima ou embaixo da mesa, e por fim um comando de duas etapas, como “toque primeiro na bola e depois na estrela”.',
     'E no **Conte a História**, ela ouve uma história curta, coloca três cenas na ordem e responde qual é a ideia central. Cada jogo está ligado a uma habilidade de Língua Portuguesa da BNCC, que aparece no slide.'] },
-  { n: 8, t: 'Motivar a criança, orientar a família', q: N, c: CN, tempo: '1 min 15 s', falas: [
+  { n: 8, t: 'Motivar a criança, orientar a família', q: J, c: CJ, tempo: '1 min 15 s', falas: [
     'Para manter a criança motivada, cada atividade concluída dá **moedas** e faz nascer uma **flor** no jardim virtual. Quando ela bate uma meta, ganha uma **medalha**, como “Primeiro passo”, “Jardim florido” e “Sequência de 7 dias”.',
     'Para o responsável, no primeiro acesso aparece o questionário **“Conhecendo a criança”**. Ele pergunta se a criança tem diagnóstico, quais sinais o responsável percebe no dia a dia, que foram adaptados do NIDCD, e a idade. Se o responsável marca sinais e a criança não tem diagnóstico, a plataforma explica que isso **não significa TDL** e recomenda uma avaliação na UBS ou com o apoio da escola.',
-    'E nas estatísticas, se a criança acerta de primeira **menos de 60%** depois de **pelo menos 12 respostas**, aparece o aviso “Vale prestar atenção”, sugerindo compartilhar os dados com a escola ou com um fonoaudiólogo. Esses valores são parâmetros iniciais que nós definimos e ainda precisam ser validados por profissionais. A plataforma **nunca diz que a criança tem TDL**.'] },
+    'E nas estatísticas, se a criança acerta de primeira **menos de 60%** depois de **pelo menos 12 respostas**, aparece o aviso “Vale prestar atenção”, sugerindo compartilhar os dados com a escola ou com um fonoaudiólogo. Esses valores são parâmetros iniciais que nós definimos e ainda precisam ser validados por profissionais. A plataforma **nunca diz que a criança tem TDL**. Agora a Nicoli mostra como tudo isso foi planejado.'] },
   { n: 9, t: 'Requisitos e casos de uso', q: N, c: CN, tempo: '40 s', falas: [
-    'Levantamos **16 requisitos funcionais**, como login, cadastro, os quatro jogos, recompensas, conquistas, estatísticas, o questionário e o aviso. São **três atores**: o visitante, que pode criar uma conta; o responsável, que faz login e acompanha a criança; e a criança, que joga. No diagrama, os quatro jogos incluem o caso “Ganhar recompensas”, que pode se estender para “Desbloquear conquista”.'] },
+    'Obrigada, Julliana. Para construir tudo isso, levantamos **16 requisitos funcionais**, como login, cadastro, os quatro jogos, recompensas, conquistas, estatísticas, o questionário e o aviso. São **três atores**: o visitante, que pode criar uma conta; o responsável, que faz login e acompanha a criança; e a criança, que joga. No diagrama, os quatro jogos incluem o caso “Ganhar recompensas”, que pode se estender para “Desbloquear conquista”.'] },
   { n: 10, t: 'Classes, arquitetura e dados', q: N, c: CN, tempo: '1 min', acoes: ['Use a seta para passar pelos três diagramas.'], falas: [
     'No **diagrama de classes**, as principais são Responsável, Criança e Atividade. Atividade é uma **classe abstrata**, e os quatro jogos herdam dela os acertos, os erros e a conclusão.',
     '[seta] Na **arquitetura**, são três camadas: a apresentação, no navegador; a lógica, no servidor; e os dados, no MySQL.',
     '[seta] E o **modelo lógico** do banco, feito no MySQL Workbench, tem oito tabelas. É importante dizer que, **nesta versão do protótipo, os dados ficam salvos no próprio navegador, com o localStorage**, seguindo as mesmas informações do modelo. Levar o banco para o MySQL num servidor é a próxima etapa.'] },
   { n: 11, t: 'Uma interface acolhedora e alegre', q: N, c: CN, tempo: '40 s', falas: [
-    'Na interface, cada cor tem um significado: roxo é a marca, verde é o acerto, rosa é o “tente de novo” e amarelo são as moedas. As ilustrações são vetoriais e o cenário é fixo, sem animações que distraiam. A logo junta um balão de fala, o “talk”, com uma flor nascendo, o “garden”. E pensamos na acessibilidade: **leitura em voz alta, letras grandes, controle de sons e pouco texto por tela**.'] },
-  { n: 12, t: 'Principais telas', q: N, c: CN, tempo: '20 s', acoes: ['Mostre só duas ou três abas e siga para o vídeo. Neste slide, a seta passa pelas 10 abas antes de ir para o próximo; para pular, clique direto na última aba.'], falas: [
-    'Aqui estão as principais telas da plataforma. Mas o melhor é ver o sistema funcionando.'] },
-  { n: 13, t: 'O TalkGarden funcionando (vídeo)', q: N, c: CN, tempo: '2 min 21 s de vídeo', acoes: ['Clique no play. O vídeo já tem narração. Quando terminar, passe para o próximo slide.'], falas: [
+    'Na interface, cada cor tem um significado: roxo é a marca, verde é o acerto, rosa é o “tente de novo” e amarelo são as moedas. As ilustrações são vetoriais e o cenário é fixo, sem animações que distraiam. A logo junta um balão de fala, o “talk”, com uma flor nascendo, o “garden”. E pensamos na acessibilidade: **leitura em voz alta, letras grandes, controle de sons e pouco texto por tela**. E a Julliana vai mostrar as telas.'] },
+  { n: 12, t: 'Principais telas', q: J, c: CJ, tempo: '20 s', acoes: ['Mostre só duas ou três abas e siga para o vídeo. Neste slide, a seta passa pelas 10 abas antes de ir para o próximo; para pular, clique direto na última aba.'], falas: [
+    'Obrigada, Nicoli. Aqui estão as principais telas da plataforma. Mas o melhor é ver o sistema funcionando.'] },
+  { n: 13, t: 'O TalkGarden funcionando (vídeo)', q: J, c: CJ, tempo: '2 min 21 s de vídeo', acoes: ['Clique no play. O vídeo já tem narração. Quando terminar, passe para o próximo slide e a Nicoli assume a conclusão.'], falas: [
     'Preparamos um vídeo curto com o sistema do começo ao fim.'] },
-  { n: 14, t: 'Conclusão', q: J, c: CJ, tempo: '1 min 15 s', falas: [
+  { n: 14, t: 'Conclusão', q: N, c: CN, tempo: '1 min 15 s', falas: [
     'Para concluir: o TalkGarden ocupa um espaço pouco explorado, que é a **compreensão da linguagem** em crianças com TDL. Entregamos quatro minijogos alinhados à BNCC, o questionário e os avisos para o responsável, o jardim com moedas e medalhas, e uma interface colorida, responsiva e acessível.',
     'Também reconhecemos as limitações: a plataforma depende de internet, **ainda não foi testada com crianças com TDL nem avaliada por fonoaudiólogos**, e ela **não diagnostica**, porque esse papel é do fonoaudiólogo.',
     'Como trabalhos futuros, queremos avaliar a plataforma com crianças e fonoaudiólogos, validar um instrumento de triagem para famílias e escolas, hospedar o sistema com o banco MySQL, criar atividades de inferência para as crianças maiores e um painel para professores e fonoaudiólogos.'] },
   { n: 15, t: 'Referências', q: N, c: CN, tempo: '10 s', falas: [
     'Essas são as principais referências do trabalho. A lista completa está no documento.'] },
-  { n: 16, t: 'Obrigada', q: N, c: CN, tempo: '10 s', falas: [
+  { n: 16, t: 'Obrigada', q: J, c: CJ, tempo: '10 s', falas: [
     'Obrigada pela atenção. Estamos à disposição para as perguntas.'] },
 ];
 
@@ -196,7 +196,7 @@ const doc = new Document({
     children: [
       new Paragraph({ spacing: { after: 80 }, children: [new TextRun({ text: 'Apresentação do PCCT', font: F, size: 44, bold: true, color: ROXO })] }),
       new Paragraph({ spacing: { after: 300 }, children: [new TextRun({ text: 'TalkGarden · roteiro de fala, como o sistema funciona e perguntas da banca', font: F, size: 25, color: CINZA })] }),
-      p('A apresentação tem 16 slides e dura cerca de 15 minutos: uns 12 minutos de fala e 2 min 21 s de vídeo. A fala está dividida ao meio. A **Julliana** apresenta a parte teórica (slides 1 a 6: problema, objetivos, o que já existe e o que falta, evidências e metodologia) e a conclusão (slide 14). A **Nicoli** apresenta o sistema (slides 7 a 13) e fecha (slides 15 e 16).'),
+      p('A apresentação tem 16 slides e dura cerca de 15 minutos: uns 12 minutos de fala e 2 min 21 s de vídeo. A fala está dividida ao meio, e as duas apresentam teoria e sistema, alternando a cada dois ou três slides para não ficar cansativo. A **Julliana** faz a abertura e o problema (slides 1 a 3), os jogos e o jardim (7 e 8), as telas e o vídeo (12 e 13) e o agradecimento (16). A **Nicoli** faz o que já existe, as evidências e a metodologia (4 a 6), os requisitos, a modelagem e a interface (9 a 11), a conclusão e as referências (14 e 15).'),
       p('Os trechos em negrito são as ideias que não podem faltar. O resto pode ser dito com as palavras de vocês.'),
       h1('1. Roteiro de fala'), ...roteiro,
       quebra(), h1('2. Como o sistema funciona'),
