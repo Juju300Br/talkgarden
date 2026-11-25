@@ -37,21 +37,21 @@ const slides = [
     'E ele é mais comum do que parece. Um estudo com crianças no primeiro ano escolar encontrou **7,58%** de prevalência, o que dá mais ou menos **duas crianças em cada turma de 30**.',
     'O problema é que o acesso ao fonoaudiólogo, que é quem diagnostica e trata o TDL, é desigual. Em 2013, o **Amazonas tinha a menor oferta de fonoaudiólogos no SUS** do país: 2,12 para cada 100 mil habitantes, enquanto o Amapá tinha 7,73.',
     'Isso se soma a um desafio de alfabetização: em 2024, **40,8%** das crianças das escolas públicas ainda não estavam alfabetizadas no fim do 2º ano. Como a linguagem oral é a base da leitura, a criança com TDL está entre as que mais correm o risco de ficar para trás.',
-    'E o próprio nome TDL só foi padronizado em 2017, pelo consenso internacional CATALISE. Por isso ele ainda é pouco conhecido, inclusive nas escolas.'] },
-  { n: 3, t: 'A lacuna que o TalkGarden preenche', q: J, c: CJ, tempo: '1 min 15 s', falas: [
-    'Para entender onde o TalkGarden entra, usamos a **Visão Simples da Leitura**, de Gough e Tunmer. Ela diz que entender um texto depende de duas coisas: **decodificar**, que é reconhecer as palavras escritas, e **compreender a linguagem**, que é entender o vocabulário, as frases, as instruções e as histórias.',
-    'Já existem boas plataformas gratuitas de alfabetização, como o **GraphoGame**, do MEC, e o **Escribo Play**. Mas elas focam na decodificação, ou seja, nas letras e nos sons. E uma revisão de 2025 sobre intervenções digitais para o TDL mostrou que vocabulário e gramática ainda são pouco trabalhados.',
-    'Só que a criança com TDL tem mais dificuldade justamente na **compreensão**. Então o TalkGarden trabalha essa parte, de graça e direto no navegador. Ele não substitui essas plataformas nem o fonoaudiólogo: ele **complementa**.'] },
-  { n: 4, t: 'Objetivos', q: J, c: CJ, tempo: '1 min', falas: [
-    'O nosso público são crianças de **6 a 9 anos** com TDL ou com sinais de dificuldade de linguagem. Escolhemos essa faixa porque o TDL é identificado quando as dificuldades continuam depois dos 5 anos, e porque é a fase da alfabetização.',
+    'E o próprio nome TDL só foi padronizado em 2017, pelo consenso internacional CATALISE. Por isso ele ainda é pouco conhecido, inclusive nas escolas. Foi pensando nessas crianças que nós criamos o TalkGarden.'] },
+  { n: 3, t: 'Objetivos', q: J, c: CJ, tempo: '1 min', falas: [
+    'O TalkGarden é para crianças de **6 a 9 anos** com TDL ou com sinais de dificuldade de linguagem. Escolhemos essa faixa porque o TDL é identificado quando as dificuldades continuam depois dos 5 anos, e porque é a fase da alfabetização.',
     'O objetivo geral foi desenvolver um sistema web educativo, lúdico e acessível, focado em vocabulário, construção de frases e compreensão de comandos e de histórias.',
     'Para isso, os objetivos específicos foram: relacionar a BNCC às atividades; estudar as plataformas que já existem e as evidências científicas; oferecer um questionário e avisos ao responsável, sem fazer diagnóstico; modelar o sistema com a UML; projetar telas pensadas para crianças; desenvolver com HTML, CSS e JavaScript; e modelar o banco de dados.'] },
-  { n: 5, t: 'Como o projeto foi feito', q: J, c: CJ, tempo: '50 s', falas: [
-    'Foi uma pesquisa aplicada, de abordagem qualitativa, feita em três etapas.',
-    'Na primeira, o **levantamento**: pesquisamos sobre TDL, alfabetização e jogos digitais, e analisamos a BNCC e plataformas parecidas. Na segunda, o **planejamento**: fizemos os diagramas da UML no StarUML e os protótipos das telas no Canva. Na terceira, o **desenvolvimento**: programamos no VS Code com HTML, CSS e JavaScript e modelamos o banco de dados no MySQL Workbench. As tarefas foram organizadas no Trello e o código ficou guardado no GitHub.'] },
-  { n: 6, t: 'Decisões baseadas em evidências', q: J, c: CJ, tempo: '1 min 15 s', falas: [
-    'Cada decisão do projeto partiu de um estudo. Como a dificuldade está mais na compreensão, os jogos trabalham **vocabulário, frases, comandos e histórias**. Como as intervenções digitais focam no fonológico, o nosso foco é **vocabulário e sintaxe**.',
-    'O NIDCD aponta que crianças com TDL têm dificuldade para seguir instruções e organizar narrativas: daí vieram o **Siga a Abelha** e o **Conte a História**. Um estudo de Storkel mostrou que são precisas cerca de **36 exposições** para aprender uma palavra nova, por isso as rodadas são curtas e o jardim incentiva a criança a voltar todo dia. E intervenções feitas com os pais melhoram a linguagem, então o **responsável** tem login próprio e acompanha as estatísticas.',
+  { n: 4, t: 'O que já existe e o que falta', q: J, c: CJ, tempo: '1 min 15 s', falas: [
+    'Mas por que criar mais uma plataforma? Para explicar, usamos a **Visão Simples da Leitura**, de Gough e Tunmer. Ela diz que entender um texto depende de duas coisas: **decodificar**, que é reconhecer as palavras escritas, e **compreender a linguagem**, que é entender o vocabulário, as frases, as instruções e as histórias.',
+    'Já existem boas plataformas gratuitas de alfabetização, como o **GraphoGame**, do MEC, e o **Escribo Play**. Mas elas focam na decodificação, ou seja, nas letras e nos sons. E uma revisão de 2025 sobre intervenções digitais para o TDL mostrou que vocabulário e gramática ainda são pouco trabalhados.',
+    'Só que a criança com TDL tem mais dificuldade justamente na **compreensão**. Então o TalkGarden trabalha essa parte, de graça e direto no navegador. Ele não substitui essas plataformas nem o fonoaudiólogo: ele **complementa**.'] },
+  { n: 5, t: 'Decisões baseadas em evidências', q: J, c: CJ, tempo: '1 min 15 s', falas: [
+    'E não foi só isso: cada decisão do projeto partiu de um estudo. Como a dificuldade está mais na compreensão, os jogos trabalham **vocabulário, frases, comandos e histórias**. Como as intervenções digitais focam no fonológico, o nosso foco é **vocabulário e sintaxe**.',
+    'O NIDCD aponta que crianças com TDL têm dificuldade para seguir instruções e organizar narrativas: daí vieram o **Siga a Abelha** e o **Conte a História**. Um estudo de Storkel mostrou que são precisas cerca de **36 exposições** para aprender uma palavra nova, por isso as rodadas são curtas e o jardim incentiva a criança a voltar todo dia. E intervenções feitas com os pais melhoram a linguagem, então o **responsável** tem login próprio e acompanha as estatísticas.'] },
+  { n: 6, t: 'Como o projeto foi feito', q: J, c: CJ, tempo: '50 s', falas: [
+    'Quanto ao método, foi uma pesquisa aplicada, de abordagem qualitativa, feita em três etapas.',
+    'Na primeira, o **levantamento**: pesquisamos sobre TDL, alfabetização e jogos digitais, e analisamos a BNCC e plataformas parecidas. Na segunda, o **planejamento**: fizemos os diagramas da UML no StarUML e os protótipos das telas no Canva. Na terceira, o **desenvolvimento**: programamos no VS Code com HTML, CSS e JavaScript e modelamos o banco de dados no MySQL Workbench. As tarefas foram organizadas no Trello e o código ficou guardado no GitHub.',
     'Agora a Nicoli vai mostrar como a plataforma funciona.'] },
   { n: 7, t: 'Quatro minijogos, quatro habilidades', q: N, c: CN, tempo: '1 min 30 s', falas: [
     'Obrigada, Julliana. O TalkGarden tem quatro minijogos, e cada um treina uma habilidade. Todos têm rodadas curtas, leitura em voz alta e retorno imediato, **sem punição**: quando a criança erra, recebe um incentivo e tenta de novo.',
@@ -125,7 +125,7 @@ const sistema = [
     'Depois, responde **sobre o que é a história**, escolhendo a ideia central entre três opções. Moedas: 10, menos 3 por erro (no mínimo 4).']],
   ['Recompensas, jardim e medalhas', [
     'Toda atividade concluída soma as moedas, planta **uma flor** (os tipos seguem um ciclo) e conta uma atividade no dia. O jardim fica **100% completo com 20 flores**. A **sequência** conta quantos dias seguidos a criança jogou, e a meta diária é de 4 atividades.',
-    'São **6 medalhas**, conferidas automaticamente depois de cada atividade: Primeiro passo (1ª atividade), Jardim florido (5 flores), Sequência de 7 dias, Mestre das frases (25 frases), Caçador de palavras (50 palavras certas) e Cofrinho cheio (300 moedas). Na tela de conquistas aparecem as ganhas e o que falta para as outras.']],
+    'São **8 medalhas**, conferidas automaticamente depois de cada atividade: Primeiro passo (1ª atividade), Jardim florido (5 flores), Sequência de 7 dias, Mestre das frases (25 frases), Caçador de palavras (50 palavras certas), Cofrinho cheio (300 moedas), Bom ouvinte (20 comandos certos no Siga a Abelha) e Contador de histórias (10 histórias organizadas). Na tela de conquistas aparecem as ganhas e o que falta para as outras.']],
   ['Estatísticas e aviso', [
     'Mostram o percentual de acertos de primeira no Vocabulário e no Siga a Abelha, quantas frases e histórias foram feitas, os dias de prática e um gráfico com as atividades de cada dia da semana.',
     'O aviso **“Vale prestar atenção”** aparece quando o acerto de primeira fica **abaixo de 60%** com **pelo menos 12 respostas**, e só nesses dois jogos, porque são eles que contam acertos por pergunta. O texto deixa claro que não é diagnóstico.']],
@@ -183,7 +183,7 @@ const dicas = [
   'Testem o som do computador da sala antes, porque o vídeo tem narração.',
   'Aperte **F** para tela cheia. As setas ou o passador passam os slides. No slide 10 e no slide 12, a seta passa primeiro pelas abas.',
   'Se pedirem para mostrar o sistema ao vivo, abram o **index.html** com internet ligada (sem internet o login não entra) e usem a conta **demo@talkgarden.com**, senha **123456**.',
-  'O tempo total fica em torno de 15 minutos: uns 12 de fala e 2 min 21 s de vídeo. Se precisarem encurtar, resumam os slides 4, 5 e 9.',
+  'O tempo total fica em torno de 15 minutos: uns 12 de fala e 2 min 21 s de vídeo. Se precisarem encurtar, resumam os slides 3 (objetivos), 6 (metodologia) e 9 (requisitos).',
   'Ensaiem pelo menos duas vezes cronometrando, uma lendo e outra só olhando os slides. Não precisa decorar palavra por palavra: o importante é saber a ideia de cada slide.',
   'Na hora das perguntas, a outra pode completar a resposta. Combinem que quem souber melhor o assunto responde.',
 ];
@@ -196,7 +196,7 @@ const doc = new Document({
     children: [
       new Paragraph({ spacing: { after: 80 }, children: [new TextRun({ text: 'Apresentação do PCCT', font: F, size: 44, bold: true, color: ROXO })] }),
       new Paragraph({ spacing: { after: 300 }, children: [new TextRun({ text: 'TalkGarden · roteiro de fala, como o sistema funciona e perguntas da banca', font: F, size: 25, color: CINZA })] }),
-      p('A apresentação tem 16 slides e dura cerca de 15 minutos: uns 12 minutos de fala e 2 min 21 s de vídeo. A fala está dividida ao meio. A **Julliana** apresenta a parte teórica (slides 1 a 6) e a conclusão (slide 14). A **Nicoli** apresenta o sistema (slides 7 a 13) e fecha (slides 15 e 16).'),
+      p('A apresentação tem 16 slides e dura cerca de 15 minutos: uns 12 minutos de fala e 2 min 21 s de vídeo. A fala está dividida ao meio. A **Julliana** apresenta a parte teórica (slides 1 a 6: problema, objetivos, o que já existe e o que falta, evidências e metodologia) e a conclusão (slide 14). A **Nicoli** apresenta o sistema (slides 7 a 13) e fecha (slides 15 e 16).'),
       p('Os trechos em negrito são as ideias que não podem faltar. O resto pode ser dito com as palavras de vocês.'),
       h1('1. Roteiro de fala'), ...roteiro,
       quebra(), h1('2. Como o sistema funciona'),
