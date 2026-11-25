@@ -145,6 +145,11 @@ p,li{font-size:20px;line-height:1.5}
 #lightbox{position:fixed;inset:0;background:rgba(30,25,60,.9);display:none;place-items:center;z-index:50;cursor:zoom-out}
 #lightbox.on{display:grid}
 #lightbox img{max-width:94vw;max-height:92vh;border-radius:12px;background:#fff}
+
+.video-box{flex:none;display:flex;justify-content:center;margin-top:6px}
+.video-box video{height:590px;aspect-ratio:16/9;border-radius:18px;background:#1d1838;box-shadow:0 14px 34px rgba(91,79,168,.25);display:block}
+.refs{columns:2;column-gap:46px;margin-top:14px}
+.refs p{font-size:17px;line-height:1.45;margin-bottom:13px;break-inside:avoid;color:var(--ink)}
 </style>
 </head>
 <body>
@@ -430,6 +435,13 @@ p,li{font-size:20px;line-height:1.5}
   </div>
 </section>
 
+<!-- VÍDEO -->
+<section class="slide" data-sec="6" data-label="Demonstração" data-title="Vídeo">
+  <h2 class="t r">O TalkGarden funcionando</h2>
+  <p class="subt r">Do cadastro ao jardim: os quatro minijogos, as recompensas e a área do responsável.</p>
+  <div class="video-box r" style="--d:1"><video src="TalkGarden-demonstracao.mp4" controls preload="metadata"></video></div>
+</section>
+
 <!-- CONCLUSÃO -->
 <section class="slide" data-sec="7" data-label="Conclusão" data-title="Conclusão">
   <h2 class="t r">Conclusão</h2>
@@ -443,6 +455,26 @@ p,li{font-size:20px;line-height:1.5}
       <p style="font-size:19.9px;margin-top:8px">A plataforma <b>não diagnostica</b>: esse papel é do fonoaudiólogo.</p></div>
     <div class="card r" style="--d:3"><span class="k" style="color:var(--verde-esc)">Trabalhos futuros</span>
       <ul class="chk" style="margin-top:12px"><li style="font-size:18.8px">Avaliação com crianças e fonoaudiólogos</li><li style="font-size:18.8px">Validar um instrumento de triagem para famílias e escolas</li><li style="font-size:18.8px">Hospedagem com integração ao MySQL</li><li style="font-size:18.8px">Atividades de inferência (EF35LP04 e EF35LP05)</li><li style="font-size:18.8px">Videoaulas e painel para professores e fonoaudiólogos</li></ul></div>
+  </div>
+</section>
+
+<!-- REFERÊNCIAS -->
+<section class="slide" data-sec="7" data-label="Referências" data-title="Referências">
+  <h2 class="t r">Referências</h2>
+  <div class="refs r" style="--d:1">
+    <p>AMORIM, A. N. et al. Using Escribo Play video games to improve phonological awareness, early reading, and writing in preschool. <b>Educational Researcher</b>, v. 49, n. 3, p. 188-197, 2020.</p>
+    <p>BISHOP, D. V. M. et al. Phase 2 of CATALISE: a multinational and multidisciplinary Delphi consensus study of problems with language development: terminology. <b>Journal of Child Psychology and Psychiatry</b>, v. 58, n. 10, p. 1068-1080, 2017.</p>
+    <p>BRASIL. Ministério da Educação. <b>Base Nacional Comum Curricular</b>. Brasília: MEC, 2018.</p>
+    <p>GOUGH, P. B.; TUNMER, W. E. Decoding, reading, and reading disability. <b>Remedial and Special Education</b>, v. 7, n. 1, p. 6-10, 1986.</p>
+    <p>INFOESCOLA. <b>MEC lança aplicativo gratuito para reforçar alfabetização</b>. 2020.</p>
+    <p>NATIONAL INSTITUTE ON DEAFNESS AND OTHER COMMUNICATION DISORDERS (NIDCD). <b>Developmental Language Disorder</b>. Bethesda: NIDCD, 2022.</p>
+    <p>NORBURY, C. F. et al. The impact of nonverbal ability on prevalence and clinical presentation of language disorder: evidence from a population study. <b>Journal of Child Psychology and Psychiatry</b>, v. 57, n. 11, p. 1247-1257, 2016.</p>
+    <p>PUBLISHNEWS. <b>Índice de crianças alfabetizadas fica abaixo da meta no Brasil em 2024</b>. 14 jul. 2025.</p>
+    <p>RICKETTS, J. Research review: reading comprehension in developmental disorders of language and communication. <b>Journal of Child Psychology and Psychiatry</b>, v. 52, n. 11, p. 1111-1123, 2011.</p>
+    <p>ROBERTS, M. Y.; KAISER, A. P. The effectiveness of parent-implemented language interventions: a meta-analysis. <b>American Journal of Speech-Language Pathology</b>, v. 20, n. 3, p. 180-199, 2011.</p>
+    <p>SOUSA, M. F. S. et al. Evolução da oferta de fonoaudiólogos no SUS e na atenção primária à saúde, no Brasil. <b>Revista CEFAC</b>, v. 19, n. 2, p. 213-220, 2017.</p>
+    <p>STORKEL, H. L. et al. Interactive book reading to accelerate word learning by kindergarten children with specific language impairment. <b>Language, Speech, and Hearing Services in Schools</b>, v. 48, n. 1, p. 16-30, 2017.</p>
+    <p>ZHOU, Z. et al. Digital intervention in children with developmental language disorder: systematic review. <b>JMIR mHealth and uHealth</b>, v. 13, e59992, 2025.</p>
   </div>
 </section>
 
@@ -533,7 +565,7 @@ p,li{font-size:20px;line-height:1.5}
   }
   function go(i){
     i=Math.max(0,Math.min(N-1,i)); if(i===cur && slides[i].classList.contains('active')) return;
-    slides[cur].classList.remove('active'); cur=i; slides[cur].classList.add('active'); show();
+    document.querySelectorAll('video').forEach(v=>v.pause()); slides[cur].classList.remove('active'); cur=i; slides[cur].classList.add('active'); show();
   }
   function next(){const s=slides[cur]; if(s.dataset.steps && s._idx<s._n-1){s._set(s._idx+1);return;} go(cur+1);}
   function prev(){const s=slides[cur]; if(s.dataset.steps && s._idx>0){s._set(s._idx-1);return;} go(cur-1);}
@@ -553,6 +585,7 @@ p,li{font-size:20px;line-height:1.5}
   });
   document.querySelectorAll('.panel .hint').forEach(h=>h.onclick=()=>{const im=h.parentElement.querySelector('img.on'); if(im){lb.querySelector('img').src=im.src;lb.classList.add('on');}});
   document.addEventListener('keydown',e=>{
+    if(e.target.tagName==='VIDEO' && e.key===' ') return;
     if(lb.classList.contains('on')){ if(['Escape',' ','Enter','ArrowRight','ArrowLeft'].includes(e.key)){lb.classList.remove('on');e.preventDefault();} return; }
     switch(e.key){
       case 'ArrowRight': case 'PageDown': case ' ': case 'Enter': case 'ArrowDown': e.preventDefault(); next(); break;
